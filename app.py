@@ -20,9 +20,10 @@ st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@400;500;700&display=swap');
     
-    /* Global Styles */
+    /* Global Styles - base font scaled down 1 level */
     html, body, [class*="css"] {
         font-family: 'Roboto', sans-serif;
+        font-size: 13px;
     }
     h1, h2, h3, h4, h5, h6, .header-title {
         font-family: 'Poppins', sans-serif !important;
@@ -30,37 +31,42 @@ st.markdown("""
     .main {
         background-color: #F4F4F4;
     }
+    /* Kurangi padding atas default Streamlit agar header lebih ke atas */
+    .block-container {
+        padding-top: 3.5rem !important;
+        padding-bottom: 1rem !important;
+    }
     
     /* Header Banner */
     .header-container {
         background-color: #E65100;
-        padding: 24px 30px;
+        padding: 18px 24px;
         border-radius: 18px;
         color: white;
-        margin-bottom: 24px;
+        margin-bottom: 20px;
         box-shadow: 0 4px 15px rgba(230, 81, 0, 0.2);
     }
     .header-title {
-        font-size: 2.2rem;
+        font-size: 1.8rem;
         font-weight: 800;
         margin: 0;
         letter-spacing: -0.5px;
         color: #FFFFFF;
     }
     .header-subtitle {
-        font-size: 1.05rem;
+        font-size: 0.9rem;
         opacity: 0.95;
-        margin-top: 6px;
+        margin-top: 5px;
         font-weight: 500;
     }
     .header-badge {
         background-color: rgba(255, 255, 255, 0.2);
-        padding: 6px 14px;
+        padding: 4px 12px;
         border-radius: 20px;
-        font-size: 0.8rem;
+        font-size: 0.72rem;
         font-weight: 600;
         display: inline-block;
-        margin-top: 12px;
+        margin-top: 10px;
         font-family: 'Poppins', sans-serif;
     }
 
@@ -68,31 +74,32 @@ st.markdown("""
     .sales-card {
         background-color: #FFFFFF;
         border-left: 6px solid #E65100;
-        padding: 20px 24px;
+        padding: 16px 20px;
         border-radius: 18px;
         box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-        margin: 15px 0;
+        margin: 12px 0;
     }
     .sales-card h4 {
         color: #0D1F3C;
-        margin: 0 0 10px 0;
+        margin: 0 0 8px 0;
         font-weight: 700;
+        font-size: 0.95rem;
         font-family: 'Poppins', sans-serif;
     }
     .sales-card p {
         color: #475569;
-        font-size: 0.95rem;
-        margin-bottom: 14px;
+        font-size: 0.82rem;
+        margin-bottom: 12px;
     }
     .wa-button {
         display: inline-block;
         background-color: #25D366;
         color: white !important;
         font-weight: 700;
-        padding: 10px 20px;
+        padding: 8px 16px;
         border-radius: 10px;
         text-decoration: none;
-        font-size: 0.95rem;
+        font-size: 0.82rem;
         box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
         font-family: 'Poppins', sans-serif;
         transition: transform 0.2s ease;
@@ -104,11 +111,11 @@ st.markdown("""
         background-color: #0D1F3C;
         color: white !important;
         font-weight: 700;
-        padding: 10px 20px;
+        padding: 8px 16px;
         border-radius: 10px;
         text-decoration: none;
-        font-size: 0.95rem;
-        margin-left: 10px;
+        font-size: 0.82rem;
+        margin-left: 8px;
         transition: transform 0.2s ease;
         font-family: 'Poppins', sans-serif;
     }
@@ -117,25 +124,27 @@ st.markdown("""
     /* Prompt Chips */
     .chip-container {
         display: flex;
-        gap: 10px;
+        gap: 8px;
         flex-wrap: wrap;
-        margin-bottom: 20px;
+        margin-bottom: 16px;
     }
     .stButton>button {
         border-radius: 10px !important;
-        border: none !important;
+        border: 1.5px solid rgba(255, 255, 255, 0.45) !important;
         background-color: #E65100 !important;
         color: #FFFFFF !important;
         font-weight: 600 !important;
-        font-size: 0.9rem !important;
-        padding: 0.5rem 1rem !important;
+        font-size: 0.78rem !important;
+        padding: 0.4rem 0.85rem !important;
         transition: all 0.2s ease;
         font-family: 'Poppins', sans-serif;
-        box-shadow: 0 2px 8px rgba(230, 81, 0, 0.2);
+        box-shadow: 0 2px 8px rgba(230, 81, 0, 0.2), inset 0 1px 0 rgba(255,255,255,0.15);
+        outline: none !important;
     }
     .stButton>button:hover {
         background-color: #0D1F3C !important;
         color: #FFFFFF !important;
+        border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
         box-shadow: 0 4px 12px rgba(13, 31, 60, 0.3);
     }
 </style>
@@ -178,7 +187,7 @@ PANDUAN UTAMA BERINTERAKSI & GAYA BAHASA:
    - Bantu calon pelanggan mengenali produk mana yang paling cocok dengan jenis kendaraannya.
    - Contoh Rekomendasi:
      * Truk Pendingin (Reefer): Rekomendasikan **VT-45 + Sensor Suhu & Sensor Pintu**.
-     * Truk Semen / Readymix: Rekomendasikan **VT-45 / IT-360 + Sensor Rotasi Drum Mixer**.
+     * Truk Semen / Readymix: Rekomendasikan **VT-45 + Sensor Rotasi Drum Mixer**.
      * Truk Kargo / Logistik Umum: Rekomendasikan **VT-45 Lite** (dasar) atau **VT-45** (lengkap dengan door sensor).
      * Armada Komersial/Bus dengan Pengawasan Sopir (K3 & Safety): Rekomendasikan **Dual AI Dashcam JC261** (ADAS + DMS) atau **JC450** (hingga 5 kamera).
      * Mobil Operasional / Kendaraan Dinas: Rekomendasikan **VT-45 Lite**.
@@ -188,6 +197,8 @@ PANDUAN UTAMA BERINTERAKSI & GAYA BAHASA:
    - Kemudian **arahkan calon customer untuk menghubungi Sales Person (manusia asli) dari tim IntelliTrac** melalui tombol kontak sales yang tersedia di aplikasi atau kontak telepon/WhatsApp resmi.
 5. **Jawaban Berdasarkan Data Resmi**: Selalu gunakan fakta dan spesifikasi yang ada di Knowledge Base di atas. Jangan mengarang fitur yang tidak dimiliki IntelliTrac.
 6. **Batasan Konteks (STRICT OUT-OF-SCOPE RULE)**: Kamu HANYA BOLEH menjawab pertanyaan seputar GPS Tracker, AI Dashcam, Manajemen Armada (Fleet Management), dan produk/layanan PT Intimap (IntelliTrac). Jika pengguna menanyakan topik di luar ini (contoh: politik, hiburan, olahraga, sejarah umum, coding, dll), TOLAK dengan sopan dan kembalikan percakapan ke konteks awal. Contoh penolakan: "Mohon maaf, sebagai Mintel (Asisten Virtual Pre-Sales IntelliTrac), saya khusus diprogram untuk berdiskusi seputar solusi pelacak kendaraan dan manajemen armada. Ada pertanyaan seputar GPS Tracker atau AI Dashcam yang bisa saya bantu?"
+7. **Gaya Penulisan (WAJIB)**: JANGAN PERNAH menggunakan karakter em dash (—) dalam jawabanmu. Sebagai gantinya gunakan titik dua (:), koma (,), tanda hubung pendek (-), atau titik (.) sesuai konteks kalimat. Contoh yang SALAH: "Fitur ini berguna — terutama untuk armada besar." Contoh yang BENAR: "Fitur ini berguna, terutama untuk armada besar."
+8. **Link Aplikasi Mobile (WAJIB)**: Jika calon customer bertanya apakah pemantauan bisa dilakukan lewat HP/smartphone, atau menanyakan soal aplikasi mobile, kamu WAJIB memberikan link unduhan resmi berikut di dalam jawabanmu: https://play.google.com/store/apps/details?id=com.intimap.mobile.hawk
 """
 
 # 5. Sidebar Setup
@@ -200,6 +211,7 @@ with st.sidebar:
     """, unsafe_allow_html=True)
     st.markdown("### 🛰️ IntelliTrac SalesBot")
     st.markdown("Asisten Pintar Pre-Sales IntelliTrac GPS & Fleet Management Systems.")
+    
     st.divider()
 
     # Gemini API Key Management
@@ -211,6 +223,13 @@ with st.sidebar:
             st.success("API Key berhasil dimasukkan!")
         else:
             st.info("💡 Belum ada API Key di .env. Anda dapat memasukkannya di atas.")
+            st.markdown("""
+            <a href="https://aistudio.google.com/app/apikey" target="_blank" style="text-decoration:none;">
+                <div style="background-color:#E65100; color:white; text-align:center; padding:8px; border-radius:8px; font-weight:600; font-size:0.85rem; font-family: 'Poppins', sans-serif; box-shadow: 0 2px 6px rgba(230,81,0,0.3); margin-top: 10px; margin-bottom: 5px;">
+                    Dapatkan API Key Gratis di Sini
+                </div>
+            </a>
+            """, unsafe_allow_html=True)
 
     st.divider()
 
@@ -218,12 +237,14 @@ with st.sidebar:
     st.subheader("🔍 Fast Product Match")
     jenis_armada = st.selectbox(
         "Pilih Jenis Armada Anda:",
-        ["-- Pilih Jenis Armada --", "Truk Logistik / Kargo", "Truk Pendingin (Reefer)", "Truk Semen / Mixer", "Truk Tambang & Alat Berat", "Bus & Mobil Operasional"]
+        ["-- Pilih Jenis Armada --", "Sepeda Motor", "Mobil Pribadi", "Truk Logistik / Kargo", "Truk Pendingin (Reefer)", "Truk Semen / Mixer", "Truk Tambang & Alat Berat", "Bus & Mobil Operasional"]
     )
     
     if jenis_armada != "-- Pilih Jenis Armada --":
         if st.button("💡 Lihat Rekomendasi Produk"):
             prompt_map = {
+                "Sepeda Motor": "Halo Mintel, saya butuh GPS Tracker untuk Sepeda Motor. Rekomendasinya tipe apa?",
+                "Mobil Pribadi": "Halo Mintel, produk GPS Tracker apa yang cocok untuk pengamanan Mobil Pribadi?",
                 "Truk Logistik / Kargo": "Halo Mintel, saya punya armada Truk Logistik / Kargo. Produk GPS Tracker apa yang paling cocok dan apa fiturnya?",
                 "Truk Pendingin (Reefer)": "Halo Mintel, saya butuh sistem pemantau suhu dan lokasi untuk Truk Pendingin (Reefer). Apa solusi dari IntelliTrac?",
                 "Truk Semen / Mixer": "Halo Mintel, produk mana yang cocok untuk Truk Semen / Readymix Mixer?",
@@ -280,23 +301,38 @@ for msg in st.session_state.messages:
     with st.chat_message(msg["role"], avatar="🛰️" if msg["role"] == "assistant" else "👤"):
         st.markdown(msg["content"])
 
-# Quick Prompt Chips (displayed if conversation is short)
-if len(st.session_state.messages) <= 2:
-    st.markdown("**💡 Pertanyaan Populer:**")
-    col1, col2, col3, col4 = st.columns(4)
-    
-    with col1:
-        if st.button("🚚 Rekomendasi Truk Pendingin"):
-            st.session_state["pending_prompt"] = "Rekomendasi GPS Tracker untuk Truk Pendingin (Reefer) apa ya?"
-    with col2:
-        if st.button("📷 AI Dashcam JC261 vs JC450"):
-            st.session_state["pending_prompt"] = "Apa perbedaan fitur Dashcam JC261 dan JC450?"
-    with col3:
-        if st.button("🔌 Modul OBD-II CAN800"):
-            st.session_state["pending_prompt"] = "Apa kegunaan modul OBD-II CAN800 bagi armada kami?"
-    with col4:
-        if st.button("📑 Minta Penawaran Harga"):
-            st.session_state["pending_prompt"] = "Saya ingin meminta penawaran harga resmi untuk 10 unit kendaraan perusahaan."
+# Quick Prompt Chips — selalu tampil
+st.markdown("**💡 Pertanyaan Populer:**")
+
+# Row 1 - pertanyaan umum (personal & awam)
+col1, col2, col3, col4 = st.columns(4, gap="small")
+with col1:
+    if st.button("📍 GPS bisa pantau real-time?", use_container_width=True):
+        st.session_state["pending_prompt"] = "Apakah GPS IntelliTrac bisa memantau posisi kendaraan secara real-time? Seberapa akurat dan cepat update lokasinya?"
+with col2:
+    if st.button("🔒 Bisa matiin mesin dari jarak jauh?", use_container_width=True):
+        st.session_state["pending_prompt"] = "Apakah IntelliTrac bisa mematikan mesin kendaraan dari jarak jauh jika kendaraan dicuri atau disalahgunakan?"
+with col3:
+    if st.button("📱 Dipantau lewat HP bisa?", use_container_width=True):
+        st.session_state["pending_prompt"] = "Apakah saya bisa memantau posisi kendaraan lewat smartphone? Ada aplikasinya tidak?"
+with col4:
+    if st.button("💰 Harga & biaya bulanan?", use_container_width=True):
+        st.session_state["pending_prompt"] = "Berapa kisaran harga GPS Tracker IntelliTrac? Apakah ada biaya langganan bulanan? Apa saja yang termasuk dalam paketnya?"
+
+# Row 2 - pertanyaan B2B & teknis
+col5, col6, col7, col8 = st.columns(4, gap="small")
+with col5:
+    if st.button("🚚 Rekomendasi Truk & Armada", use_container_width=True):
+        st.session_state["pending_prompt"] = "Misalkan kami punya armada truk logistik sekitar 20 unit. Produk GPS Tracker IntelliTrac apa yang paling cocok dan apa saja fitur unggulannya?"
+with col6:
+    if st.button("📷 AI Dashcam, apa manfaatnya?", use_container_width=True):
+        st.session_state["pending_prompt"] = "Apa manfaat nyata AI Dashcam seperti JC261 bagi perusahaan? Apakah bisa mendeteksi sopir mengantuk atau tidak fokus?"
+with col7:
+    if st.button("🔌 Apa bedanya dengan GPS tracker murah?", use_container_width=True):
+        st.session_state["pending_prompt"] = "Apa bedanya GPS IntelliTrac dibanding GPS tracker murah yang banyak dijual di marketplace? Mengapa harus pilih IntelliTrac?"
+with col8:
+    if st.button("📑 Minta Penawaran Resmi", use_container_width=True):
+        st.session_state["pending_prompt"] = "Saya tertarik dan ingin mendapatkan penawaran harga resmi untuk armada perusahaan kami. Bagaimana caranya?"
 
 # Check if there is a pending prompt from sidebar or chips
 user_input = st.chat_input("Ketik pertanyaan Anda di sini... (contoh: Rekomendasi GPS untuk truk kargo)")

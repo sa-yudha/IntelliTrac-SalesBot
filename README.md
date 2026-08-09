@@ -1,6 +1,6 @@
 # 🛰️ IntelliTrac SalesBot
 
-> **Final Project — Course: LLM-Based Tools and Gemini API Integration for Data Scientists**  
+> **Final Project - Course: LLM-Based Tools and Gemini API Integration for Data Scientists**  
 > *Organized by Hacktiv8 & Supported by Google.org / AVPN*
 
 ---
@@ -15,8 +15,8 @@ Chatbot ini diberi nama **"Mintel"**, yang diprogram untuk memberikan rekomendas
 
 ## ✨ Fitur Utama
 
-- 🧠 **Powered by Google Gemini AI**: Memanfaatkan model LLM Gemini 1.5 Flash untuk pemrosesan bahasa alami (NLP) yang responsif dan kontekstual.
-- 📚 **Integrated Knowledge Base**: Dilengkapi konteks dokumen resmi PT Intimap, Katalog Produk 2026, serta Matriks Spesifikasi & Fitur Perangkat (VT-15J, VT-39, VT-45, VT-45 Lite, JC261, JC450, IT-360, OBD-II CAN800, dll.).
+- 🧠 **Powered by Google Gemini AI**: Memanfaatkan model LLM **Gemini 3.5 Flash-Lite** (dipadukan dengan sistem *multi-model fallback*: **Gemini 3.1 Flash-Lite**, **Gemini 3.6 Flash**, **Gemini 3.5 Flash**) untuk pemrosesan bahasa alami (NLP) yang cepat, hemat, dan akurat.
+- 📚 **Integrated Knowledge Base**: Dilengkapi konteks dokumen resmi PT Intimap, Katalog Produk 2026, serta Matriks Spesifikasi & Fitur Perangkat (VT-45 Lite, VT-45, JC261, JC450, OBD-II CAN800, dll.).
 - 🤝 **Sales Handoff Card**: Secara otomatis menampilkan kartu kontak Sales Representative (WhatsApp & Email) ketika calon customer menanyakan penawaran harga resmi atau berniat melakukan pembelian.
 - 🔍 **Fast Product Match (Sidebar)**: Widget rekomendasi cepat berdasarkan pilihan jenis armada calon pelanggan.
 - 💡 **Quick Prompt Chips**: Pilihan pertanyaan populer untuk memudahkan interaksi awal calon customer.
@@ -82,4 +82,4 @@ Aplikasi akan secara otomatis terbuka di browser pada alamat `http://localhost:8
 ---
 
 ## 📄 Lisensi & Hak Cipta
-© 2026 PT Intimap / IntelliTrac Indonesia & Yudha — Dikembangkan untuk Hacktiv8 Final Project.
+© 2026 PT Intimap / IntelliTrac Indonesia & Yudha. Dikembangkan untuk Hacktiv8 Final Project.

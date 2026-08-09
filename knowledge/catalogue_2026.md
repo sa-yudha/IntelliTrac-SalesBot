@@ -40,7 +40,7 @@
 - **Kategori**: Solusi pelacak armada tingkat lanjut dengan dukungan multi-sensor komprehensif.
 - **Peruntukan**: Truk pendingin (reefer), truk semen/mixer, alat berat, truk kargo mahal, bus antarkota.
 - **Fitur Utama**:
-  - **Multi-Sensor Integration**: Kompatibel dengan Sensor Suhu, Door Sensor (hingga 3 channel), Sensor Rotasi Drum Mixer, iButton (ID Reader), Sensor BBM (Fuel Sensor).
+  - **Multi-Sensor Integration**: Kompatibel dengan Sensor Suhu, Door Sensor (hingga 3 channel), Sensor Rotasi Drum Mixer, iButton (ID Reader).
   - **Dukungan Modul OBD-II CAN800**: Membaca data ECU mesin secara mendalam.
   - **Harsh Driving Behaviour**: Deteksi akselerasi mendadak (HA), rem mendadak (HB), dan manuver tajam (HC).
   - **Engine Cut-Off, Geofence Controller, Overspeed Alarm, SOS Button**.
@@ -81,7 +81,7 @@
 
 ## 3. Fitur Platform Web & Solusi Aplikasi
 
-- **Fleet Management System (FMS)**: Web dashboard & mobile app (Android/iOS) untuk tracking real-time, geofence, playback perjalanan, dan laporan performa.
+- **Fleet Management System (FMS)**: Web dashboard & mobile app (Android: bisa diunduh di Google Play Store dengan link https://play.google.com/store/apps/details?id=com.intimap.mobile.hawk, serta tersedia juga untuk iOS) untuk tracking real-time, geofence, playback perjalanan, dan laporan performa.
 - **Transport Management System (TMS)**: Solusi alur pengiriman barang, manajemen POD (Proof of Delivery), penugasan driver, dan pelacakan resi.
 - **Smart Public Transport**: Integrasi sistem angkutan umum dengan aplikasi jadwal dan sistem pemerintah.
 - **Smart Cold Chain System**: Monitoring rantai dingin terintegrasi sensor suhu & pintu dengan sistem ERP perusahaan.

@@ -50,24 +50,25 @@ Final_Project_IntelliTrac_SalesBot/
 ## 🚀 Cara Menjalankan Aplikasi Secara Lokal
 
 ### 1. Prasyarat
-- Python 3.10 atau versi yang lebih baru.
-- Google Gemini API Key (bisa didapatkan secara gratis di [Google AI Studio](https://aistudio.google.com/)).
+- Python 3.10 atau versi yang lebih baru (kompatibel & teruji pada Python 3.10 - 3.14).
+- Google Gemini API Key (bisa didapatkan gratis di [Google AI Studio](https://aistudio.google.com/)).
 
 ### 2. Kloning Repositori & Install Dependensi
 ```bash
-git clone https://github.com/USERNAME/IntelliTrac-SalesBot.git
+git clone https://github.com/sa-yudha/IntelliTrac-SalesBot.git
 cd IntelliTrac-SalesBot
 
 # Install dependensi
 pip install -r requirements.txt
 ```
 
-### 3. Konfigurasi Environment Variables
-Buat file `.env` di direktori utama dan tambahkan API Key Anda:
+### 3. Konfigurasi Environment Variables (Otomatis & Aman)
+API Key terkonfigurasi secara otomatis dan aman via file `.env` (untuk pengujian lokal) atau via **Streamlit Cloud Secrets** (untuk live web app), sehingga calon pelanggan/user **tidak perlu menginputkan API Key secara manual** di antarmuka web.
+
+Untuk pengujian lokal, buat file `.env` di root folder:
 ```env
 GOOGLE_API_KEY=AIzaSy...
 ```
-*(Catatan: Jika `.env` tidak diisi, Anda juga dapat memasukkan API Key secara langsung melalui form di sidebar aplikasi).*
 
 ### 4. Jalankan Aplikasi Streamlit
 ```bash

@@ -1,6 +1,8 @@
 # 🛰️ IntelliTrac SalesBot
 
 > **Final Project - Course: LLM-Based Tools and Gemini API Integration for Data Scientists**  
+> 🌐 **Live Demo Web App**: [https://intellitrac-salesbot.streamlit.app/](https://intellitrac-salesbot.streamlit.app/)
+>
 > *Organized by Hacktiv8 & Supported by Google.org / AVPN*
 
 ---

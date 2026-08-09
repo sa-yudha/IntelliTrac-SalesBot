@@ -9,6 +9,8 @@
 
 ## 📌 Overview
 
+![IntelliTrac SalesBot UI](UI_Screenshot.png)
+
 **IntelliTrac SalesBot** adalah aplikasi chatbot AI pre-sales berbasis web yang dirancang untuk PT Intimap (IntelliTrac Indonesia). Chatbot ini berfungsi sebagai asisten konsultasi pintar bagi calon pelanggan yang tertarik dengan produk pelacak kendaraan (GPS Tracker), AI Dashcam (ADAS & DMS), serta sistem manajemen armada (Fleet Management System).
 
 Chatbot ini diberi nama **"Mintel"**, yang diprogram untuk memberikan rekomendasi produk sesuai jenis armada bisnis calon customer (truk logistik, truk reefer pendingin, truk semen, bus, hingga kendaraan operasional kantor), menjelaskan spesifikasi teknis, serta mengarahkan calon customer ke Sales Executive resmi saat membutuhkan penawaran harga resmi (Sales Handoff).

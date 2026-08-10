@@ -181,8 +181,9 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-# 3. Helper Function to Load Knowledge Base & Feedback Logs
+# 3. Helper Function to Load Knowledge Base & Audit Logs
 FEEDBACK_FILE = os.path.join(os.path.dirname(__file__), "feedback_logs.json")
+CHAT_LOGS_FILE = os.path.join(os.path.dirname(__file__), "chat_history_logs.json")
 
 def load_feedback_logs():
     if os.path.exists(FEEDBACK_FILE):
@@ -206,6 +207,31 @@ def clear_feedback_logs():
     if os.path.exists(FEEDBACK_FILE):
         try:
             os.remove(FEEDBACK_FILE)
+        except Exception:
+            pass
+
+def load_chat_history_logs():
+    if os.path.exists(CHAT_LOGS_FILE):
+        try:
+            with open(CHAT_LOGS_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            return []
+    return []
+
+def save_chat_history_log(entry):
+    logs = load_chat_history_logs()
+    logs.append(entry)
+    try:
+        with open(CHAT_LOGS_FILE, "w", encoding="utf-8") as f:
+            json.dump(logs, f, ensure_ascii=False, indent=2)
+    except Exception:
+        pass
+
+def clear_chat_history_logs():
+    if os.path.exists(CHAT_LOGS_FILE):
+        try:
+            os.remove(CHAT_LOGS_FILE)
         except Exception:
             pass
 
@@ -334,10 +360,10 @@ with st.sidebar:
         st.session_state.chat_session = None
         st.rerun()
 
-    # Admin Login & Feedback Logs Viewer
+    # Admin Login & Audit Logs Viewer
     st.divider()
-    with st.expander("🔒 Akses Admin (Feedback Logs)", expanded=False):
-        admin_pin_input = st.text_input("PIN Admin:", type="password", key="admin_pin", help="Masukkan PIN Admin untuk membuka log rating")
+    with st.expander("🔒 Akses Admin (Audit & Feedback Logs)", expanded=False):
+        admin_pin_input = st.text_input("PIN Admin:", type="password", key="admin_pin", help="Masukkan PIN Admin untuk membuka log audit & rating")
         target_pin = os.getenv("ADMIN_PIN")
         if not target_pin and hasattr(st, "secrets"):
             try:
@@ -350,33 +376,70 @@ with st.sidebar:
         if admin_pin_input:
             if admin_pin_input.strip() == target_pin.strip():
                 st.success("✅ Akses Admin Diberikan!")
-                logs = load_feedback_logs()
-                if logs:
-                    st.write(f"**Total Feedback User:** {len(logs)}")
-                    st.dataframe(logs, use_container_width=True)
-                    
-                    # Generate CSV Data for Download
-                    csv_lines = ["Timestamp,User_Query,Mintel_Response,Rating"]
-                    for l in logs:
-                        q = l.get('query', '').replace('"', '""').replace('\n', ' ')
-                        r = l.get('response', '').replace('"', '""').replace('\n', ' ')
-                        csv_lines.append(f'"{l.get("timestamp")}","{q}","{r}","{l.get("rating")}"')
-                    csv_data = "\n".join(csv_lines)
-                    
-                    st.download_button(
-                        "📥 Unduh Laporan Log (.csv)",
-                        data=csv_data,
-                        file_name="intellitrac_feedback_logs.csv",
-                        mime="text/csv",
-                        use_container_width=True
-                    )
-                    
-                    if st.button("🗑️ Bersihkan Semua Log Feedback", use_container_width=True):
-                        clear_feedback_logs()
-                        st.success("Log feedback berhasil dibersihkan.")
-                        st.rerun()
-                else:
-                    st.info("Belum ada data umpan balik (feedback) dari pengguna.")
+                tab1, tab2 = st.tabs(["💬 Audit Log Chat Lengkap", "👍👎 Rating Feedback"])
+                
+                with tab1:
+                    chat_logs = load_chat_history_logs()
+                    if chat_logs:
+                        st.write(f"**Total Percakapan Tercatat:** {len(chat_logs)}")
+                        search_term = st.text_input("🔍 Cari pertanyaan / respon:", key="search_chat_logs")
+                        display_logs = chat_logs
+                        if search_term:
+                            display_logs = [l for l in chat_logs if search_term.lower() in l.get('query','').lower() or search_term.lower() in l.get('response','').lower()]
+                        
+                        st.dataframe(display_logs, use_container_width=True)
+                        
+                        # Generate CSV Data for Download
+                        csv_lines = ["Timestamp,User_Query,Mintel_Response"]
+                        for l in chat_logs:
+                            q = l.get('query', '').replace('"', '""').replace('\n', ' ')
+                            r = l.get('response', '').replace('"', '""').replace('\n', ' ')
+                            csv_lines.append(f'"{l.get("timestamp")}","{q}","{r}"')
+                        csv_data = "\n".join(csv_lines)
+                        
+                        st.download_button(
+                            "📥 Unduh Audit Log Chat (.csv)",
+                            data=csv_data,
+                            file_name="intellitrac_chat_audit_logs.csv",
+                            mime="text/csv",
+                            use_container_width=True
+                        )
+                        
+                        if st.button("🗑️ Bersihkan Audit Log Chat", use_container_width=True):
+                            clear_chat_history_logs()
+                            st.success("Audit log chat berhasil dibersihkan.")
+                            st.rerun()
+                    else:
+                        st.info("Belum ada riwayat percakapan yang tercatat.")
+
+                with tab2:
+                    fb_logs = load_feedback_logs()
+                    if fb_logs:
+                        st.write(f"**Total Feedback Rating:** {len(fb_logs)}")
+                        st.dataframe(fb_logs, use_container_width=True)
+                        
+                        csv_lines = ["Timestamp,User_Query,Mintel_Response,Rating"]
+                        for l in fb_logs:
+                            q = l.get('query', '').replace('"', '""').replace('\n', ' ')
+                            r = l.get('response', '').replace('"', '""').replace('\n', ' ')
+                            csv_lines.append(f'"{l.get("timestamp")}","{q}","{r}","{l.get("rating")}"')
+                        csv_data = "\n".join(csv_lines)
+                        
+                        st.download_button(
+                            "📥 Unduh Log Feedback (.csv)",
+                            data=csv_data,
+                            file_name="intellitrac_feedback_logs.csv",
+                            mime="text/csv",
+                            use_container_width=True,
+                            key="dl_fb_csv"
+                        )
+                        
+                        if st.button("🗑️ Bersihkan Log Feedback", use_container_width=True, key="clear_fb_btn"):
+                            clear_feedback_logs()
+                            st.success("Log feedback berhasil dibersihkan.")
+                            st.rerun()
+                    else:
+                        st.info("Belum ada data umpan balik rating dari pengguna.")
             else:
                 st.error("❌ PIN Admin Salah!")
 
@@ -515,6 +578,14 @@ if user_input:
 
                 st.markdown(reply_text)
                 st.session_state.messages.append({"role": "assistant", "content": reply_text})
+
+                # Automatically save full conversation to Chat Audit Log
+                chat_log_entry = {
+                    "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                    "query": user_input,
+                    "response": reply_text
+                }
+                save_chat_history_log(chat_log_entry)
 
                 # Detect if the query triggers Sales Handoff (Price quotation, sales contact, discount, purchase)
                 handoff_keywords = ["harga", "biaya", "penawaran", "quotation", "diskon", "beli", "pesan", "sales", "hubungi", "kontak", "bayar"]

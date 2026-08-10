@@ -12,7 +12,7 @@
   - **Advanced Driver Assistance Systems (ADAS)**: Peringatan jarak aman kendaraan, potensi tabrakan depan, departure lane warning.
   - **Engine Cut-Off**: Mematikan mesin dari jarak jauh saat keadaan darurat.
   - **Auto-Capture Event**: Otomatis merekam dan mengunggah klip video saat terjadi insiden / pengereman mendadak.
-  - **Fitur Lainnya**: SOS/Panic Button, Door Sensor Support, Overspeed Alert, In-Cabin Voice Alert, Wi-Fi Connectivity, Replay History, Rebound Alert (Fatigue/Harsh Driving).
+  - **Fitur Lainnya**: SOS/Panic Button, Door Sensor Support, Overspeed Alert, In-Cabin Voice Alert, Wi-Fi Connectivity, Replay History, Rebound Alert (Fatigue/Harsh Driving termasuk HA, HB, dan Manuver Tajam/HC).
 
 ### B. IntelliTrac GPS Tracker JC450 (Multi-Channel AI Dashcam)
 - **Kategori**: Multi-channel Commercial Dashcam (hingga 5 kamera sekaligus).
@@ -23,6 +23,7 @@
   - **DMS & ADAS AI**: Peringatan kelelahan sopir dan asisten keselamatan berkendara.
   - **Storage Besar**: Dual microSD Slot (hingga 512GB / 2x256GB).
   - **Engine Cut-Off & SOS Button**: Fitur keamanan standar keselamatan industri.
+  - **Harsh Driving Behaviour**: Deteksi pengereman mendadak (HB), akselerasi mendadak (HA), dan manuver tajam / Harsh Cornering (HC).
   - **Analog & Serial Ports**: Mendukung koneksi berbagai sensor tambahan dan integrasi relay.
 
 ### C. IntelliTrac GPS Tracker VT-45 Lite (Essential Fleet Management)
@@ -42,7 +43,7 @@
 - **Fitur Utama**:
   - **Multi-Sensor Integration**: Kompatibel dengan Sensor Suhu, Door Sensor (hingga 3 channel), Sensor Rotasi Drum Mixer, iButton (ID Reader).
   - **Dukungan Modul OBD-II CAN800**: Membaca data ECU mesin secara mendalam.
-  - **Harsh Driving Behaviour**: Deteksi akselerasi mendadak (HA), rem mendadak (HB), dan manuver tajam (HC).
+  - **Harsh Driving Behaviour**: Deteksi akselerasi mendadak (HA) dan rem mendadak (HB).
   - **Engine Cut-Off, Geofence Controller, Overspeed Alarm, SOS Button**.
   - **Proteksi IP65**: Tahan terhadap debu dan cipratan air.
 

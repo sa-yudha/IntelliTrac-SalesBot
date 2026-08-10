@@ -152,7 +152,6 @@ st.markdown("""
 
 
 # 3. Helper Function to Load Knowledge Base
-@st.cache_data(show_spinner=False)
 def load_knowledge_base():
     knowledge_dir = os.path.join(os.path.dirname(__file__), "knowledge")
     knowledge_text = ""

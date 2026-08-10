@@ -293,6 +293,11 @@ with st.sidebar:
     """, unsafe_allow_html=True)
     st.markdown("### 🛰️ IntelliTrac SalesBot")
     st.markdown("Asisten Pintar Pre-Sales IntelliTrac GPS & Fleet Management Systems.")
+    st.markdown("""
+    <div style="margin-top: 12px; margin-bottom: 5px;">
+        <div class="status-badge"><span class="status-dot"></span> Mintel Active 24/7</div>
+    </div>
+    """, unsafe_allow_html=True)
     
     st.divider()
 
@@ -356,13 +361,17 @@ with st.sidebar:
 
     st.divider()
     if st.button("🗑️ Hapus Riwayat Chat"):
-        st.session_state.messages = []
-        st.session_state.chat_session = None
+        st.session_state.messages = [
+            {
+                "role": "assistant",
+                "content": "Halo! Saya **Mintel**, Asisten Virtual Pre-Sales IntelliTrac GPS Indonesia 👋🏼\n\nAda yang bisa saya bantu terkait kebutuhan pelacak kendaraan, AI Dashcam, atau sistem manajemen armada bisnis Anda hari ini?"
+            }
+        ]
         st.rerun()
 
     # Admin Login & Audit Logs Viewer
     st.divider()
-    with st.expander("🔒 Akses Admin (Audit & Feedback Logs)", expanded=False):
+    with st.expander("🔒 Akses Admin", expanded=False):
         admin_pin_input = st.text_input("PIN Admin:", type="password", key="admin_pin", help="Masukkan PIN Admin untuk membuka log audit & rating")
         target_pin = os.getenv("ADMIN_PIN")
         if not target_pin and hasattr(st, "secrets"):
@@ -449,7 +458,6 @@ st.markdown("""
     <div class="header-title">IntelliTrac SalesBot 🛰️</div>
     <div class="header-subtitle">Asisten Konsultasi Pre-Sales GPS Tracker, AI Dashcam & Solusi Manajemen Armada PT Intimap</div>
     <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 10px;">
-        <div class="status-badge"><span class="status-dot"></span> Mintel Active 24/7</div>
         <div class="header-badge">Powered by Google Gemini AI & Knowledge Base IntelliTrac 2026</div>
     </div>
 </div>
@@ -541,6 +549,12 @@ if user_input:
             try:
                 genai.configure(api_key=api_key)
                 
+                # Format conversation history for Gemini API
+                formatted_history = []
+                for msg in st.session_state.messages[:-1]:
+                    role = "user" if msg["role"] == "user" else "model"
+                    formatted_history.append({"role": role, "parts": [msg["content"]]})
+
                 # Configure Gemini model with fallback priority
                 fallback_models = [
                     "gemini-3.5-flash-lite",
@@ -548,33 +562,29 @@ if user_input:
                     "gemini-3.6-flash",
                     "gemini-3.5-flash"
                 ]
+                
                 model = None
+                chat = None
+                reply_text = None
+                
                 for m_name in fallback_models:
                     try:
                         model = genai.GenerativeModel(
                             model_name=m_name,
                             system_instruction=SYSTEM_INSTRUCTION
                         )
-                        # Successfully initialized, break out of loop
+                        chat = model.start_chat(history=formatted_history)
+                        with st.spinner(f"Mintel sedang berpikir... (Mencoba {m_name})"):
+                            response = chat.send_message(user_input)
+                            reply_text = response.text
+                        # Successfully got response, break out of loop
                         break
                     except Exception as e:
-                        st.warning(f"Model {m_name} unavailable, trying next...")
+                        st.warning(f"Model {m_name} tidak tersedia atau error, mencoba model berikutnya...")
                         model = None
-                if model is None:
-                    raise RuntimeError("All Gemini models failed to initialize.")
-
-                # Format conversation history for Gemini API
-                formatted_history = []
-                for msg in st.session_state.messages[:-1]:
-                    role = "user" if msg["role"] == "user" else "model"
-                    formatted_history.append({"role": role, "parts": [msg["content"]]})
-
-                # Start chat session with history
-                chat = model.start_chat(history=formatted_history)
                 
-                with st.spinner("Mintel sedang berpikir..."):
-                    response = chat.send_message(user_input)
-                    reply_text = response.text
+                if model is None or reply_text is None:
+                    raise RuntimeError("Semua model Gemini gagal diinisialisasi atau mengalami timeout.")
 
                 st.markdown(reply_text)
                 st.session_state.messages.append({"role": "assistant", "content": reply_text})

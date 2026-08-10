@@ -574,7 +574,7 @@ if user_input:
                             system_instruction=SYSTEM_INSTRUCTION
                         )
                         chat = model.start_chat(history=formatted_history)
-                        with st.spinner(f"Mintel sedang berpikir... (Mencoba {m_name})"):
+                        with st.spinner("Mintel sedang berpikir..."):
                             response = chat.send_message(user_input)
                             reply_text = response.text
                         # Successfully got response, break out of loop

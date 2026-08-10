@@ -338,10 +338,17 @@ with st.sidebar:
     st.divider()
     with st.expander("🔒 Akses Admin (Feedback Logs)", expanded=False):
         admin_pin_input = st.text_input("PIN Admin:", type="password", key="admin_pin", help="Masukkan PIN Admin untuk membuka log rating")
-        target_pin = os.getenv("ADMIN_PIN") or (st.secrets.get("ADMIN_PIN") if hasattr(st, "secrets") else "***REMOVED***")
+        target_pin = os.getenv("ADMIN_PIN")
+        if not target_pin and hasattr(st, "secrets"):
+            try:
+                target_pin = st.secrets.get("ADMIN_PIN")
+            except Exception:
+                pass
+        if not target_pin:
+            target_pin = "***REMOVED***"
         
         if admin_pin_input:
-            if admin_pin_input == target_pin:
+            if admin_pin_input.strip() == target_pin.strip():
                 st.success("✅ Akses Admin Diberikan!")
                 logs = load_feedback_logs()
                 if logs:

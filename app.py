@@ -1,7 +1,7 @@
 import os
 import glob
 import json
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 import streamlit as st
 import google.generativeai as genai
 from dotenv import load_dotenv
@@ -486,7 +486,7 @@ for idx, msg in enumerate(st.session_state.messages):
                 if logged_key not in st.session_state:
                     st.session_state[logged_key] = True
                     log_entry = {
-                        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                        "timestamp": datetime.now(timezone(timedelta(hours=7))).strftime("%Y-%m-%d %H:%M:%S"),
                         "query": user_q,
                         "response": msg["content"][:200] + "..." if len(msg["content"]) > 200 else msg["content"],
                         "rating": rating_str
@@ -591,7 +591,7 @@ if user_input:
 
                 # Automatically save full conversation to Chat Audit Log
                 chat_log_entry = {
-                    "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                    "timestamp": datetime.now(timezone(timedelta(hours=7))).strftime("%Y-%m-%d %H:%M:%S"),
                     "query": user_input,
                     "response": reply_text
                 }

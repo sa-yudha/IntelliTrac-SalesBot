@@ -1,5 +1,7 @@
 import os
 import glob
+import json
+from datetime import datetime
 import streamlit as st
 import google.generativeai as genai
 from dotenv import load_dotenv
@@ -66,8 +68,36 @@ st.markdown("""
         font-size: 0.72rem;
         font-weight: 600;
         display: inline-block;
-        margin-top: 10px;
         font-family: 'Poppins', sans-serif;
+    }
+    
+    /* Real-time Status Badge */
+    .status-badge {
+        background-color: rgba(37, 211, 102, 0.2);
+        color: #25D366;
+        border: 1px solid rgba(37, 211, 102, 0.4);
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-family: 'Poppins', sans-serif;
+    }
+    .status-dot {
+        width: 8px;
+        height: 8px;
+        background-color: #25D366;
+        border-radius: 50%;
+        display: inline-block;
+        box-shadow: 0 0 8px #25D366;
+        animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+        0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+        70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(37, 211, 102, 0); }
+        100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
     }
 
     /* Sales Handoff Card */
@@ -151,7 +181,34 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-# 3. Helper Function to Load Knowledge Base
+# 3. Helper Function to Load Knowledge Base & Feedback Logs
+FEEDBACK_FILE = os.path.join(os.path.dirname(__file__), "feedback_logs.json")
+
+def load_feedback_logs():
+    if os.path.exists(FEEDBACK_FILE):
+        try:
+            with open(FEEDBACK_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            return []
+    return []
+
+def save_feedback_log(entry):
+    logs = load_feedback_logs()
+    logs.append(entry)
+    try:
+        with open(FEEDBACK_FILE, "w", encoding="utf-8") as f:
+            json.dump(logs, f, ensure_ascii=False, indent=2)
+    except Exception:
+        pass
+
+def clear_feedback_logs():
+    if os.path.exists(FEEDBACK_FILE):
+        try:
+            os.remove(FEEDBACK_FILE)
+        except Exception:
+            pass
+
 def load_knowledge_base():
     knowledge_dir = os.path.join(os.path.dirname(__file__), "knowledge")
     knowledge_text = ""
@@ -277,12 +334,54 @@ with st.sidebar:
         st.session_state.chat_session = None
         st.rerun()
 
+    # Admin Login & Feedback Logs Viewer
+    st.divider()
+    with st.expander("🔒 Akses Admin (Feedback Logs)", expanded=False):
+        admin_pin_input = st.text_input("PIN Admin:", type="password", key="admin_pin", help="Masukkan PIN Admin untuk membuka log rating")
+        target_pin = os.getenv("ADMIN_PIN") or (st.secrets.get("ADMIN_PIN") if hasattr(st, "secrets") else "***REMOVED***")
+        
+        if admin_pin_input:
+            if admin_pin_input == target_pin:
+                st.success("✅ Akses Admin Diberikan!")
+                logs = load_feedback_logs()
+                if logs:
+                    st.write(f"**Total Feedback User:** {len(logs)}")
+                    st.dataframe(logs, use_container_width=True)
+                    
+                    # Generate CSV Data for Download
+                    csv_lines = ["Timestamp,User_Query,Mintel_Response,Rating"]
+                    for l in logs:
+                        q = l.get('query', '').replace('"', '""').replace('\n', ' ')
+                        r = l.get('response', '').replace('"', '""').replace('\n', ' ')
+                        csv_lines.append(f'"{l.get("timestamp")}","{q}","{r}","{l.get("rating")}"')
+                    csv_data = "\n".join(csv_lines)
+                    
+                    st.download_button(
+                        "📥 Unduh Laporan Log (.csv)",
+                        data=csv_data,
+                        file_name="intellitrac_feedback_logs.csv",
+                        mime="text/csv",
+                        use_container_width=True
+                    )
+                    
+                    if st.button("🗑️ Bersihkan Semua Log Feedback", use_container_width=True):
+                        clear_feedback_logs()
+                        st.success("Log feedback berhasil dibersihkan.")
+                        st.rerun()
+                else:
+                    st.info("Belum ada data umpan balik (feedback) dari pengguna.")
+            else:
+                st.error("❌ PIN Admin Salah!")
+
 # 6. Main Header Banner
 st.markdown("""
 <div class="header-container">
     <div class="header-title">IntelliTrac SalesBot 🛰️</div>
     <div class="header-subtitle">Asisten Konsultasi Pre-Sales GPS Tracker, AI Dashcam & Solusi Manajemen Armada PT Intimap</div>
-    <div class="header-badge">Powered by Google Gemini AI & Knowledge Base IntelliTrac 2026</div>
+    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 10px;">
+        <div class="status-badge"><span class="status-dot"></span> Mintel Active 24/7</div>
+        <div class="header-badge">Powered by Google Gemini AI & Knowledge Base IntelliTrac 2026</div>
+    </div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -296,9 +395,26 @@ if "messages" not in st.session_state:
     ]
 
 # Display Previous Messages
-for msg in st.session_state.messages:
+for idx, msg in enumerate(st.session_state.messages):
     with st.chat_message(msg["role"], avatar="🛰️" if msg["role"] == "assistant" else "👤"):
         st.markdown(msg["content"])
+        if msg["role"] == "assistant" and idx > 0:
+            fb_key = f"fb_{idx}"
+            feedback = st.feedback("thumbs", key=fb_key)
+            if feedback is not None:
+                user_q = st.session_state.messages[idx-1]["content"] if idx > 0 and st.session_state.messages[idx-1]["role"] == "user" else "N/A"
+                rating_str = "👍 Positive" if feedback == 1 else "👎 Negative"
+                logged_key = f"logged_{idx}_{feedback}"
+                if logged_key not in st.session_state:
+                    st.session_state[logged_key] = True
+                    log_entry = {
+                        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                        "query": user_q,
+                        "response": msg["content"][:200] + "..." if len(msg["content"]) > 200 else msg["content"],
+                        "rating": rating_str
+                    }
+                    save_feedback_log(log_entry)
+                    st.toast(f"Terima kasih atas umpan balik Anda! ({rating_str})", icon="🙏")
 
 # Quick Prompt Chips — selalu tampil
 st.markdown("**💡 Pertanyaan Populer:**")

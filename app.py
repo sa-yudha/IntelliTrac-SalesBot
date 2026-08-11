@@ -379,10 +379,10 @@ with st.sidebar:
                 target_pin = st.secrets.get("ADMIN_PIN")
             except Exception:
                 pass
+
         if not target_pin:
-            target_pin = "***REMOVED***"
-        
-        if admin_pin_input:
+            st.error("ADMIN_PIN belum dikonfigurasi di secrets. Akses admin dinonaktifkan.")
+        elif admin_pin_input:
             if admin_pin_input.strip() == target_pin.strip():
                 st.success("✅ Akses Admin Diberikan!")
                 tab1, tab2 = st.tabs(["💬 Audit Log Chat Lengkap", "👍👎 Rating Feedback"])

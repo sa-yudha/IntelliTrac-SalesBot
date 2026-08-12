@@ -1,9 +1,11 @@
 import os
 import glob
-import json
 from datetime import datetime, timezone, timedelta
 import streamlit as st
 import google.generativeai as genai
+import gspread
+from google.oauth2.service_account import Credentials
+from gspread.exceptions import WorksheetNotFound
 from dotenv import load_dotenv
 
 # 1. Load Environment Variables
@@ -181,59 +183,72 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-# 3. Helper Function to Load Knowledge Base & Audit Logs
-FEEDBACK_FILE = os.path.join(os.path.dirname(__file__), "feedback_logs.json")
-CHAT_LOGS_FILE = os.path.join(os.path.dirname(__file__), "chat_history_logs.json")
+# 3. Helper Function to Load Knowledge Base & Audit Logs (persisted in Google Sheets)
+FEEDBACK_TAB = "FeedbackLogs"
+FEEDBACK_HEADER = ["timestamp", "query", "response", "rating"]
+CHAT_LOGS_TAB = "ChatLogs"
+CHAT_LOGS_HEADER = ["timestamp", "query", "response"]
+
+@st.cache_resource(show_spinner=False)
+def _get_gsheet_client():
+    creds = Credentials.from_service_account_info(
+        dict(st.secrets["gcp_service_account"]),
+        scopes=["https://www.googleapis.com/auth/spreadsheets"],
+    )
+    return gspread.authorize(creds)
+
+def _get_worksheet(tab_name, header):
+    spreadsheet = _get_gsheet_client().open_by_key(st.secrets["GSHEET_ID"])
+    try:
+        return spreadsheet.worksheet(tab_name)
+    except WorksheetNotFound:
+        ws = spreadsheet.add_worksheet(title=tab_name, rows=1000, cols=len(header))
+        ws.append_row(header)
+        return ws
 
 def load_feedback_logs():
-    if os.path.exists(FEEDBACK_FILE):
-        try:
-            with open(FEEDBACK_FILE, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except Exception:
-            return []
-    return []
+    try:
+        return _get_worksheet(FEEDBACK_TAB, FEEDBACK_HEADER).get_all_records()
+    except Exception as e:
+        st.warning(f"Gagal memuat log feedback dari Google Sheets: {e}")
+        return []
 
 def save_feedback_log(entry):
-    logs = load_feedback_logs()
-    logs.append(entry)
     try:
-        with open(FEEDBACK_FILE, "w", encoding="utf-8") as f:
-            json.dump(logs, f, ensure_ascii=False, indent=2)
-    except Exception:
-        pass
+        ws = _get_worksheet(FEEDBACK_TAB, FEEDBACK_HEADER)
+        ws.append_row([entry.get(k, "") for k in FEEDBACK_HEADER])
+    except Exception as e:
+        st.warning(f"Gagal menyimpan log feedback ke Google Sheets: {e}")
 
 def clear_feedback_logs():
-    if os.path.exists(FEEDBACK_FILE):
-        try:
-            os.remove(FEEDBACK_FILE)
-        except Exception:
-            pass
+    try:
+        ws = _get_worksheet(FEEDBACK_TAB, FEEDBACK_HEADER)
+        ws.clear()
+        ws.append_row(FEEDBACK_HEADER)
+    except Exception as e:
+        st.warning(f"Gagal membersihkan log feedback: {e}")
 
 def load_chat_history_logs():
-    if os.path.exists(CHAT_LOGS_FILE):
-        try:
-            with open(CHAT_LOGS_FILE, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except Exception:
-            return []
-    return []
+    try:
+        return _get_worksheet(CHAT_LOGS_TAB, CHAT_LOGS_HEADER).get_all_records()
+    except Exception as e:
+        st.warning(f"Gagal memuat log chat dari Google Sheets: {e}")
+        return []
 
 def save_chat_history_log(entry):
-    logs = load_chat_history_logs()
-    logs.append(entry)
     try:
-        with open(CHAT_LOGS_FILE, "w", encoding="utf-8") as f:
-            json.dump(logs, f, ensure_ascii=False, indent=2)
-    except Exception:
-        pass
+        ws = _get_worksheet(CHAT_LOGS_TAB, CHAT_LOGS_HEADER)
+        ws.append_row([entry.get(k, "") for k in CHAT_LOGS_HEADER])
+    except Exception as e:
+        st.warning(f"Gagal menyimpan log chat ke Google Sheets: {e}")
 
 def clear_chat_history_logs():
-    if os.path.exists(CHAT_LOGS_FILE):
-        try:
-            os.remove(CHAT_LOGS_FILE)
-        except Exception:
-            pass
+    try:
+        ws = _get_worksheet(CHAT_LOGS_TAB, CHAT_LOGS_HEADER)
+        ws.clear()
+        ws.append_row(CHAT_LOGS_HEADER)
+    except Exception as e:
+        st.warning(f"Gagal membersihkan log chat: {e}")
 
 def load_knowledge_base():
     knowledge_dir = os.path.join(os.path.dirname(__file__), "knowledge")

@@ -5,6 +5,11 @@
 ### A. IntelliTrac GPS Tracker JC261 (Dual-Channel AI Dashcam)
 - **Kategori**: Dual-Channel AI Dashcam dengan GPS Tracking 4G LTE.
 - **Fungsi Utama**: Memantau jalan di depan (road-facing) dan kabin sopir (driver-facing) secara bersamaan.
+- **Konfigurasi Kamera** (terdiri dari 1 Main Camera + 1 Sub Camera, total 2 titik kamera):
+  - **Main Camera — JC261**: Front Road-view Camera (kamera utama menghadap jalan, selalu terpasang).
+  - **Sub Camera (pilih salah satu tipe, menyesuaikan kebutuhan)**:
+    - **JC171**: DMS AI Driver-facing Camera — arah kamera khusus fokus ke sopir saja (bukan keseluruhan kabin), sehingga posisi & sudut pemasangan harus presisi mengarah ke wajah sopir agar deteksi AI (kelelahan, distraksi mengemudi) berfungsi akurat.
+    - **CI01**: Infrared Cabin-view Camera (Basic Camera) — memantau keseluruhan kabin (sopir & penumpang), tanpa analisis AI. Posisi pemasangan lebih fleksibel, umumnya di tengah dashboard atau pojok sisi penumpang depan dengan sudut diagonal, menyesuaikan kebutuhan pemasangan.
 - **Fitur Unggulan**:
   - **Live Streaming 4G LTE**: Memantau video jalan & kabin real-time.
   - **Dual-Channel Recording**: Perekaman disimpan langsung di microSD (hingga 256GB).

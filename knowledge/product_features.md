@@ -4,20 +4,21 @@
 
 | Fitur / Spesifikasi | VT-45 Lite | VT-45 | JC261 (Dashcam) | JC450 (Dashcam) |
 |---|---|---|---|---|
-| **Jaringan (Network)** | 4G LTE | 2G/4G | 4G LTE | 4G LTE |
+| **Jaringan (Network)** | 4G LTE | 4G LTE (Fallback 2G) | 4G LTE | 4G LTE |
 | **GPS Live Tracking** | Ya | Ya | Ya | Ya |
 | **Engine Cut-off (Immobilizer)** | Ya | Ya | Ya | Ya |
-| **SOS / Panic Button** | Op | Ya | Ya | Ya |
+| **SOS / Panic Button** | Opsional | Ya | Ya | Ya |
 | **Voice Tap (Listen In)** | Tidak | Tidak | Ya | Ya |
-| **Overspeed Alarm/Buzzer** | No (App) | Ya | Ya | Ya |
-| **Door Sensor Support** | Op (1 Ch) | Ya (up to 3 Ch) | Ya | Ya |
-| **Temperature Sensor** | Tidak | Ya (Op) | Tidak | Tidak |
-| **Rotation Sensor (Mixer)** | Tidak | Ya (Op) | Tidak | Tidak |
-| **RFID / iButton (ID Reader)**| Tidak | Ya (iButton) | Tidak | Tidak |
-| **DMS (Driver Monitor AI)** | Tidak | Tidak | Ya (Cam) | Ya (Cam) |
+| **Overspeed Alarm/Buzzer** | Tidak (Notifikasi via Aplikasi) | Ya (Buzzer & App) | Ya (Voice & App) | Ya (Voice & App) |
+| **Door Sensor Support** | Opsional (1 Channel) | Ya (Hingga 3 Channel) | Ya | Ya |
+| **Temperature Sensor** | Tidak | Opsional | Tidak | Tidak |
+| **Rotation Sensor (Mixer)** | Tidak | Opsional | Tidak | Tidak |
+| **RFID / iButton (ID Reader)**| Tidak | Opsional (iButton) | Tidak | Tidak |
+| **Harsh Driving Behaviour** | Tidak | Ya (HA & HB) | Ya (HA, HB, HC) | Ya (HA, HB, HC) |
+| **DMS (Driver Monitor AI)** | Tidak | Tidak | Ya (Kamera Kabin) | Ya (Kamera Kabin) |
 | **ADAS (Safety Assist AI)** | Tidak | Tidak | Ya | Ya |
-| **Jumlah Kamera** | - | - | Dual (2 Ch) | Up to 5 Ch |
-| **OBD-II CAN800 Integration**| Tidak | Ya (Op) | Tidak | Tidak |
+| **Jumlah Kamera** | - | - | Dual (2 Channel) | Hingga 5 Channel |
+| **OBD-II CAN800 Integration**| Tidak | Opsional | Tidak | Tidak |
 | **Backup Battery Capacity** | 160 mAh | 200/300 mAh | Built-in | Built-in |
 | **Garansi Alat** | 1 Tahun | 1-2 Tahun | 1 Tahun | 1 Tahun |
 

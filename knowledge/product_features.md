@@ -14,7 +14,7 @@
 | **Temperature Sensor** | Tidak | Opsional | Tidak | Tidak |
 | **Rotation Sensor (Mixer)** | Tidak | Opsional | Tidak | Tidak |
 | **RFID / iButton (ID Reader)**| Tidak | Opsional (iButton) | Tidak | Tidak |
-| **Harsh Driving Behaviour** | Tidak | Ya (HA & HB) | Ya (HA, HB, HC) | Ya (HA, HB, HC) |
+| **Harsh Driving Behaviour** | Ya (HA & HB) | Ya (HA & HB) | Ya (HA, HB, HC) | Ya (HA, HB, HC) |
 | **DMS (Driver Monitor AI)** | Tidak | Tidak | Ya (Kamera Kabin) | Ya (Kamera Kabin) |
 | **ADAS (Safety Assist AI)** | Tidak | Tidak | Ya | Ya |
 | **Jumlah Kamera** | - | - | Dual (2 Channel) | Hingga 5 Channel |

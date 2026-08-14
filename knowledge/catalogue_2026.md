@@ -40,6 +40,7 @@
   - **Power Lost Alert**: Notifikasi instan saat kabel GPS dilepas/dipotong paksa.
   - **Door Sensor (1 Channel)**: Pengawasan pintu kargo/penumpang.
   - **SOS / Panic Button**: Tombol darurat untuk pengemudi.
+  - **Harsh Driving Behaviour**: Deteksi akselerasi mendadak (HA) dan pengereman mendadak (HB).
   - **Desain Ringkas & Kompatibilitas Tegangan Luas**: Operating voltage 9V–90V DC.
 
 ### D. IntelliTrac GPS Tracker VT-45 (Advanced Fleet Management)

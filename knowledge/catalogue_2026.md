@@ -70,6 +70,8 @@
 1. **Temperature Sensor (Sensor Suhu)**:
    - Mendeteksi perubahan suhu pada truk pendingin / cold storage (-10°C s/d +65°C).
    - Dilengkapi laporan grafik suhu real-time & alarm ambang batas suhu.
+   - **Batasan Penggunaan (PENTING)**: Sensor ini hanya mengukur suhu ruangan/udara (ambient), BUKAN sensor tahan celup cairan (non-submersible). JANGAN direkomendasikan untuk mengukur suhu cairan di dalam tangki, seperti CPO (Crude Palm Oil) di industri sawit, BBM, atau cairan kimia. Sensor ini hanya sesuai untuk memantau suhu udara di dalam boks/kabin pendingin (reefer/cold storage), bukan untuk dicelupkan langsung ke cairan.
+   - **Jika Customer Butuh Monitoring Suhu Cairan/Tangki**: JANGAN merekomendasikan produk pengganti apa pun untuk kebutuhan ini (tidak ada spesifikasi resminya di knowledge base). Arahkan calon customer untuk konsultasi langsung dengan Sales Executive IntelliTrac agar kebutuhan khususnya dapat ditinjau lebih lanjut.
 2. **Door Sensor (Sensor Pintu)**:
    - Mendeteksi aktivitas buka-tutup pintu kargo / boks.
    - Verifikasi lokasi buka pintu di dalam vs luar geofence untuk mencegah pencurian barang.

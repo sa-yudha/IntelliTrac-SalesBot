@@ -20,7 +20,7 @@
 | **Jumlah Kamera** | - | - | Dual (2 Channel) | Hingga 5 Channel |
 | **OBD-II CAN800 Integration**| Tidak | Opsional | Tidak | Tidak |
 | **Backup Battery Capacity** | 160 mAh | 200/300 mAh | Built-in | Built-in |
-| **Garansi Alat** | 1 Tahun | 1-2 Tahun | 1 Tahun | 1 Tahun |
+| **Garansi Alat** | 1 Tahun | 1 Tahun | 1 Tahun | 1 Tahun |
 
 ## Ketentuan Pre-Sales & Kebijakan Harga (Internal Guidance for Bot)
 - **Informasi Harga**: 

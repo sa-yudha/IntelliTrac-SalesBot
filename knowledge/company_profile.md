@@ -10,7 +10,7 @@ Sejak tahun 2008, IntelliTrac hadir di Indonesia sebagai mitra terpercaya berbag
 2. **Teknologi Telemotika Terkini**: Hardware dan software terus diperbarui mengikuti perkembangan industri.
 3. **Produk Bersertifikat Resmi**: Telah tersertifikasi ISO 9001, KAN (Komite Akreditasi Nasional), POSTEL KOMDIGI, dan PSE (Penyelenggara Sistem Elektronik).
 4. **Infrastruktur Lokal Mandiri**: Server dan data center berada di Indonesia untuk kecepatan dan keamanan data.
-5. **Garansi Perangkat**: Garansi alat hingga 1-2 tahun dan garansi sensor 1 tahun.
+5. **Garansi Perangkat**: Garansi alat 1 tahun dan garansi sensor 1 tahun.
 6. **Layanan Pelanggan 24 Jam**: Tim support dan CS siap membantu 24/7.
 7. **Mitra Resmi Telkomsel**: Menggunakan konektivitas jaringan Telkomsel yang luas dan stabil di Indonesia.
 8. **User Friendly & Customizable**: Sistem dapat disesuaikan (custom) sesuai kebutuhan bisnis spesifik pengguna.

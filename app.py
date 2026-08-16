@@ -37,6 +37,28 @@ HANDOFF_RE = re.compile(
     re.IGNORECASE,
 )
 
+# Pesan sambutan, dipakai saat sesi baru maupun saat riwayat chat dihapus
+GREETING = (
+    "Halo! Saya **Mintel**, Asisten Virtual Pre-Sales IntelliTrac GPS Indonesia 👋🏼\n\n"
+    "Ada yang bisa saya bantu terkait kebutuhan pelacak kendaraan, AI Dashcam, "
+    "atau sistem manajemen armada bisnis Anda hari ini?"
+)
+
+
+def _new_message(role, content):
+    """Setiap pesan diberi ID unik. Penanda feedback sebelumnya memakai nomor urut,
+    sehingga setelah riwayat dihapus nomor itu terpakai ulang dan feedback pada
+    percakapan berikutnya dianggap sudah pernah dicatat lalu dilewati diam-diam."""
+    return {"role": role, "content": content, "id": uuid.uuid4().hex}
+
+
+def _reset_chat():
+    st.session_state.messages = [_new_message("assistant", GREETING)]
+    # Bersihkan juga state widget & penanda feedback, agar tidak tertinggal
+    # dan mengganggu percakapan berikutnya.
+    for key in [k for k in st.session_state if k.startswith(("fb_", "logged_"))]:
+        del st.session_state[key]
+
 # Set Streamlit Page Configuration
 st.set_page_config(
     page_title="IntelliTrac SalesBot - Pre-Sales Assistant",
@@ -381,12 +403,7 @@ with st.sidebar:
 
     st.divider()
     if st.button("🗑️ Hapus Riwayat Chat"):
-        st.session_state.messages = [
-            {
-                "role": "assistant",
-                "content": "Halo! Saya **Mintel**, Asisten Virtual Pre-Sales IntelliTrac GPS Indonesia 👋🏼\n\nAda yang bisa saya bantu terkait kebutuhan pelacak kendaraan, AI Dashcam, atau sistem manajemen armada bisnis Anda hari ini?"
-            }
-        ]
+        _reset_chat()
         st.rerun()
 
 
@@ -403,34 +420,35 @@ st.markdown("""
 
 # 7. Initialize Chat Messages & Gemini Client
 if "messages" not in st.session_state:
-    st.session_state.messages = [
-        {
-            "role": "assistant",
-            "content": "Halo! Saya **Mintel**, Asisten Virtual Pre-Sales IntelliTrac GPS Indonesia 👋🏼\n\nAda yang bisa saya bantu terkait kebutuhan pelacak kendaraan, AI Dashcam, atau sistem manajemen armada bisnis Anda hari ini?"
-        }
-    ]
+    st.session_state.messages = [_new_message("assistant", GREETING)]
+
+# Sesi yang sudah berjalan sebelum perubahan ini belum punya ID, lengkapi di sini
+for _m in st.session_state.messages:
+    _m.setdefault("id", uuid.uuid4().hex)
 
 # Display Previous Messages
 for idx, msg in enumerate(st.session_state.messages):
     with st.chat_message(msg["role"], avatar="🛰️" if msg["role"] == "assistant" else "👤"):
         st.markdown(msg["content"])
         if msg["role"] == "assistant" and idx > 0:
-            fb_key = f"fb_{idx}"
-            feedback = st.feedback("thumbs", key=fb_key)
-            if feedback is not None:
-                user_q = st.session_state.messages[idx-1]["content"] if idx > 0 and st.session_state.messages[idx-1]["role"] == "user" else "N/A"
+            logged_key = f"logged_{msg['id']}"
+            already_logged = logged_key in st.session_state
+            # Setelah tercatat, tombol dikunci supaya rating tidak bisa diubah
+            # dan menghasilkan baris ganda di spreadsheet.
+            feedback = st.feedback("thumbs", key=f"fb_{msg['id']}", disabled=already_logged)
+            if feedback is not None and not already_logged:
+                st.session_state[logged_key] = feedback
+                prev = st.session_state.messages[idx - 1]
+                user_q = prev["content"] if prev["role"] == "user" else "N/A"
                 rating_str = "👍 Positive" if feedback == 1 else "👎 Negative"
-                logged_key = f"logged_{idx}_{feedback}"
-                if logged_key not in st.session_state:
-                    st.session_state[logged_key] = True
-                    log_entry = {
-                        "timestamp": datetime.now(timezone(timedelta(hours=7))).strftime("%Y-%m-%d %H:%M:%S"),
-                        "query": user_q,
-                        "response": msg["content"][:200] + "..." if len(msg["content"]) > 200 else msg["content"],
-                        "rating": rating_str
-                    }
-                    save_feedback_log(log_entry)
-                    st.toast(f"Terima kasih atas umpan balik Anda! ({rating_str})", icon="🙏")
+                log_entry = {
+                    "timestamp": datetime.now(timezone(timedelta(hours=7))).strftime("%Y-%m-%d %H:%M:%S"),
+                    "query": user_q,
+                    "response": msg["content"][:200] + "..." if len(msg["content"]) > 200 else msg["content"],
+                    "rating": rating_str
+                }
+                save_feedback_log(log_entry)
+                st.toast(f"Terima kasih atas umpan balik Anda! ({rating_str})", icon="🙏")
 
 # Quick Prompt Chips — selalu tampil
 st.markdown("**💡 Pertanyaan Populer:**")
@@ -480,7 +498,7 @@ if user_input and len(user_input) > MAX_INPUT_CHARS:
 # 8. Handle User Input
 if user_input:
     # Append user message
-    st.session_state.messages.append({"role": "user", "content": user_input})
+    st.session_state.messages.append(_new_message("user", user_input))
     with st.chat_message("user", avatar="👤"):
         st.markdown(user_input)
 
@@ -489,7 +507,7 @@ if user_input:
         if not api_key:
             error_msg = "⚠️ API Key Google Gemini belum dikonfigurasi. Silakan masukkan GOOGLE_API_KEY di file `.env` atau melalui sidebar."
             st.error(error_msg)
-            st.session_state.messages.append({"role": "assistant", "content": error_msg})
+            st.session_state.messages.append(_new_message("assistant", error_msg))
         else:
             try:
                 genai.configure(api_key=api_key)
@@ -536,7 +554,7 @@ if user_input:
                     raise RuntimeError("Semua model Gemini gagal diinisialisasi atau mengalami timeout.")
 
                 st.markdown(reply_text)
-                st.session_state.messages.append({"role": "assistant", "content": reply_text})
+                st.session_state.messages.append(_new_message("assistant", reply_text))
 
                 # Automatically save full conversation to Chat Audit Log
                 chat_log_entry = {
@@ -571,4 +589,4 @@ if user_input:
                     f"Silakan coba lagi sebentar lagi. (Kode: {ref})"
                 )
                 st.error(err_text)
-                st.session_state.messages.append({"role": "assistant", "content": err_text})
+                st.session_state.messages.append(_new_message("assistant", err_text))

@@ -206,49 +206,28 @@ def _get_worksheet(tab_name, header):
         ws.append_row(header)
         return ws
 
-def load_feedback_logs():
-    try:
-        return _get_worksheet(FEEDBACK_TAB, FEEDBACK_HEADER).get_all_records()
-    except Exception as e:
-        st.warning(f"Gagal memuat log feedback dari Google Sheets: {e}")
-        return []
+# Netralisasi karakter formula sebelum data masuk ke spreadsheet.
+# Tanpa ini, teks pengguna seperti =cmd|'/c calc'!A1 akan dieksekusi sebagai
+# formula saat sheet diunduh dan dibuka di Excel / LibreOffice (CSV injection).
+FORMULA_PREFIXES = ("=", "+", "-", "@", "\t", "\r")
+
+def _sheet_safe(value):
+    s = "" if value is None else str(value)
+    return "'" + s if s and s[0] in FORMULA_PREFIXES else s
 
 def save_feedback_log(entry):
     try:
         ws = _get_worksheet(FEEDBACK_TAB, FEEDBACK_HEADER)
-        ws.append_row([entry.get(k, "") for k in FEEDBACK_HEADER])
-    except Exception as e:
-        st.warning(f"Gagal menyimpan log feedback ke Google Sheets: {e}")
-
-def clear_feedback_logs():
-    try:
-        ws = _get_worksheet(FEEDBACK_TAB, FEEDBACK_HEADER)
-        ws.clear()
-        ws.append_row(FEEDBACK_HEADER)
-    except Exception as e:
-        st.warning(f"Gagal membersihkan log feedback: {e}")
-
-def load_chat_history_logs():
-    try:
-        return _get_worksheet(CHAT_LOGS_TAB, CHAT_LOGS_HEADER).get_all_records()
-    except Exception as e:
-        st.warning(f"Gagal memuat log chat dari Google Sheets: {e}")
-        return []
+        ws.append_row([_sheet_safe(entry.get(k, "")) for k in FEEDBACK_HEADER])
+    except Exception:
+        st.warning("Gagal menyimpan log feedback. Percakapan Anda tetap berjalan normal.")
 
 def save_chat_history_log(entry):
     try:
         ws = _get_worksheet(CHAT_LOGS_TAB, CHAT_LOGS_HEADER)
-        ws.append_row([entry.get(k, "") for k in CHAT_LOGS_HEADER])
-    except Exception as e:
-        st.warning(f"Gagal menyimpan log chat ke Google Sheets: {e}")
-
-def clear_chat_history_logs():
-    try:
-        ws = _get_worksheet(CHAT_LOGS_TAB, CHAT_LOGS_HEADER)
-        ws.clear()
-        ws.append_row(CHAT_LOGS_HEADER)
-    except Exception as e:
-        st.warning(f"Gagal membersihkan log chat: {e}")
+        ws.append_row([_sheet_safe(entry.get(k, "")) for k in CHAT_LOGS_HEADER])
+    except Exception:
+        st.warning("Gagal menyimpan log chat. Percakapan Anda tetap berjalan normal.")
 
 def load_knowledge_base():
     knowledge_dir = os.path.join(os.path.dirname(__file__), "knowledge")
@@ -384,88 +363,6 @@ with st.sidebar:
         ]
         st.rerun()
 
-    # Admin Login & Audit Logs Viewer
-    st.divider()
-    with st.expander("🔒 Akses Admin", expanded=False):
-        admin_pin_input = st.text_input("PIN Admin:", type="password", key="admin_pin", help="Masukkan PIN Admin untuk membuka log audit & rating")
-        target_pin = os.getenv("ADMIN_PIN")
-        if not target_pin and hasattr(st, "secrets"):
-            try:
-                target_pin = st.secrets.get("ADMIN_PIN")
-            except Exception:
-                pass
-
-        if not target_pin:
-            st.error("ADMIN_PIN belum dikonfigurasi di secrets. Akses admin dinonaktifkan.")
-        elif admin_pin_input:
-            if admin_pin_input.strip() == target_pin.strip():
-                st.success("✅ Akses Admin Diberikan!")
-                tab1, tab2 = st.tabs(["💬 Audit Log Chat Lengkap", "👍👎 Rating Feedback"])
-                
-                with tab1:
-                    chat_logs = load_chat_history_logs()
-                    if chat_logs:
-                        st.write(f"**Total Percakapan Tercatat:** {len(chat_logs)}")
-                        search_term = st.text_input("🔍 Cari pertanyaan / respon:", key="search_chat_logs")
-                        display_logs = chat_logs
-                        if search_term:
-                            display_logs = [l for l in chat_logs if search_term.lower() in l.get('query','').lower() or search_term.lower() in l.get('response','').lower()]
-                        
-                        st.dataframe(display_logs, use_container_width=True)
-                        
-                        # Generate CSV Data for Download
-                        csv_lines = ["Timestamp,User_Query,Mintel_Response"]
-                        for l in chat_logs:
-                            q = l.get('query', '').replace('"', '""').replace('\n', ' ')
-                            r = l.get('response', '').replace('"', '""').replace('\n', ' ')
-                            csv_lines.append(f'"{l.get("timestamp")}","{q}","{r}"')
-                        csv_data = "\n".join(csv_lines)
-                        
-                        st.download_button(
-                            "📥 Unduh Audit Log Chat (.csv)",
-                            data=csv_data,
-                            file_name="intellitrac_chat_audit_logs.csv",
-                            mime="text/csv",
-                            use_container_width=True
-                        )
-                        
-                        if st.button("🗑️ Bersihkan Audit Log Chat", use_container_width=True):
-                            clear_chat_history_logs()
-                            st.success("Audit log chat berhasil dibersihkan.")
-                            st.rerun()
-                    else:
-                        st.info("Belum ada riwayat percakapan yang tercatat.")
-
-                with tab2:
-                    fb_logs = load_feedback_logs()
-                    if fb_logs:
-                        st.write(f"**Total Feedback Rating:** {len(fb_logs)}")
-                        st.dataframe(fb_logs, use_container_width=True)
-                        
-                        csv_lines = ["Timestamp,User_Query,Mintel_Response,Rating"]
-                        for l in fb_logs:
-                            q = l.get('query', '').replace('"', '""').replace('\n', ' ')
-                            r = l.get('response', '').replace('"', '""').replace('\n', ' ')
-                            csv_lines.append(f'"{l.get("timestamp")}","{q}","{r}","{l.get("rating")}"')
-                        csv_data = "\n".join(csv_lines)
-                        
-                        st.download_button(
-                            "📥 Unduh Log Feedback (.csv)",
-                            data=csv_data,
-                            file_name="intellitrac_feedback_logs.csv",
-                            mime="text/csv",
-                            use_container_width=True,
-                            key="dl_fb_csv"
-                        )
-                        
-                        if st.button("🗑️ Bersihkan Log Feedback", use_container_width=True, key="clear_fb_btn"):
-                            clear_feedback_logs()
-                            st.success("Log feedback berhasil dibersihkan.")
-                            st.rerun()
-                    else:
-                        st.info("Belum ada data umpan balik rating dari pengguna.")
-            else:
-                st.error("❌ PIN Admin Salah!")
 
 # 6. Main Header Banner
 st.markdown("""

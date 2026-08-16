@@ -5,7 +5,8 @@ import uuid
 import logging
 from datetime import datetime, timezone, timedelta
 import streamlit as st
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 import gspread
 from google.oauth2.service_account import Credentials
 from gspread.exceptions import WorksheetNotFound
@@ -511,8 +512,8 @@ if user_input:
             st.session_state.messages.append(_new_message("assistant", error_msg))
         else:
             try:
-                genai.configure(api_key=api_key)
-                
+                client = genai.Client(api_key=api_key)
+
                 # Format conversation history for Gemini API.
                 # Hanya kirim giliran terakhir agar biaya token tidak terus menumpuk
                 # dan percakapan panjang tidak menembus batas context window.
@@ -520,7 +521,7 @@ if user_input:
                 formatted_history = []
                 for msg in recent_messages:
                     role = "user" if msg["role"] == "user" else "model"
-                    formatted_history.append({"role": role, "parts": [msg["content"]]})
+                    formatted_history.append({"role": role, "parts": [{"text": msg["content"]}]})
 
                 # Configure Gemini model with fallback priority
                 fallback_models = [
@@ -529,29 +530,27 @@ if user_input:
                     "gemini-3.6-flash",
                     "gemini-3.5-flash"
                 ]
-                
-                model = None
-                chat = None
+
+                chat_config = types.GenerateContentConfig(system_instruction=SYSTEM_INSTRUCTION)
                 reply_text = None
-                
+
                 for m_name in fallback_models:
                     try:
-                        model = genai.GenerativeModel(
-                            model_name=m_name,
-                            system_instruction=SYSTEM_INSTRUCTION
+                        chat = client.chats.create(
+                            model=m_name,
+                            config=chat_config,
+                            history=formatted_history,
                         )
-                        chat = model.start_chat(history=formatted_history)
                         with st.spinner("Mintel sedang berpikir..."):
-                            response = chat.send_message(user_input)
-                            reply_text = response.text
+                            reply_text = chat.send_message(user_input).text
                         # Successfully got response, break out of loop
                         break
                     except Exception:
                         # Nama model internal tidak perlu diketahui pengunjung
                         logger.warning("Model %s gagal, mencoba berikutnya", m_name, exc_info=True)
-                        model = None
-                
-                if model is None or reply_text is None:
+                        reply_text = None
+
+                if not reply_text:
                     raise RuntimeError("Semua model Gemini gagal diinisialisasi atau mengalami timeout.")
 
                 st.markdown(reply_text)

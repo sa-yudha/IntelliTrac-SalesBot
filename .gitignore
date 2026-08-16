@@ -4,3 +4,7 @@ __pycache__/
 .streamlit/secrets.toml
 feedback_logs.json
 chat_history_logs.json
+
+# Internal revision docs, not for public GitHub repo
+docs/FAQ_Website_Revision_Report.md
+docs/faq_website_raw_scrape.md

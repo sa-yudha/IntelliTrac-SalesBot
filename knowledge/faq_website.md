@@ -78,7 +78,7 @@ Semua tipe di atas sudah dilengkapi live tracking 24 jam dan engine cut-off/immo
 
 Harga bervariasi tergantung tipe perangkat, fitur yang dibutuhkan, dan jumlah unit armada. Paket *tracking only* lebih ekonomis untuk kebutuhan pelacakan dasar, sementara paket premium menawarkan fitur kustom seperti AI dashcam, multi-sensor, atau integrasi ERP. Untuk perusahaan dengan armada besar, tersedia juga opsi sewa.
 
-> **Catatan untuk Mintel**: JANGAN menyebutkan angka nominal, estimasi yang mengikat, atau menawarkan diskon. Saat calon customer menanyakan biaya, tawarkan untuk menghubungkan ke Sales Executive IntelliTrac agar mendapatkan *Official Quotation / Surat Penawaran* resmi.
+> **Catatan untuk Mintel**: harga final selalu disusun Sales Executive berdasarkan tipe perangkat, jumlah unit armada, fitur yang dipilih, dan skema langganan, lalu dituangkan dalam Surat Penawaran resmi. Karena itu angka pastinya tidak tersedia di luar dokumen tersebut. Saat calon customer menanyakan biaya, jelaskan komponen apa saja yang memengaruhi harga, lalu tawarkan untuk menghubungkan ke Sales Executive IntelliTrac agar mendapatkan *Official Quotation / Surat Penawaran* resmi.
 
 ---
 
@@ -88,7 +88,7 @@ Ya. Perangkat GPS Tracker IntelliTrac bergaransi 1 (satu) tahun, dan sensor berg
 
 Garansi ini berlaku selama kerusakan bukan disebabkan oleh masuknya air melebihi batas ketahanan rating IP perangkat (misalnya perendaman) atau kelalaian penggunaan, perangkat tidak dimodifikasi atau dibongkar sendiri oleh customer di luar teknisi resmi IntelliTrac, dan kerusakan bukan akibat faktor eksternal di luar pemakaian normal seperti kecelakaan, kebakaran, atau lonjakan tegangan ekstrem.
 
-> **Catatan untuk Mintel**: sebagian produk justru dipasarkan dengan ketahanan air - VT-45 ber-rating IP65 (tahan debu & cipratan air) dan kamera CE04 pada JC450 ber-rating IP67 (waterproof). Karena itu jangan menyatakan "garansi hangus bila terkena air" secara mutlak, karena bertentangan dengan spesifikasi yang dijual sendiri. Untuk klaim garansi spesifik, arahkan ke tim Support/Service resmi.
+> **Catatan untuk Mintel**: garansi mengikuti batas rating IP masing-masing perangkat. VT-45 ber-rating IP65 (tahan debu dan cipratan air) dan kamera CE04 pada JC450 ber-rating IP67 (waterproof), jadi paparan air dalam batas rating tersebut termasuk pemakaian normal. Yang berada di luar cakupan garansi adalah kerusakan akibat air melebihi batas rating perangkat, misalnya perendaman. Untuk klaim garansi spesifik, arahkan ke tim Support/Service resmi.
 
 ---
 
@@ -98,7 +98,7 @@ Ya, legal. Perangkat dan layanan IntelliTrac sudah memenuhi ketentuan regulasi y
 
 PT Intimap adalah penyedia dan mitra resmi solusi IntelliTrac GPS di Indonesia, di bawah naungan Virtual Map (Australia) Pty Ltd.
 
-> **Catatan untuk Mintel**: jaga presisi istilah di jawaban ini. Kominfo sudah berganti nama menjadi Komdigi (Kementerian Komunikasi dan Digital) sejak Oktober 2024, jadi selalu pakai "Komdigi". PSE itu status pendaftaran, bukan sertifikasi - sebut "terdaftar sebagai PSE", bukan "tersertifikasi PSE". KAN sendiri mengakreditasi lembaga sertifikasi, bukan perusahaan biasa, jadi jangan pernah menyatakan "PT Intimap terakreditasi KAN" - yang benar, PT Intimap tersertifikasi ISO 9001:2015 oleh lembaga sertifikasi yang terakreditasi KAN. Hindari juga klaim menyeluruh seperti "memenuhi seluruh perizinan hukum"; sebutkan saja sertifikasi/pendaftaran yang spesifik, dan bila customer meminta bukti dokumen legalitas, arahkan ke Sales Executive.
+> **Catatan untuk Mintel**: gunakan istilah resmi berikut secara persis. Nama kementeriannya adalah Kementerian Komunikasi dan Digital (Komdigi), sebelumnya bernama Kominfo hingga Oktober 2024. Untuk PSE, gunakan frasa "terdaftar sebagai PSE", karena PSE berbentuk pendaftaran. Untuk ISO, gunakan frasa "PT Intimap tersertifikasi ISO 9001:2015 oleh lembaga sertifikasi yang terakreditasi KAN", karena KAN memberi akreditasi kepada lembaga sertifikasi. Sebutkan setiap sertifikasi dan pendaftaran secara spesifik satu per satu. Bila customer meminta salinan dokumen legalitas, arahkan ke Sales Executive.
 
 ---
 
@@ -108,7 +108,7 @@ Untuk lokasi yang masuk area layanan kantor pusat dan cabang IntelliTrac, biaya 
 
 Kantor layanan saat ini ada di Jakarta (Head Office) dan Surabaya (Branch Office) - alamat lengkapnya ada di `company_profile.md`.
 
-> **Catatan untuk Mintel**: jangan menyatakan "gratis" begitu saja tanpa syarat. Cakupan area layanan, skema langganan vs pembelian putus, serta kondisi yang tidak tercakup (misalnya kerusakan akibat kelalaian pengguna, lihat Q7) perlu dikonfirmasi oleh Sales Executive. Untuk lokasi di luar Jabodetabek dan Surabaya, selalu arahkan ke Sales untuk pengecekan cakupan layanan.
+> **Catatan untuk Mintel**: sampaikan bahwa pemasangan dan maintenance sudah termasuk dalam paket layanan untuk lokasi di dalam area layanan kantor pusat dan cabang. Untuk lokasi di luar area tersebut, cakupan layanan dan kemungkinan biaya perjalanan teknisi dihitung menurut jarak dan kondisi lokasi, sehingga perlu dikonfirmasi Sales Executive. Ketentuan juga dapat berbeda antara skema langganan dan pembelian putus, serta untuk kondisi di luar pemakaian normal (lihat Q7). Untuk lokasi di luar Jabodetabek dan Surabaya, arahkan ke Sales untuk pengecekan cakupan layanan.
 
 ---
 
@@ -155,7 +155,7 @@ Kalau fitur ini diaktifkan saat kendaraan sedang melaju, mesin tidak akan mati m
 
 Fitur ini tersedia di seluruh lini produk: VT-45 Lite, VT-45, JC261, dan JC450.
 
-> **Catatan untuk Mintel**: ini klaim keselamatan, jadi penting dijaga presisinya. Sebagian materi pemasaran menyebut fitur ini "Matikan Mesin Jarak Jauh" atau "mematikan mesin dari jarak jauh" - penamaan itu menyesatkan dan sebaiknya dihindari. Pakai istilah "Engine Cut-Off / Immobilizer (pemutus starter)". Kalau customer bertanya apakah mesin bisa dimatikan saat kendaraan sedang melaju, jawabannya tidak, dan justru itulah alasan fitur ini aman. Jangan pernah menjanjikan kemampuan mematikan mesin yang sedang berjalan.
+> **Catatan untuk Mintel**: ini klaim keselamatan, jadi presisinya penting. Gunakan istilah "Engine Cut-Off / Immobilizer (pemutus starter)" saat menjelaskan fitur ini. Bila customer menyebutnya dengan istilah umum di pasaran seperti "Matikan Mesin Jarak Jauh", jelaskan bahwa cara kerjanya adalah memutus fungsi starter, bukan mematikan mesin yang sedang berjalan. Kalau customer bertanya apakah mesin bisa dimatikan saat kendaraan sedang melaju, jawabannya tidak, dan justru itulah yang membuat fitur ini aman. Jangan pernah menjanjikan kemampuan mematikan mesin yang sedang berjalan.
 
 ---
 

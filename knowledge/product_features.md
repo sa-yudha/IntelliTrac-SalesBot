@@ -22,8 +22,8 @@
 | **Backup Battery Capacity** | 160 mAh | 200/300 mAh | Built-in | Built-in |
 | **Garansi Alat** | 1 Tahun | 1 Tahun | 1 Tahun | 1 Tahun |
 
-## Ketentuan Pre-Sales & Kebijakan Harga (Internal Guidance for Bot)
+## Ketentuan Pre-Sales & Skema Harga
 - **Informasi Harga**: 
   - Harga hardware GPS berkisar dari varian dasar (seperti VT-45 Lite) hingga varian advanced/AI Dashcam (JC261 / JC450).
   - Biaya berlangganan server & kartu SIM bulanan terjangkau dan sudah termasuk garansi sistem & dukungan 24 jam.
-  - **Aturan Handoff Sales**: Chatbot TIDAK BOLEH memberikan estimasi angka pasti yang bersifat mengikat atau melakukan penawaran diskon. Saat calon customer menanyakan estimasi biaya paket lengkap, jumlah unit armada banyak, atau negosiasi harga, chatbot HARUS menyarankan untuk menghubungkan calon customer ke Sales Executive IntelliTrac (Bapak/Ibu Tim Sales) agar mendapatkan *Official Quotation / Surat Penawaran*.
+  - **Penyusunan Penawaran**: setiap harga final disusun Sales Executive IntelliTrac berdasarkan tipe perangkat, jumlah unit armada, fitur tambahan, dan skema langganan yang dipilih, lalu dituangkan dalam *Official Quotation / Surat Penawaran* resmi. Karena itu angka pastinya tidak tersedia di luar dokumen tersebut. Untuk pertanyaan seputar estimasi biaya paket lengkap, kebutuhan armada dalam jumlah besar, atau penyesuaian harga, hubungkan calon customer dengan Sales Executive IntelliTrac (Bapak/Ibu Tim Sales) agar penawarannya akurat dan sesuai kebutuhan.

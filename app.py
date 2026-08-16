@@ -1,5 +1,8 @@
 import os
+import re
 import glob
+import uuid
+import logging
 from datetime import datetime, timezone, timedelta
 import streamlit as st
 import google.generativeai as genai
@@ -10,6 +13,29 @@ from dotenv import load_dotenv
 
 # 1. Load Environment Variables
 load_dotenv()
+
+# Detail teknis error dikirim ke log server (Streamlit Cloud: Manage app -> Logs),
+# bukan ke layar pengunjung.
+logger = logging.getLogger(__name__)
+
+# Batas panjang pertanyaan, mencegah kuota API dihabiskan lewat prompt raksasa
+MAX_INPUT_CHARS = 2000
+
+# Batas jumlah giliran percakapan yang dikirim ulang ke Gemini setiap request
+MAX_HISTORY_TURNS = 20
+
+# Pemicu kartu Sales Handoff. Memakai batas kata (\b) supaya "penghargaan" tidak
+# terbaca sebagai "harga" dan "beliau" tidak terbaca sebagai "beli".
+# "pesan" ditangani terpisah karena bermakna ganda: memesan barang vs pesan error.
+HANDOFF_RE = re.compile(
+    r"\b(?:"
+    r"harga|biaya|tarif|budget|anggaran|penawaran|quotation|quote|rab|"
+    r"diskon|nego\w*|beli|membeli|pembelian|pesanan|memesan|pemesanan|order|"
+    r"sewa|rental|sales|hubungi|kontak|bayar|pembayaran|cicilan|duit"
+    r")\b"
+    r"|\bpesan\b(?!\s+(?:error|eror|gagal|masuk|singkat|otomatis|notifikasi|balasan|terkirim))",
+    re.IGNORECASE,
+)
 
 # Set Streamlit Page Configuration
 st.set_page_config(
@@ -444,6 +470,13 @@ user_input = st.chat_input("Ketik pertanyaan Anda di sini... (contoh: Rekomendas
 if "pending_prompt" in st.session_state and st.session_state["pending_prompt"]:
     user_input = st.session_state.pop("pending_prompt")
 
+if user_input and len(user_input) > MAX_INPUT_CHARS:
+    st.warning(
+        f"Pertanyaan Anda terlalu panjang ({len(user_input):,} karakter, "
+        f"maksimal {MAX_INPUT_CHARS:,}). Mohon persingkat pertanyaannya."
+    )
+    user_input = None
+
 # 8. Handle User Input
 if user_input:
     # Append user message
@@ -461,9 +494,12 @@ if user_input:
             try:
                 genai.configure(api_key=api_key)
                 
-                # Format conversation history for Gemini API
+                # Format conversation history for Gemini API.
+                # Hanya kirim giliran terakhir agar biaya token tidak terus menumpuk
+                # dan percakapan panjang tidak menembus batas context window.
+                recent_messages = st.session_state.messages[:-1][-(MAX_HISTORY_TURNS * 2):]
                 formatted_history = []
-                for msg in st.session_state.messages[:-1]:
+                for msg in recent_messages:
                     role = "user" if msg["role"] == "user" else "model"
                     formatted_history.append({"role": role, "parts": [msg["content"]]})
 
@@ -491,8 +527,9 @@ if user_input:
                             reply_text = response.text
                         # Successfully got response, break out of loop
                         break
-                    except Exception as e:
-                        st.warning(f"Model {m_name} tidak tersedia atau error, mencoba model berikutnya...")
+                    except Exception:
+                        # Nama model internal tidak perlu diketahui pengunjung
+                        logger.warning("Model %s gagal, mencoba berikutnya", m_name, exc_info=True)
                         model = None
                 
                 if model is None or reply_text is None:
@@ -510,8 +547,7 @@ if user_input:
                 save_chat_history_log(chat_log_entry)
 
                 # Detect if the query triggers Sales Handoff (Price quotation, sales contact, discount, purchase)
-                handoff_keywords = ["harga", "biaya", "penawaran", "quotation", "diskon", "beli", "pesan", "sales", "hubungi", "kontak", "bayar"]
-                if any(kw in user_input.lower() for kw in handoff_keywords):
+                if HANDOFF_RE.search(user_input):
                     st.markdown("""
                     <div class="sales-card">
                         <h4>🤝 Terhubung dengan Tim Sales Representative IntelliTrac</h4>
@@ -525,7 +561,14 @@ if user_input:
                     </div>
                     """, unsafe_allow_html=True)
 
-            except Exception as e:
-                err_text = f"Terjadi kesalahan saat berkomunikasi dengan AI: {str(e)}"
+            except Exception:
+                # Detail lengkap (termasuk traceback) hanya ke log server.
+                # Pengunjung cukup dapat kode referensi untuk dilaporkan ke admin.
+                ref = uuid.uuid4().hex[:8]
+                logger.exception("Gagal memproses pesan pengguna. ref=%s", ref)
+                err_text = (
+                    "Maaf, sedang ada gangguan teknis di sisi kami. "
+                    f"Silakan coba lagi sebentar lagi. (Kode: {ref})"
+                )
                 st.error(err_text)
                 st.session_state.messages.append({"role": "assistant", "content": err_text})

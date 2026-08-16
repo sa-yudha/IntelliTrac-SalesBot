@@ -590,3 +590,13 @@ if user_input:
                 )
                 st.error(err_text)
                 st.session_state.messages.append(_new_message("assistant", err_text))
+
+# 9. Pemberitahuan Perekaman Percakapan
+# Ditaruh paling akhir dengan sengaja. st.chat_input di level teratas dipaku ke dasar
+# layar, sedangkan elemen lain mengalir di area yang bisa di-scroll di atasnya. Menaruh
+# caption ini terakhir membuatnya selalu muncul tepat di atas kolom input, termasuk pada
+# rerun yang baru saja merender balasan baru.
+st.caption(
+    "Percakapan ini direkam dan dapat ditinjau tim IntelliTrac untuk peningkatan "
+    "kualitas layanan. Mohon tidak membagikan data pribadi yang sensitif di sini."
+)

@@ -11,20 +11,20 @@
 
 ![IntelliTrac SalesBot UI](UI_Screenshot.png)
 
-**IntelliTrac SalesBot** adalah aplikasi chatbot AI pre-sales berbasis web yang dirancang untuk PT Intimap (IntelliTrac Indonesia). Chatbot ini berfungsi sebagai asisten konsultasi pintar bagi calon pelanggan yang tertarik dengan produk pelacak kendaraan (GPS Tracker), AI Dashcam (ADAS & DMS), serta sistem manajemen armada (Fleet Management System).
+**IntelliTrac SalesBot** adalah aplikasi chatbot AI pre-sales berbasis web yang dirancang untuk PT Intimap (IntelliTrac Indonesia). Chatbot ini berfungsi sebagai asisten konsultasi yang cerdas bagi calon pelanggan yang tertarik dengan produk pelacak kendaraan (GPS Tracker), AI Dashcam (ADAS & DMS), serta sistem manajemen armada (Fleet Management System).
 
-Chatbot ini diberi nama **"Mintel"**, yang diprogram untuk memberikan rekomendasi produk sesuai jenis armada bisnis calon customer (truk logistik, truk reefer pendingin, truk semen, bus, hingga kendaraan operasional kantor), menjelaskan spesifikasi teknis, serta mengarahkan calon customer ke Sales Executive resmi saat membutuhkan penawaran harga resmi (Sales Handoff).
+Chatbot ini diberi nama **"Mintel"**. Mintel bertugas memberikan rekomendasi produk sesuai jenis armada bisnis calon customer (truk logistik, truk reefer pendingin, truk semen, bus, hingga kendaraan operasional kantor) dan menjelaskan spesifikasi teknisnya, lalu mengarahkan calon customer ke Sales Executive resmi saat membutuhkan penawaran harga resmi (Sales Handoff).
 
 ---
 
 ## ✨ Fitur Utama
 
-- 🧠 **Powered by Google Gemini AI**: Memanfaatkan model LLM **Gemini 3.5 Flash-Lite** (dipadukan dengan sistem *multi-model fallback*: **Gemini 3.1 Flash-Lite**, **Gemini 3.6 Flash**, **Gemini 3.5 Flash**) untuk pemrosesan bahasa alami (NLP) yang cepat, hemat, dan akurat.
-- 📚 **Integrated Knowledge Base**: Dilengkapi konteks dokumen resmi PT Intimap, Katalog Produk 2026, serta Matriks Spesifikasi & Fitur Perangkat (VT-45 Lite, VT-45, JC261, JC450, OBD-II CAN800, dll.).
-- 🤝 **Sales Handoff Card**: Secara otomatis menampilkan kartu kontak Sales Representative (WhatsApp & Email) ketika calon customer menanyakan penawaran harga resmi atau berniat melakukan pembelian.
-- 🔍 **Fast Product Match (Sidebar)**: Widget rekomendasi cepat berdasarkan pilihan jenis armada calon pelanggan.
-- 💡 **Quick Prompt Chips**: Pilihan pertanyaan populer untuk memudahkan interaksi awal calon customer.
-- 🎨 **Modern & Responsive UI**: Antarmuka web interaktif menggunakan Streamlit dengan tema warna khas IntelliTrac (Navy Blue & Orange).
+- 🧠 **Powered by Google Gemini AI**: Memanfaatkan model LLM **Gemini 3.5 Flash-Lite** (dipadukan dengan sistem *multi-model fallback*: **Gemini 3.1 Flash-Lite**, **Gemini 3.6 Flash**, **Gemini 3.5 Flash**) supaya respons bahasa alami (NLP) tetap cepat dan stabil walau ada gangguan di salah satu model.
+- 📚 **Integrated Knowledge Base**: Konteks jawabannya diambil langsung dari dokumen resmi PT Intimap, Katalog Produk 2026, serta Matriks Spesifikasi & Fitur Perangkat (VT-45 Lite, VT-45, JC261, JC450, OBD-II, dan lain-lain).
+- 🤝 **Sales Handoff Card**: Ketika calon customer mulai menanyakan harga resmi atau niat membeli, kartu kontak Sales Representative (WhatsApp & Email) langsung muncul otomatis.
+- 🔍 **Fast Product Match**: Pada sidebar kiri, ada widget yang langsung merekomendasikan produk begitu calon pelanggan memilih jenis armadanya.
+- 💡 **Quick Prompt Chips**: Sederet pertanyaan populer yang bisa langsung diklik, jadi calon customer dimudahkan karena tidak perlu mengetik dari nol untuk memulai obrolan.
+- 🎨 **Modern & Responsive UI**: Dibangun di atas Streamlit dengan tema warna khas IntelliTrac, Navy Blue & Orange.
 
 ---
 
@@ -38,11 +38,21 @@ Final_Project_IntelliTrac_SalesBot/
 ├── .env.example            # Template konfigurasi API Key Google Gemini
 ├── .gitignore              # Mengabaikan file sensitif (.env)
 ├── README.md               # Dokumentasi lengkap proyek
+├── LICENSE                 # Lisensi proyek
+├── UI_Screenshot.png       # Screenshot antarmuka aplikasi
+│
+├── .streamlit/
+│   └── config.toml         # Konfigurasi tema & pengaturan Streamlit
+│
+├── docs/
+│   └── PROJECT_ARTIFACTS.md # Catatan artefak & dokumentasi tambahan proyek
 │
 └── knowledge/              # Knowledge Base Dokumen Perusahaan & Produk
     ├── company_profile.md  # Profil PT Intimap & IntelliTrac Indonesia
     ├── catalogue_2026.md   # Deskripsi & spesifikasi katalog produk 2026
-    └── product_features.md # Tabel matriks perbandingan fitur & perangkat
+    ├── product_features.md # Tabel matriks perbandingan fitur & perangkat
+    ├── faq.md               # Panduan jawaban internal (blank spot, trial/POC)
+    └── faq_website.md       # FAQ publik website, sudah dikoreksi untuk chatbot
 ```
 
 ---

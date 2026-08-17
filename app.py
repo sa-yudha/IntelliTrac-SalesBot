@@ -523,12 +523,15 @@ if user_input:
                     role = "user" if msg["role"] == "user" else "model"
                     formatted_history.append({"role": role, "parts": [{"text": msg["content"]}]})
 
-                # Configure Gemini model with fallback priority
+                # Urutan fallback disusun dari yang tercepat, berdasarkan pengukuran
+                # dengan system instruction penuh (3 ronde round-robin, Agustus 2026).
+                # Angka di komentar adalah rata-rata waktu jawab saat pengukuran itu.
                 fallback_models = [
-                    "gemini-3.5-flash-lite",
-                    "gemini-3.1-flash-lite",
-                    "gemini-3.6-flash",
-                    "gemini-3.5-flash"
+                    "gemini-3.5-flash-lite",   #  2,98 dtk
+                    "gemini-3.1-flash-lite",   #  3,80 dtk
+                    "gemini-3.7-flash",        #  7,22 dtk
+                    "gemini-3.6-flash",        # 13,79 dtk
+                    "gemini-3.5-flash"         # 14,79 dtk
                 ]
 
                 chat_config = types.GenerateContentConfig(system_instruction=SYSTEM_INSTRUCTION)

@@ -19,7 +19,7 @@ Chatbot ini diberi nama **"Mintel"**. Mintel bertugas memberikan rekomendasi pro
 
 ## ✨ Fitur Utama
 
-- 🧠 **Powered by Google Gemini AI**: Memanfaatkan model LLM **Gemini 3.5 Flash-Lite** (dipadukan dengan sistem *multi-model fallback*: **Gemini 3.1 Flash-Lite**, **Gemini 3.6 Flash**, **Gemini 3.5 Flash**) supaya respons bahasa alami (NLP) tetap cepat dan stabil walau ada gangguan di salah satu model.
+- 🧠 **Powered by Google Gemini AI**: Memanfaatkan model LLM **Gemini 3.5 Flash-Lite** (dipadukan dengan sistem *multi-model fallback* berurutan: **Gemini 3.1 Flash-Lite**, **Gemini 3.7 Flash**, **Gemini 3.6 Flash**, **Gemini 3.5 Flash**) supaya respons bahasa alami (NLP) tetap cepat dan stabil walau ada gangguan di salah satu model. Urutannya disusun dari model tercepat berdasarkan hasil pengukuran waktu respons.
 - 📚 **Integrated Knowledge Base**: Konteks jawabannya diambil langsung dari dokumen resmi PT Intimap, Katalog Produk 2026, serta Matriks Spesifikasi & Fitur Perangkat (VT-45 Lite, VT-45, JC261, JC450, OBD-II, dan lain-lain).
 - 🤝 **Sales Handoff Card**: Ketika calon customer mulai menanyakan harga resmi atau niat membeli, kartu kontak Sales Representative (WhatsApp & Email) langsung muncul otomatis.
 - 🔍 **Fast Product Match**: Pada sidebar kiri, ada widget yang langsung merekomendasikan produk begitu calon pelanggan memilih jenis armadanya.

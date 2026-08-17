@@ -42,7 +42,8 @@ Final_Project_IntelliTrac_SalesBot/
 ├── UI_Screenshot.png       # Screenshot antarmuka aplikasi
 │
 ├── .streamlit/
-│   └── config.toml         # Konfigurasi tema & pengaturan Streamlit
+│   ├── config.toml         # Konfigurasi tema & pengaturan Streamlit
+│   └── secrets.toml.example # Template konfigurasi Google Sheets (opsional)
 │
 ├── docs/
 │   └── PROJECT_ARTIFACTS.md # Catatan artefak & dokumentasi tambahan proyek

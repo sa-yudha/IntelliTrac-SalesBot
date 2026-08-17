@@ -1,9 +1,18 @@
 .env
+.env.*
+!.env.example
 __pycache__/
 *.pyc
 .streamlit/secrets.toml
 feedback_logs.json
 chat_history_logs.json
+
+# Kredensial Google Cloud. Jangan pernah ter-commit.
+*service-account*.json
+*credentials*.json
+client_secret*.json
+gen-lang-client-*.json
+gcp-*.json
 
 # Internal revision docs, not for public GitHub repo
 docs/FAQ_Website_Revision_Report.md

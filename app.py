@@ -25,6 +25,16 @@ MAX_INPUT_CHARS = 2000
 # Batas jumlah giliran percakapan yang dikirim ulang ke Gemini setiap request
 MAX_HISTORY_TURNS = 20
 
+# Batas waktu tanpa ada potongan teks masuk sebelum model dianggap menggantung.
+# Pengukuran Agustus 2026: potongan pertama tiba dalam 0,80 s/d 1,10 detik terlepas
+# dari panjang jawaban (diuji 238 s/d 7.288 karakter), jadi 10 detik memberi
+# kelonggaran sekitar 9 kali lipat.
+STREAM_STALL_TIMEOUT_MS = 10_000
+
+# Jatah waktu yang diberikan ke server Google untuk menulis jawaban sampai selesai.
+# Dibuat longgar karena jawaban panjang memang butuh waktu lebih lama.
+SERVER_BUDGET_SECONDS = 300
+
 # Pemicu kartu Sales Handoff. Memakai batas kata (\b) supaya "penghargaan" tidak
 # terbaca sebagai "harga" dan "beliau" tidak terbaca sebagai "beli".
 # "pesan" ditangani terpisah karena bermakna ganda: memesan barang vs pesan error.
@@ -536,29 +546,58 @@ if user_input:
                     "gemini-3.5-flash"         # 21,11 dtk
                 ]
 
-                chat_config = types.GenerateContentConfig(system_instruction=SYSTEM_INSTRUCTION)
+                chat_config = types.GenerateContentConfig(
+                    system_instruction=SYSTEM_INSTRUCTION,
+                    http_options=types.HttpOptions(
+                        # Jeda maksimum antar potongan teks. Karena jawaban dialirkan
+                        # bertahap, hitungan ini di-reset setiap kali data tiba, jadi
+                        # jawaban sepanjang apa pun tidak akan terpotong. Batas ini
+                        # hanya tercapai kalau aliran benar-benar berhenti.
+                        timeout=STREAM_STALL_TIMEOUT_MS,
+                        # Tanpa ini SDK menyuntikkan X-Server-Timeout senilai timeout di
+                        # atas, yang membuat server berhenti menulis setelah 10 detik.
+                        headers={"X-Server-Timeout": str(SERVER_BUDGET_SECONDS)},
+                        # Fallback ke model berikutnya jauh lebih cepat daripada menunggu
+                        # backoff, karena kuota Gemini dihitung per model. Retry bawaan
+                        # SDK (5 percobaan, ~17 detik) dipangkas jadi sekali ulang saja
+                        # supaya gangguan sesaat tetap tertangani tanpa menahan lama.
+                        retry_options=types.HttpRetryOptions(attempts=2, initial_delay=0.5),
+                    ),
+                )
                 reply_text = None
+                placeholder = st.empty()
 
                 for m_name in fallback_models:
+                    potongan = []
                     try:
+                        placeholder.markdown("_Mintel sedang berpikir..._")
                         chat = client.chats.create(
                             model=m_name,
                             config=chat_config,
                             history=formatted_history,
                         )
-                        with st.spinner("Mintel sedang berpikir..."):
-                            reply_text = chat.send_message(user_input).text
-                        # Successfully got response, break out of loop
+                        for chunk in chat.send_message_stream(user_input):
+                            teks = getattr(chunk, "text", None)
+                            if teks:
+                                potongan.append(teks)
+                                placeholder.markdown("".join(potongan))
+                        hasil = "".join(potongan).strip()
+                        if not hasil:
+                            raise RuntimeError("Model mengembalikan jawaban kosong")
+                        reply_text = hasil
                         break
                     except Exception:
-                        # Nama model internal tidak perlu diketahui pengunjung
+                        # Nama model internal tidak perlu diketahui pengunjung.
+                        # Teks parsial dibuang supaya jawaban setengah jadi tidak
+                        # tercampur dengan jawaban dari model berikutnya.
                         logger.warning("Model %s gagal, mencoba berikutnya", m_name, exc_info=True)
+                        placeholder.empty()
                         reply_text = None
 
                 if not reply_text:
-                    raise RuntimeError("Semua model Gemini gagal diinisialisasi atau mengalami timeout.")
+                    placeholder.empty()
+                    raise RuntimeError("Semua model Gemini gagal menjawab.")
 
-                st.markdown(reply_text)
                 st.session_state.messages.append(_new_message("assistant", reply_text))
 
                 # Automatically save full conversation to Chat Audit Log

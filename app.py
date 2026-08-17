@@ -56,11 +56,27 @@ GREETING = (
 )
 
 
-def _new_message(role, content):
+def _new_message(role, content, **kwargs):
     """Setiap pesan diberi ID unik. Penanda feedback sebelumnya memakai nomor urut,
     sehingga setelah riwayat dihapus nomor itu terpakai ulang dan feedback pada
     percakapan berikutnya dianggap sudah pernah dicatat lalu dilewati diam-diam."""
-    return {"role": role, "content": content, "id": uuid.uuid4().hex}
+    msg = {"role": role, "content": content, "id": uuid.uuid4().hex}
+    msg.update(kwargs)
+    return msg
+
+SALES_HANDOFF_HTML = """
+<div class="sales-card">
+    <h4>🤝 Terhubung dengan Tim Sales Representative IntelliTrac</h4>
+    <p>Untuk mendapatkan <b>Surat Penawaran Resmi (Official Quotation)</b>, kalkulasi biaya instalasi, dan penawaran khusus armada Anda, silakan hubungi Sales Executive kami:</p>
+    <a href="https://wa.me/628118456789?text=Halo%20Tim%20Sales%20IntelliTrac,%20saya%20ingin%20berkonsultasi%20dan%20meminta%20penawaran%20harga%20resmi" target="_blank" class="wa-button">
+        💬 Chat Sales via WhatsApp (+62 811-845-6789)
+    </a>
+    <a href="mailto:sales@intellitrac.co.id?subject=Permintaan%20Penawaran%20Harga%20IntelliTrac%20GPS" class="email-button">
+        ✉️ Kirim Email Sales
+    </a>
+</div>
+"""
+
 
 
 def _reset_chat():
@@ -279,15 +295,22 @@ def save_feedback_log(entry):
         ws = _get_worksheet(FEEDBACK_TAB, FEEDBACK_HEADER)
         ws.append_row([_sheet_safe(entry.get(k, "")) for k in FEEDBACK_HEADER])
     except Exception:
-        st.warning("Gagal menyimpan log feedback. Percakapan Anda tetap berjalan normal.")
+        logger.warning("Gagal menyimpan log feedback.", exc_info=True)
 
 def save_chat_history_log(entry):
     try:
         ws = _get_worksheet(CHAT_LOGS_TAB, CHAT_LOGS_HEADER)
         ws.append_row([_sheet_safe(entry.get(k, "")) for k in CHAT_LOGS_HEADER])
     except Exception:
-        st.warning("Gagal menyimpan log chat. Percakapan Anda tetap berjalan normal.")
+        logger.warning("Gagal menyimpan log chat.", exc_info=True)
 
+# TTL wajib diisi. Tanpa argumen, @st.cache_data tidak pernah kedaluwarsa selama
+# proses hidup, sehingga perubahan pada berkas di knowledge/ tidak akan terbaca
+# sampai aplikasi di-restart. Itulah alasan cache ini pernah dihapus sepenuhnya
+# (lihat commit "Remove st.cache_data from knowledge base loader to prevent stale
+# data"). Dengan TTL 5 menit, pembacaan disk tidak lagi terjadi di setiap rerun,
+# tapi pembaruan knowledge base tetap terpakai otomatis tanpa reboot.
+@st.cache_data(ttl=300, show_spinner=False)
 def load_knowledge_base():
     knowledge_dir = os.path.join(os.path.dirname(__file__), "knowledge")
     knowledge_text = ""
@@ -436,12 +459,15 @@ if "messages" not in st.session_state:
 
 # Sesi yang sudah berjalan sebelum perubahan ini belum punya ID, lengkapi di sini
 for _m in st.session_state.messages:
-    _m.setdefault("id", uuid.uuid4().hex)
+    if "id" not in _m:
+        _m["id"] = uuid.uuid4().hex
 
 # Display Previous Messages
 for idx, msg in enumerate(st.session_state.messages):
     with st.chat_message(msg["role"], avatar="🛰️" if msg["role"] == "assistant" else "👤"):
         st.markdown(msg["content"])
+        if msg.get("handoff"):
+            st.markdown(SALES_HANDOFF_HTML, unsafe_allow_html=True)
         if msg["role"] == "assistant" and idx > 0:
             logged_key = f"logged_{msg['id']}"
             already_logged = logged_key in st.session_state
@@ -598,7 +624,8 @@ if user_input:
                     placeholder.empty()
                     raise RuntimeError("Semua model Gemini gagal menjawab.")
 
-                st.session_state.messages.append(_new_message("assistant", reply_text))
+                is_handoff = bool(HANDOFF_RE.search(user_input))
+                st.session_state.messages.append(_new_message("assistant", reply_text, handoff=is_handoff))
 
                 # Automatically save full conversation to Chat Audit Log
                 chat_log_entry = {
@@ -609,19 +636,8 @@ if user_input:
                 save_chat_history_log(chat_log_entry)
 
                 # Detect if the query triggers Sales Handoff (Price quotation, sales contact, discount, purchase)
-                if HANDOFF_RE.search(user_input):
-                    st.markdown("""
-                    <div class="sales-card">
-                        <h4>🤝 Terhubung dengan Tim Sales Representative IntelliTrac</h4>
-                        <p>Untuk mendapatkan <b>Surat Penawaran Resmi (Official Quotation)</b>, kalkulasi biaya instalasi, dan penawaran khusus armada Anda, silakan hubungi Sales Executive kami:</p>
-                        <a href="https://wa.me/628118456789?text=Halo%20Tim%20Sales%20IntelliTrac,%20saya%20ingin%20berkonsultasi%20dan%20meminta%20penawaran%20harga%20resmi" target="_blank" class="wa-button">
-                            💬 Chat Sales via WhatsApp (+62 811-845-6789)
-                        </a>
-                        <a href="mailto:sales@intellitrac.co.id?subject=Permintaan%20Penawaran%20Harga%20IntelliTrac%20GPS" class="email-button">
-                            ✉️ Kirim Email Sales
-                        </a>
-                    </div>
-                    """, unsafe_allow_html=True)
+                if is_handoff:
+                    st.markdown(SALES_HANDOFF_HTML, unsafe_allow_html=True)
 
             except Exception:
                 # Detail lengkap (termasuk traceback) hanya ke log server.

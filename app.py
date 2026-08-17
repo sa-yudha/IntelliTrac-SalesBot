@@ -524,14 +524,16 @@ if user_input:
                     formatted_history.append({"role": role, "parts": [{"text": msg["content"]}]})
 
                 # Urutan fallback disusun dari yang tercepat, berdasarkan pengukuran
-                # dengan system instruction penuh (3 ronde round-robin, Agustus 2026).
-                # Angka di komentar adalah rata-rata waktu jawab saat pengukuran itu.
+                # dengan system instruction penuh (8 model, 3 ronde round-robin,
+                # Agustus 2026). Angka di komentar adalah rata-rata waktu jawab.
+                # Dua teratas praktis seri (selisih 0,02 dtk, rentang tumpang tindih).
                 fallback_models = [
-                    "gemini-3.5-flash-lite",   #  2,98 dtk
-                    "gemini-3.1-flash-lite",   #  3,80 dtk
-                    "gemini-3.7-flash",        #  7,22 dtk
-                    "gemini-3.6-flash",        # 13,79 dtk
-                    "gemini-3.5-flash"         # 14,79 dtk
+                    "gemini-3.5-flash-lite",   #  3,23 dtk
+                    "gemini-3.1-flash-lite",   #  3,21 dtk
+                    "gemini-3.7-flash",        #  8,84 dtk
+                    "gemini-3-flash-preview",  # 11,71 dtk
+                    "gemini-3.6-flash",        # 13,59 dtk
+                    "gemini-3.5-flash"         # 21,11 dtk
                 ]
 
                 chat_config = types.GenerateContentConfig(system_instruction=SYSTEM_INSTRUCTION)

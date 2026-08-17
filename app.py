@@ -592,11 +592,29 @@ if user_input:
                 st.session_state.messages.append(_new_message("assistant", err_text))
 
 # 9. Pemberitahuan Perekaman Percakapan
-# Ditaruh paling akhir dengan sengaja. st.chat_input di level teratas dipaku ke dasar
-# layar, sedangkan elemen lain mengalir di area yang bisa di-scroll di atasnya. Menaruh
-# caption ini terakhir membuatnya selalu muncul tepat di atas kolom input, termasuk pada
-# rerun yang baru saja merender balasan baru.
-st.caption(
-    "Percakapan ini direkam dan dapat ditinjau tim IntelliTrac untuk peningkatan "
-    "kualitas layanan. Mohon tidak membagikan data pribadi yang sensitif di sini."
-)
+# Hanya ditampilkan sebelum jawaban pertama muncul, setelah itu dianggap sudah terbaca
+# dan disembunyikan agar tidak mengganggu. Karena pengecekan ini berada di akhir skrip,
+# pada rerun yang merender jawaban pertama panjang messages sudah bertambah, sehingga
+# pemberitahuan langsung hilang di saat yang sama.
+#
+# Ditempatkan lewat CSS ::after pada stBottomBlockContainer karena st.chat_input di level
+# teratas dipaku ke dasar layar oleh Streamlit, sehingga elemen Streamlit biasa tidak bisa
+# diletakkan di bawahnya. Kontainer itu sudah punya padding-bottom sekitar 45px, jadi
+# teksnya mengisi ruang yang memang sudah ada.
+if len(st.session_state.messages) <= 1:
+    st.markdown("""
+    <style>
+        [data-testid="stBottomBlockContainer"] {
+            padding-bottom: 14px !important;
+        }
+        [data-testid="stBottomBlockContainer"]::after {
+            content: "Percakapan ini direkam dan dapat ditinjau tim IntelliTrac untuk peningkatan kualitas layanan. Mohon tidak membagikan data pribadi yang sensitif di sini.";
+            display: block;
+            text-align: center;
+            font-size: 10px;
+            line-height: 1.35;
+            color: #94A3B8;
+            padding-top: 8px;
+        }
+    </style>
+    """, unsafe_allow_html=True)

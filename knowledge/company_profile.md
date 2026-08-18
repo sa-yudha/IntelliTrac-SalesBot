@@ -1,13 +1,13 @@
 # Knowledge Base: Profil Perusahaan PT Intimap (IntelliTrac Indonesia)
 
 ## Tentang PT Intimap / IntelliTrac GPS
-PT Intimap adalah mitra resmi dan penyedia resmi solusi telemotika serta manajemen armada IntelliTrac GPS di Indonesia. 
-IntelliTrac GPS merupakan penyedia solusi telemotika dan manajemen armada terkemuka di bawah naungan Virtual Map (Australia) Pty Ltd yang berpengalaman lebih dari 35 tahun melayani klien di berbagai negara.
+PT Intimap adalah mitra resmi dan penyedia resmi solusi telematika serta manajemen armada IntelliTrac GPS di Indonesia. 
+IntelliTrac GPS merupakan penyedia solusi telematika dan manajemen armada terkemuka di bawah naungan Virtual Map (Australia) Pty Ltd yang berpengalaman lebih dari 35 tahun melayani klien di berbagai negara.
 Sejak tahun 2008, IntelliTrac hadir di Indonesia sebagai mitra terpercaya berbagai sektor industri dari Sabang sampai Merauke.
 
 ## Keunggulan Utama IntelliTrac Indonesia
-1. **Pengalaman Global 35+ Tahun**: Pengalaman panjang dalam telemotika dan Fleet Management System.
-2. **Teknologi Telemotika Terkini**: Hardware dan software terus diperbarui mengikuti perkembangan industri.
+1. **Pengalaman Global 35+ Tahun**: Pengalaman panjang dalam telematika dan Fleet Management System.
+2. **Teknologi Telematika Terkini**: Hardware dan software terus diperbarui mengikuti perkembangan industri.
 3. **Produk Bersertifikat Resmi**: Telah tersertifikasi ISO 9001, KAN (Komite Akreditasi Nasional), POSTEL KOMDIGI, dan PSE (Penyelenggara Sistem Elektronik).
 4. **Infrastruktur Lokal Mandiri**: Server dan data center berada di Indonesia untuk kecepatan dan keamanan data.
 5. **Garansi Perangkat**: Garansi alat 1 tahun dan garansi sensor 1 tahun.

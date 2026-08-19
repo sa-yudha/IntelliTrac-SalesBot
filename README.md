@@ -53,7 +53,8 @@ Final_Project_IntelliTrac_SalesBot/
     ├── catalogue_2026.md   # Deskripsi & spesifikasi katalog produk 2026
     ├── product_features.md # Tabel matriks perbandingan fitur & perangkat
     ├── faq.md               # Panduan jawaban internal (blank spot, trial/POC)
-    └── faq_website.md       # FAQ publik website, sudah dikoreksi untuk chatbot
+    ├── faq_website.md       # FAQ publik website, sudah dikoreksi untuk chatbot
+    └── silacak_klhk.md      # Integrasi GPS dengan Silacak KLHK (limbah B3)
 ```
 
 ---

@@ -4,19 +4,37 @@ Dokumen ini berisi panduan jawaban cepat untuk pertanyaan-pertanyaan spesifik da
 
 ---
 
-## 1. Kondisi Blank Spot (Area Tanpa Sinyal GSM / Luar Jangkauan Seluler)
+## 1. Kondisi Blank Spot / Sinyal Terputus (Kombinasi GSM & GPS)
 
 ### Pertanyaan:
 *"Bagaimana jika kendaraan masuk ke area blank spot (seperti perkebunan pedalaman, area tambang terpencil, atau basement gedung) yang tidak ada sinyal internet/GSM? Apakah pelacakan akan terputus dan datanya hilang?"*
 
 ### Panduan Jawaban untuk Mintel:
-1. **Penyimpanan Data Offline (Internal Buffer Memory / Blackbox Offline)**:
-   - Perangkat GPS Tracker IntelliTrac dilengkapi dengan memori internal cerdas (buffer memory).
-   - Ketika kendaraan berada di area *blank spot* tanpa koneksi internet, perangkat akan **tetap merekam semua titik koordinat lintasan, status mesin, kecepatan, dan data sensor (seperti sensor suhu atau pintu)** ke dalam memori lokal perangkat secara akurat.
-2. **Sinkronisasi Otomatis (Auto Data Upload)**:
-   - Begitu kendaraan keluar dari area blank spot dan kembali menangkap sinyal seluler (4G LTE), perangkat akan **secara otomatis mengunggah seluruh riwayat rekaman offline tersebut ke server pusat IntelliTrac**.
-3. **Hasil untuk Pengguna**:
-   - Riwayat perjalanan (*replay history*) dan laporan armada pengguna akan tetap utuh 100%, tanpa ada rute atau riwayat sensor yang terputus atau hilang.
+1. **Ada Dua Jenis Sinyal yang Berperan Berbeda, Jelaskan Bedanya Dulu**:
+   - **Sinyal GPS** (dari satelit): dipakai perangkat untuk menghitung posisi/koordinat kendaraan.
+   - **Sinyal GSM/seluler** (dari BTS provider, misal Telkomsel): dipakai perangkat untuk mengirim data (event & posisi) ke server IntelliTrac.
+   - Kedua sinyal ini bisa hilang secara independen satu sama lain, sehingga hasilnya berbeda-beda tergantung kombinasi yang terjadi. JANGAN menjawab dengan satu jawaban generik untuk semua kondisi "blank spot", karena efeknya berbeda tergantung kombinasi di bawah.
+2. **Empat Kombinasi Sinyal dan Efeknya**:
+
+   | Sinyal GSM | Sinyal GPS | Efek Saat Terjadi | Saat Kedua Sinyal Kembali |
+   |---|---|---|---|
+   | Tidak ada | Tidak ada | Perangkat **tidak mengirim** event data maupun posisi sama sekali | Langsung lompat ke posisi terbaru, **tanpa** ada data/posisi lampau yang dikirim (karena tidak ada yang bisa dibuffer; GPS-nya sendiri tidak dapat sinyal, jadi tidak ada koordinat yang bisa disimpan) |
+   | Ada | Tidak ada | Perangkat **tetap mengirim event data** (mesin nyala, pintu buka, overspeeding, dll) secara real-time, tapi **tanpa** update posisi | Langsung lompat ke posisi terbaru, **tanpa** mengirim posisi lampau |
+   | Tidak ada | Ada | Perangkat **tidak mengirim** event data maupun posisi secara real-time (karena tidak ada jaringan untuk mengirim), tapi tetap merekamnya ke memori internal (*buffer memory*) | **Secara bertahap** (gradual, bukan sekaligus) mengirim seluruh event data dan posisi yang sempat terekam offline |
+   | Ada | Ada | Kondisi normal: perangkat selalu mengirim event data dengan posisi ter-update secara real-time | Tidak relevan, kondisi sudah normal |
+
+3. **Contoh Skenario Nyata per Kombinasi** (bantu customer mengenali kombinasi mana yang relevan dengan operasional mereka):
+   - **GSM tidak ada, GPS ada**: perkebunan pedalaman, tambang terpencil, jalur laut/hutan yang tidak terjangkau menara BTS provider mana pun, namun langit terbuka sehingga GPS tetap dapat sinyal satelit. Contoh: melewati gurun atau pendaki naik gunung.
+   - **GSM ada, GPS tidak ada**: wilayah tertutup atau terhalang bangunan tinggi, namun masih terdapat sinyal BTS provider di sekitar.
+   - **GSM tidak ada, GPS tidak ada**: basement gedung bertingkat, terowongan panjang, atau garasi bawah tanah, di mana baik sinyal satelit maupun sinyal BTS provider sama-sama terhalang struktur bangunan.
+4. **Tegaskan Secara Proaktif bahwa Notifikasi Event Tetap Aman pada Kombinasi "GSM Ada, GPS Tidak Ada"**:
+   - Ini poin yang paling penting untuk menenangkan calon customer, dan sering ditanyakan secara tidak langsung, misalnya: *"Kalau pintu box dibuka pas kendaraan di parkiran bawah tanah, apa saya masih kebagian notifikasinya?"*
+   - JANGAN menjawab kabur seperti "data yang dikirim tidak menyertakan posisi" tanpa menyebut nasib event data-nya, karena itu bisa membuat customer khawatir seolah notifikasi kejadiannya juga hilang.
+   - **Tegaskan dengan jelas dan proaktif**: notifikasi/event data (mesin nyala, pintu box dibuka, overspeeding, dll) **tetap terkirim secara real-time**, jadi customer tidak perlu khawatir kehilangan notifikasi kejadian penting. Yang tertunda **hanya** update posisi/koordinatnya sampai GPS dapat sinyal kembali, bukan notifikasi kejadiannya.
+5. **JANGAN Menjanjikan Riwayat "Utuh 100%" atau "Tanpa Ada Data yang Terlewat" Secara Mutlak**:
+   - Klaim itu **hanya** berlaku untuk kombinasi "GSM tidak ada, GPS ada" (baris ketiga tabel di atas), dan bahkan itu pun tetap dibatasi kapasitas buffer memory internal (data terlama berpotensi tertimpa kalau durasi offline sangat lama).
+   - Untuk kombinasi "GSM tidak ada, GPS tidak ada" maupun "GSM ada, GPS tidak ada", secara desain **tidak ada data/posisi lampau yang di-backfill** begitu sinyal kembali, karena perangkat tidak bisa membuffer koordinat yang memang tidak pernah berhasil dihitung.
+6. **Arahkan ke Sales Executive** untuk armada yang rutin beroperasi di area dengan pola sinyal seperti ini, agar kapasitas buffer dan konfigurasi pelaporan dapat ditinjau/disesuaikan.
 
 ---
 

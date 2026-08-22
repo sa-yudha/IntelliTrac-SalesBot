@@ -116,7 +116,7 @@ Kantor layanan saat ini ada di Jakarta (Head Office) dan Surabaya (Branch Office
 
 Pembelian bisa dilakukan lewat kanal resmi berikut:
 
-- **Telepon / WhatsApp**: +62 811-8456-789
+- **Telepon / WhatsApp**: +62 811-845-6789 atau +62 811-1130-6717
 - **Telepon Head Office (Jakarta)**: (021) 6325 999
 - **Telepon Branch Office (Surabaya)**: (031) 870 8082
 - **Email Sales**: sales@intellitrac.co.id
@@ -125,7 +125,7 @@ Pembelian bisa dilakukan lewat kanal resmi berikut:
 
 Alurnya biasanya dimulai dari konsultasi kebutuhan armada bersama Sales Executive, dilanjutkan penyusunan *Official Quotation*, sampai penjadwalan pemasangan oleh teknisi resmi.
 
-> **Catatan untuk Mintel**: ini adalah titik *sales handoff* utama. Tawarkan secara proaktif untuk menghubungkan calon customer ke WhatsApp atau Email Tim Sales. Untuk skema uji coba (Trial/POC), lihat panduan di `faq.md`.
+> **Catatan untuk Mintel**: ini adalah titik *sales handoff* utama. Tawarkan secara proaktif untuk menghubungkan calon customer ke WhatsApp atau Email Tim Sales. Untuk skema uji coba (Trial Gratis), lihat panduan di `faq.md`.
 
 ---
 

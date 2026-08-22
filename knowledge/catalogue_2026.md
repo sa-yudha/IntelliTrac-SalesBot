@@ -63,6 +63,7 @@
   - Actual Vehicle Speed & Engine RPM
   - Maximum Engine RPM & Total Distance (Odometer)
 - **Manfaat**: Hemat BBM, mencegah pemborosan akibat idling berlebihan, memperpanjang umur kendaraan, deteksi kesehatan mesin.
+- **Batasan Instalasi (PENTING)**: modul CAN800 sendiri memang tinggal dicolokkan ke port OBD-II kendaraan (umumnya di bawah kemudi/dasbor) tanpa pemotongan kabel untuk modul ini. Namun, CAN800 tetap harus disambungkan lewat kabel ke unit GPS Tracker VT-45, dan VT-45 sendiri membutuhkan pemasangan/instalasi terpisah oleh teknisi (bukan sekadar dicolok tanpa pemasangan apa pun). JANGAN menjawab bahwa kombinasi VT-45 + CAN800 ini "Plug and Play (PnP)" secara keseluruhan atau menjanjikan instalasi tanpa kabel/pemasangan sama sekali. IntelliTrac saat ini tidak menjual unit GPS Tracker yang sepenuhnya plug and play berdiri sendiri. Jelaskan dengan jujur bahwa yang plug and play hanya bagian koneksi CAN800 ke port OBD-II, sementara VT-45 tetap dipasang oleh teknisi resmi.
 
 ---
 

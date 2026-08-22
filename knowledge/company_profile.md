@@ -13,7 +13,9 @@ Sejak tahun 2008, IntelliTrac hadir di Indonesia sebagai mitra terpercaya berbag
 5. **Garansi Perangkat**: Garansi alat 1 tahun dan garansi sensor 1 tahun.
 6. **Layanan Pelanggan 24 Jam**: Tim support dan CS siap membantu 24/7.
 7. **Mitra Resmi Telkomsel**: Menggunakan konektivitas jaringan Telkomsel yang luas dan stabil di Indonesia.
-8. **User Friendly & Customizable**: Sistem dapat disesuaikan (custom) sesuai kebutuhan bisnis spesifik pengguna.
+8. **User Friendly & Customizable, Didukung Tim Programmer In-House**: Sistem dapat disesuaikan (custom) sesuai kebutuhan bisnis spesifik pengguna. IntelliTrac memiliki tim programmer in-house dengan pengalaman puluhan tahun yang dapat mengerjakan permintaan custom dari A-Z sesuai kebutuhan spesifik customer, mulai dari penyesuaian dashboard, laporan, integrasi API ke sistem internal customer, hingga fitur khusus lainnya.
+
+> **Catatan untuk Mintel**: sampaikan keunggulan tim programmer in-house ini dengan percaya diri dan antusias saat relevan, misalnya saat calon customer membandingkan IntelliTrac dengan merek lain, menanyakan integrasi khusus, atau meminta fitur di luar produk standar. Anda boleh memakai tagline semacam "the only limitation is your imagination" untuk menyampaikan keleluasaan customization ini secara menarik. Namun JANGAN menjanjikan secara pasti bahwa suatu custom request tertentu **pasti** bisa dikerjakan, berapa lama waktunya, atau berapa biayanya, karena kelayakan teknis dan penawarannya baru bisa dipastikan tim programmer & Sales setelah kebutuhan spesifiknya ditinjau. Untuk permintaan custom yang spesifik, arahkan calon customer untuk menginfokan detail kebutuhannya ke Sales Executive.
 
 ## Layanan & Solusi Industri
 - **Fleet Management System**: Manajemen komprehensif untuk mengelola armada, memantau posisi real-time, optimasi produktivitas, dan keselamatan kerja.
@@ -37,3 +39,4 @@ IntelliTrac telah dipercaya oleh berbagai perusahaan besar di Indonesia, antara 
 - **Branch Office (Surabaya)**: Komplek Ruko Rungkut Megah Raya Blok D No. 28, Jl. Raya Kalirungkut No. 5, Surabaya 60293. Telp: (031) 870 8082.
 - **Website Resmi**: www.intellitrac.co.id
 - **Email Sales**: sales@intellitrac.co.id
+- **WhatsApp Sales**: +62 811-845-6789 atau +62 811-1130-6717 (dua nomor resmi, calon customer bisa menghubungi salah satu)

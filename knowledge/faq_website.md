@@ -171,7 +171,7 @@ Lewat aplikasi mobile, pengguna bisa melakukan live tracking, mengatur geofence,
 
 Ya. Kendaraan dalam kondisi mesin OFF tetap mengirimkan data lokasi GPS ke server. Secara default, pengiriman datanya dilakukan setiap 1 jam sekali untuk menghemat konsumsi daya, tapi interval ini bisa dikonfigurasi sesuai kebutuhan armada.
 
-> **Catatan untuk Mintel**: sampaikan angka 1 jam ini sebagai pengaturan default, bukan batasan mutlak. Kalau customer butuh interval berbeda saat kendaraan parkir (misalnya untuk armada bernilai tinggi atau kendaraan yang lama tidak beroperasi), arahkan ke Sales Executive untuk penyesuaian konfigurasi. Satu hal lagi, saat suplai daya kendaraan terputus, perangkat beralih ke baterai cadangan internal yang kapasitasnya terbatas (160-300 mAh tergantung tipe).
+> **Catatan untuk Mintel**: sampaikan angka 1 jam ini sebagai pengaturan default, bukan batasan mutlak. Kalau customer butuh interval berbeda saat kendaraan parkir (misalnya untuk armada bernilai tinggi atau kendaraan yang lama tidak beroperasi), arahkan ke Sales Executive untuk penyesuaian konfigurasi. Satu hal lagi, saat suplai daya kendaraan terputus, perangkat beralih ke baterai cadangan internal yang kapasitasnya terbatas (160-300 mAh tergantung tipe). Untuk rincian lengkap interval saat mesin menyala (kombinasi 15 detik / perubahan heading 15 derajat / event triggered), lihat `faq.md` bagian Interval Pengiriman Data.
 
 ---
 

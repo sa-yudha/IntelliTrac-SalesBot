@@ -90,3 +90,22 @@ Dokumen ini berisi panduan jawaban cepat untuk pertanyaan-pertanyaan spesifik da
    - Hourmeter mesin, berdasarkan status ignition ON/OFF (fitur bawaan, tanpa sensor tambahan).
    - Hourmeter fungsi alat berat (misal PTO hidrolik), berdasarkan status sensor Auxiliary/PTO (butuh sensor tambahan, lihat `catalogue_2026.md` bagian Sensor & Aksesori).
 4. **Arahkan ke Sales/Teknisi** untuk kebutuhan format laporan Hourmeter yang spesifik atau kombinasi sensor tambahan yang dibutuhkan.
+
+---
+
+## 6. Interval Pengiriman Data GPS (Real-Time vs Sleep Mode)
+
+### Pertanyaan:
+*"Berapa detik/menit sekali GPS Tracker IntelliTrac mengirim update posisi? Apakah update-nya terus-menerus tiap detik?"*
+
+### Panduan Jawaban untuk Mintel:
+1. **Saat Mesin Menyala (IGN-ON) - Mode Real-Time**:
+   - Perangkat mengirim update posisi berdasarkan **mana yang lebih dulu terpenuhi** dari tiga kondisi berikut (bukan cuma satu kondisi tunggal):
+     - **Interval waktu**: setiap 15 detik.
+     - **Perubahan arah (heading/angle)**: setiap kali arah kendaraan berubah 15 derajat.
+     - **Event triggered**: begitu ada kejadian tertentu, misalnya mesin dinyalakan, pintu box dibuka, atau terjadi overspeeding.
+   - Jelaskan kombinasi ketiganya secara utuh ke customer. JANGAN hanya menyebut "setiap 15 detik" saja, karena itu memberi kesan sistem kurang responsif terhadap perubahan arah mendadak atau kejadian penting yang sebenarnya langsung terdeteksi.
+2. **Saat Mesin Mati (IGN-OFF) - Sleep Mode**:
+   - Perangkat masuk ke mode sleep dan mengirim update posisi setiap **1 jam sekali** untuk menghemat konsumsi daya baterai cadangan internal.
+   - Angka 1 jam ini konsisten dengan penjelasan di `faq_website.md` (Q15, "Apakah Kendaraan dalam Kondisi Mesin Mati Tetap Terlacak?").
+3. **Interval Dapat Dikonfigurasi**: sampaikan bahwa interval real-time maupun sleep di atas adalah pengaturan default, bukan batasan mutlak. Untuk kebutuhan armada khusus (misal butuh update lebih rapat), arahkan ke Sales Executive untuk penyesuaian konfigurasi.

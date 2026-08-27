@@ -97,21 +97,21 @@ Garansi ini berlaku selama kerusakan bukan disebabkan oleh masuknya air melebihi
 
 ## Q8. Apakah GPS Tracker IntelliTrac Legal?
 
-Ya, legal. Perangkat dan layanan IntelliTrac sudah memenuhi ketentuan regulasi yang berlaku di Indonesia: bersertifikasi Postel (SDPPI) untuk alat dan perangkat telekomunikasi, terdaftar sebagai Penyelenggara Sistem Elektronik (PSE) di Kementerian Komunikasi dan Digital (Komdigi), dan PT Intimap sendiri tersertifikasi ISO 9001:2015 oleh lembaga sertifikasi yang terakreditasi KAN (Komite Akreditasi Nasional). Server dan data center-nya pun berlokasi di Indonesia.
+Ya, legal. Perangkat dan layanan IntelliTrac sudah memenuhi ketentuan regulasi yang berlaku di Indonesia: bersertifikasi Postel (SDPPI, sejak awal 2025 bernaung di bawah Ditjen Infrastruktur Digital/DJID) untuk alat dan perangkat telekomunikasi, terdaftar sebagai Penyelenggara Sistem Elektronik (PSE) di Kementerian Komunikasi dan Digital (Komdigi), dan PT Intimap sendiri tersertifikasi ISO 9001:2015 oleh lembaga sertifikasi yang terakreditasi KAN (Komite Akreditasi Nasional). Server dan data center-nya pun berlokasi di Indonesia.
 
 PT Intimap adalah penyedia dan mitra resmi solusi IntelliTrac GPS di Indonesia, di bawah naungan Virtual Map (Australia) Pty Ltd.
 
-> **Catatan untuk Mintel**: gunakan istilah resmi berikut secara persis. Nama kementeriannya adalah Kementerian Komunikasi dan Digital (Komdigi), sebelumnya bernama Kominfo hingga Oktober 2024. Untuk PSE, gunakan frasa "terdaftar sebagai PSE", karena PSE berbentuk pendaftaran. Untuk ISO, gunakan frasa "PT Intimap tersertifikasi ISO 9001:2015 oleh lembaga sertifikasi yang terakreditasi KAN", karena KAN memberi akreditasi kepada lembaga sertifikasi. Sebutkan setiap sertifikasi dan pendaftaran secara spesifik satu per satu. Bila customer meminta salinan dokumen legalitas, arahkan ke Sales Executive.
+> **Catatan untuk Mintel**: gunakan istilah resmi berikut secara persis. Nama kementeriannya adalah Kementerian Komunikasi dan Digital (Komdigi), sebelumnya bernama Kominfo hingga Oktober 2024. Untuk sertifikasi alat telekomunikasi, sebutkan kedua nama: "Postel (SDPPI)" karena ini istilah yang lebih dikenal customer, tapi boleh tambahkan bahwa sejak awal 2025 direktoratnya bernama Ditjen Infrastruktur Digital (DJID) - tidak perlu memaksakan istilah terbaru saja kalau customer lebih familiar dengan nama lama, dua-duanya sah disebutkan. Untuk PSE, gunakan frasa "terdaftar sebagai PSE", karena PSE berbentuk pendaftaran. Untuk ISO, gunakan frasa "PT Intimap tersertifikasi ISO 9001:2015 oleh lembaga sertifikasi yang terakreditasi KAN", karena KAN memberi akreditasi kepada lembaga sertifikasi. Sebutkan setiap sertifikasi dan pendaftaran secara spesifik satu per satu. Bila customer meminta salinan dokumen legalitas, arahkan ke Sales Executive.
 
 ---
 
 ## Q9. Apakah Ada Biaya Pemasangan dan Maintenance?
 
-Untuk lokasi yang masuk area layanan kantor pusat dan cabang IntelliTrac, biaya pemasangan dan maintenance sudah termasuk dalam paket layanan, jadi tidak ada biaya tambahan. Untuk lokasi di luar area layanan tersebut, bisa berlaku biaya perjalanan dan akomodasi teknisi yang dihitung berdasarkan jarak dan kondisi lokasi.
+Untuk lokasi yang masuk area layanan kantor pusat, kantor cabang, maupun kota perwakilan teknisi IntelliTrac, biaya pemasangan dan maintenance sudah termasuk dalam paket layanan, jadi tidak ada biaya tambahan. Untuk lokasi di luar area layanan tersebut, bisa berlaku biaya perjalanan dan akomodasi teknisi yang dihitung berdasarkan jarak dan kondisi lokasi.
 
-Kantor layanan saat ini ada di Jakarta (Head Office) dan Surabaya (Branch Office) - alamat lengkapnya ada di `company_profile.md`.
+Kantor layanan saat ini ada di Jakarta (Head Office) dan Surabaya (Branch Office) - alamat lengkapnya ada di `company_profile.md`. Selain itu, IntelliTrac juga punya kota perwakilan teknisi di Medan, Pekanbaru, Palembang, Bandung, Balikpapan, dan Morowali.
 
-> **Catatan untuk Mintel**: sampaikan bahwa pemasangan dan maintenance sudah termasuk dalam paket layanan untuk lokasi di dalam area layanan kantor pusat dan cabang. Untuk lokasi di luar area tersebut, cakupan layanan dan kemungkinan biaya perjalanan teknisi dihitung menurut jarak dan kondisi lokasi, sehingga perlu dikonfirmasi Sales Executive. Ketentuan juga dapat berbeda antara skema langganan dan pembelian putus, serta untuk kondisi di luar pemakaian normal (lihat Q7). Untuk lokasi di luar Jabodetabek dan Surabaya, arahkan ke Sales untuk pengecekan cakupan layanan.
+> **Catatan untuk Mintel**: sampaikan bahwa pemasangan dan maintenance sudah termasuk dalam paket layanan untuk lokasi di dalam area kantor pusat (Jakarta), kantor cabang (Surabaya), maupun 6 kota perwakilan teknisi (Medan, Pekanbaru, Palembang, Bandung, Balikpapan, Morowali) - selama lokasi customer memang masih di dalam area kota-kota tersebut. Untuk lokasi di luar area kota-kota ini, cakupan layanan dan kemungkinan biaya perjalanan teknisi dihitung menurut jarak dan kondisi lokasi, sehingga perlu dikonfirmasi Sales Executive. Ketentuan juga dapat berbeda antara skema langganan dan pembelian putus, serta untuk kondisi di luar pemakaian normal (lihat Q7). Untuk lokasi di luar kantor pusat/cabang dan 6 kota perwakilan ini, arahkan ke Sales untuk pengecekan cakupan layanan.
 
 ---
 

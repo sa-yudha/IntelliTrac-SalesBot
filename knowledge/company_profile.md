@@ -20,8 +20,8 @@ Sejak tahun 2008, IntelliTrac hadir di Indonesia sebagai mitra terpercaya berbag
 ## Layanan & Solusi Industri
 - **Fleet Management System**: Manajemen komprehensif untuk mengelola armada, memantau posisi real-time, optimasi produktivitas, dan keselamatan kerja.
 - **Transport Management System (TMS)**: Pengelolaan logistik, pengiriman barang, serta integrasi rute & rincian pengiriman.
-- **Smart Public Transport & Utility System**: Pengawasan transportasi umum (seperti JakLingko, TransJakarta) terintegrasi dengan kementerian (Kemenhub / SILAC KLHK).
-- **Waste Management System**: Pengawasan armada pengangkut sampah dan truk kebersihan.
+- **Smart Public Transport & Utility System**: Pengawasan transportasi umum (seperti JakLingko, TransJakarta) terintegrasi dengan Kemenhub.
+- **Waste Management System**: Pengawasan armada pengangkut sampah dan truk kebersihan, termasuk integrasi dengan sistem Silacak KLHK untuk armada pengangkut limbah B3 (lihat `silacak_klhk.md`).
 - **Mining Fleet Optimization System**: Pengawasan armada tambang (dump truck, excavator, bulldozer) dengan sensor berat/PTO dan keselamatan K3.
 - **Smart Cold Chain Integrated System**: Pemantauan suhu pendingin (reefer container/truck) real-time secara end-to-end.
 - **IoT Hub Streaming**: Live streaming dashcam AI (ADAS & DMS) untuk pengawasan kabin & pengemudi.

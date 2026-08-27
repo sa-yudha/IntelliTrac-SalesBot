@@ -10,13 +10,15 @@ Limbah B3 (bahan berbahaya dan beracun) adalah limbah yang sifat dan konsentrasi
 
 Silacak adalah sistem pelacakan milik Kementerian Lingkungan Hidup dan Kehutanan (KLHK) untuk memantau pergerakan kendaraan pengangkutan limbah B3 secara real-time.
 
+> **Catatan untuk Mintel**: sejak Oktober 2024, KLHK resmi dipecah pemerintah jadi dua kementerian, yaitu Kementerian Lingkungan Hidup/Badan Pengendalian Lingkungan Hidup (KLH/BPLH) yang sekarang menangani limbah B3 dan Silacak, serta Kementerian Kehutanan yang menangani urusan hutan secara terpisah. Istilah "KLHK" tetap dipakai di seluruh dokumen ini karena masih jadi istilah yang lebih familiar bagi customer dan konsisten dengan materi resmi IntelliTrac sendiri. Kalau customer menyebut atau menanyakan soal KLH/BPLH secara spesifik, boleh dijelaskan bahwa itu instansi yang sekarang menangani fungsi ini, dulunya tergabung dalam KLHK.
+
 ---
 
 ## Dasar Hukum: Kewajiban Pasang GPS Tracker
 
-Pemerintah, melalui KLHK, mewajibkan penggunaan GPS Tracker pada kendaraan pengangkut limbah B3. Ketentuan ini diatur dalam **Peraturan Menteri LHK (Permen LHK) No. P.4/MENLHK/SETJEN/KUM.1/1/2020 tentang Pengangkutan Limbah Bahan Berbahaya dan Beracun, Pasal 5 Ayat (2)**: alat angkut limbah B3 diwajibkan menggunakan GPS Tracking dan terintegrasi dengan server pemerintah, yaitu Silacak.
+Pemerintah, melalui KLHK, mewajibkan penggunaan GPS Tracker pada kendaraan pengangkut limbah B3. Ketentuan ini diatur dalam **Peraturan Menteri LHK (Permen LHK) No. P.4/MENLHK/SETJEN/KUM.1/1/2020 tentang Pengangkutan Limbah Bahan Berbahaya dan Beracun, Pasal 5 Ayat (1) huruf b**: alat angkut limbah B3 wajib terhubung dengan Silacak. Mekanisme pendaftarannya diatur lebih lanjut di **Pasal 5 Ayat (2)** peraturan yang sama.
 
-> **Catatan untuk Mintel**: sebutkan nomor dan pasal peraturan ini persis seperti di atas saat calon customer menanyakan dasar hukumnya. Ini adalah **Peraturan Menteri LHK (Permen LHK)**, bukan Peraturan Pemerintah (PP), jangan sampai tertukar. Jangan menyingkat atau memparafrasekan nomor peraturannya.
+> **Catatan untuk Mintel**: sebutkan nomor dan pasal peraturan ini persis seperti di atas saat calon customer menanyakan dasar hukumnya. Ini adalah **Peraturan Menteri LHK (Permen LHK)**, bukan Peraturan Pemerintah (PP), jangan sampai tertukar. Kewajiban pasang GPS & terhubung Silacak ada di **Pasal 5 Ayat (1) huruf b**, sedangkan **Ayat (2)** khusus soal mekanisme pendaftarannya, jangan tertukar keduanya. Jangan menyingkat atau memparafrasekan nomor peraturannya.
 
 ---
 

@@ -52,7 +52,7 @@ Final_Project_IntelliTrac_SalesBot/
     ├── company_profile.md  # Profil PT Intimap & IntelliTrac Indonesia
     ├── catalogue_2026.md   # Deskripsi & spesifikasi katalog produk 2026
     ├── product_features.md # Tabel matriks perbandingan fitur & perangkat
-    ├── faq.md               # Panduan jawaban internal (blank spot, trial/POC)
+    ├── faq.md               # Panduan jawaban internal (sinyal, Trial Gratis, OBD-II, hourmeter, interval)
     ├── faq_website.md       # FAQ publik website, sudah dikoreksi untuk chatbot
     └── silacak_klhk.md      # Integrasi GPS dengan Silacak KLHK (limbah B3)
 ```

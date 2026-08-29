@@ -402,8 +402,7 @@ with st.sidebar:
                 </div>
             </a>
             """, unsafe_allow_html=True)
-
-    st.divider()
+        st.divider()
 
     # Quick Solution Finder Widget
     st.subheader("🔍 Fast Product Match")

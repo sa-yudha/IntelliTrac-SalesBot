@@ -17,3 +17,12 @@ gcp-*.json
 # Internal revision docs, not for public GitHub repo
 docs/FAQ_Website_Revision_Report.md
 docs/faq_website_raw_scrape.md
+
+# Dokumen audit keamanan & salinan log percakapan: RAHASIA INTERNAL.
+# Aslinya disimpan di luar folder repo. Pola di bawah hanya jaring pengaman
+# kalau suatu saat ada salinan tak sengaja masuk ke dalam folder proyek.
+*[Aa]udit*.md
+*[Aa]udit*.pdf
+*salesbot_logs*.json
+*chat_audit_log*.csv
+intellitrac_*_logs*.csv

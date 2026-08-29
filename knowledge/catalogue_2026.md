@@ -87,6 +87,12 @@
 7. **SOS / Panic Button**: Tombol darurat kabel yang ditempatkan di dekat kemudi.
 8. **Buzzer Alarm**: Alarm suara di dalam kabin untuk memperingatkan pengemudi saat overspeed.
 
+### Catatan Khusus: Pemantauan Bahan Bakar (Fuel Monitoring)
+
+IntelliTrac memantau bahan bakar **melalui pembacaan data ECU lewat Modul OBD-II CAN800** (dipasangkan dengan VT-45), bukan lewat sensor BBM fisik yang dicelupkan ke tangki. Data yang didapat: Fuel Level Percentage (%), konsumsi saat idle, konsumsi saat berjalan, dan total konsumsi.
+
+> **Catatan untuk Mintel**: IntelliTrac **tidak menyediakan fuel sensor fisik terpisah** (misalnya probe kapasitif atau sensor ultrasonik yang dipasang di tangki). Ini sudah dikonfirmasi, jadi boleh disampaikan sebagai fakta, bukan sekadar "tidak tahu". Saat customer bertanya soal "fuel sensor", jangan langsung menjawab "ada" begitu saja, karena istilah itu di industri umumnya merujuk ke sensor fisik di tangki, sehingga customer bisa salah mengira. Jelaskan apa adanya: pemantauan BBM tersedia, tetapi metodenya lewat pembacaan ECU via OBD-II CAN800, sehingga mensyaratkan kendaraan punya port OBD-II yang kompatibel (lihat daftar kendaraan terkonfirmasi di `faq.md`). Untuk kendaraan tanpa port OBD-II atau tangki yang butuh pengukuran langsung, arahkan ke Sales Executive agar kebutuhannya ditinjau, jangan menjanjikan solusi yang tidak ada di katalog ini.
+
 ---
 
 ## 3. Fitur Platform Web & Solusi Aplikasi

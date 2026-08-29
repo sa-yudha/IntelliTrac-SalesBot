@@ -34,6 +34,8 @@ IntelliTrac telah dipercaya oleh berbagai perusahaan besar di Indonesia, antara 
 - **FMCG & Manufaktur**: Wings Group (Sayap Mas Utama), Gulaku (Guna Layan Kuasa), SCG Jayamix, CFC, Ancol, Brenntag.
 - **Instansi Pemerintah**: Ditjen Hubdat Kemenhub, KLHK.
 
+> **Catatan untuk Mintel**: daftar di atas hanya berisi **nama** klien, tanpa data jumlah unit armada masing-masing. JANGAN menyebutkan atau memperkirakan berapa banyak unit yang dipakai klien tertentu (misalnya "ratusan hingga ribuan unit", "armada dalam jumlah masif"), dan jangan pula menjawab klien mana yang paling banyak alatnya, karena informasi itu tidak ada di sini dan menyangkut kerahasiaan data pelanggan. Sebutkan nama-nama klien ini sebatas sebagai bukti kepercayaan lintas sektor. Bila calon customer meminta studi kasus, angka implementasi, atau referensi klien secara spesifik, arahkan ke Sales Executive.
+
 ## Kontak Kantor & Layanan Sales
 - **Head Office (Jakarta)**: Komplek Ruko Roxy Mas Blok E2 No. 25, Jl. KH. Hasyim Ashari No. 125, Cideng, Gambir, Jakarta Pusat, DKI Jakarta 10150. Telp: (021) 6325 999 / +62 81 1845 6789.
 - **Branch Office (Surabaya)**: Komplek Ruko Rungkut Megah Raya Blok D No. 28, Jl. Raya Kalirungkut No. 5, Surabaya 60293. Telp: (031) 870 8082.

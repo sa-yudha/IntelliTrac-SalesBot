@@ -22,6 +22,19 @@
 | **Backup Battery Capacity** | 160 mAh | 200/300 mAh | Built-in | Built-in |
 | **Garansi Alat** | 1 Tahun | 1 Tahun | 1 Tahun | 1 Tahun |
 
+## Rating Ketahanan (IP Rating) yang Terdokumentasi
+
+| Perangkat | Rating IP | Keterangan |
+|---|---|---|
+| VT-45 | IP65 | Tahan debu & cipratan air |
+| Kamera CE04 (aksesori JC450) | IP67 | Waterproof, untuk pemasangan di luar/kargo |
+| VT-45 Lite | *tidak terdokumentasi* | Belum ada data rating resmi di knowledge base |
+| JC261, JC450 (unit utama) | *tidak terdokumentasi* | Belum ada data rating resmi di knowledge base |
+
+> **Catatan untuk Mintel**: hanya dua baris pertama yang boleh disebut sebagai fakta. Untuk perangkat yang ratingnya *tidak terdokumentasi*, JANGAN menebak atau mengarang tingkat ketahanannya, termasuk jangan mengarang frasa lunak seperti "tahan cipratan ringan", "aman dari debu", atau "tidak sepenuhnya waterproof". Jawab jujur bahwa data rating resminya belum Anda miliki, lalu arahkan ke Sales Executive atau tim teknisi untuk kepastian sebelum pemasangan di lingkungan basah/berdebu. Menebak spesifikasi ketahanan air berisiko memicu sengketa garansi di kemudian hari.
+
+---
+
 ## Ketentuan Pre-Sales & Skema Harga
 - **Informasi Harga**: 
   - Harga hardware GPS berkisar dari varian dasar (seperti VT-45 Lite) hingga varian advanced/AI Dashcam (JC261 / JC450).

@@ -103,3 +103,9 @@ IntelliTrac memantau bahan bakar **melalui pembacaan data ECU lewat Modul OBD-II
 - **Smart Cold Chain System**: Monitoring rantai dingin terintegrasi sensor suhu & pintu dengan sistem ERP perusahaan.
 - **Driver Pre-Start Checklist (P2H)**: Fitur inspeksi kelayakan fisik kendaraan harian bagi pengemudi.
 - **API Integration**: API RESTful fleksibel untuk dihubungkan ke sistem ERP internal pengguna (SAP, Oracle, Odoo, custom ERP).
+
+### Kanal Notifikasi / Alert
+
+Notifikasi kejadian (mesin nyala, pintu dibuka, overspeed, dan alert lainnya) disampaikan lewat **web dashboard** dan **aplikasi mobile (push notification)**.
+
+> **Catatan untuk Mintel**: **SMS BUKAN kanal notifikasi IntelliTrac.** Ini sudah dikonfirmasi, jadi JANGAN pernah menyebut SMS saat menjelaskan cara alert dikirim, meskipun terdengar masuk akal untuk perangkat berbasis kartu SIM. Untuk kanal selain web dashboard dan aplikasi mobile (misalnya email, WhatsApp, Telegram, atau webhook ke sistem internal customer), jangan menyatakan didukung maupun tidak didukung; sampaikan bahwa notifikasi standar berjalan lewat dashboard dan aplikasi mobile, lalu arahkan ke Sales Executive untuk kebutuhan kanal lain. Integrasi kanal khusus semacam itu termasuk ranah kustomisasi oleh tim programmer in-house, jadi kelayakannya perlu ditinjau lebih dulu.

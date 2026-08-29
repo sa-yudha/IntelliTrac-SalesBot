@@ -104,6 +104,14 @@ IntelliTrac memantau bahan bakar **melalui pembacaan data ECU lewat Modul OBD-II
 - **Driver Pre-Start Checklist (P2H)**: Fitur inspeksi kelayakan fisik kendaraan harian bagi pengemudi.
 - **API Integration**: API RESTful fleksibel untuk dihubungkan ke sistem ERP internal pengguna (SAP, Oracle, Odoo, custom ERP).
 
+### Bahasa Tampilan Web Monitoring
+
+Web monitoring GPS IntelliTrac secara default **hanya tersedia dalam Bahasa Inggris**. Tidak ada tombol atau menu pemilih bahasa untuk mengganti seluruh antarmuka ke Bahasa Indonesia.
+
+Bahasa Indonesia hanya bisa muncul pada **judul kolom tabel yang memang dapat diedit manual oleh pengguna**, jadi sifatnya penyesuaian label per kolom oleh pengguna sendiri, bukan fitur alih bahasa menyeluruh.
+
+> **Catatan untuk Mintel**: JANGAN menyatakan bahwa sistem mendukung multibahasa, punya pemilih bahasa, atau tersedia dalam Bahasa Indonesia secara standar. Jangan pula mengarang dukungan "berbagai bahasa internasional". Sampaikan apa adanya: antarmuka web monitoring berbahasa Inggris, dan yang bisa disesuaikan ke Bahasa Indonesia hanya label kolom tabel yang dapat diedit pengguna. Untuk **aplikasi mobile**, pengaturan zona waktu, dan format tampilan, knowledge base ini belum memuat informasinya, jadi jangan menyatakan tersedia maupun tidak tersedia; arahkan ke Sales Executive. Kalau customer memang butuh antarmuka penuh Bahasa Indonesia, itu masuk ranah permintaan kustomisasi, arahkan ke Sales Executive untuk ditinjau tim programmer in-house.
+
 ### Kanal Notifikasi / Alert
 
 Notifikasi kejadian (mesin nyala, pintu dibuka, overspeed, dan alert lainnya) disampaikan lewat:

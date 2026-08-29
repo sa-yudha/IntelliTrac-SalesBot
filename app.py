@@ -126,7 +126,7 @@ st.markdown("""
         border-radius: 18px;
         color: white;
         margin-bottom: 20px;
-        box-shadow: 0 4px 15px rgba(230, 81, 0, 0.2);
+        box-shadow: 0 2px 4px rgba(230, 81, 0, 0.35);
     }
     .header-title {
         font-size: 1.8rem;
@@ -164,6 +164,7 @@ st.markdown("""
         align-items: center;
         gap: 6px;
         font-family: 'Poppins', sans-serif;
+        box-shadow: 0 2px 4px rgba(37, 211, 102, 0.35);
     }
     .status-dot {
         width: 8px;
@@ -186,7 +187,7 @@ st.markdown("""
         border-left: 6px solid #E65100;
         padding: 16px 20px;
         border-radius: 18px;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        box-shadow: 0 2px 4px rgba(230, 81, 0, 0.15);
         margin: 12px 0;
     }
     .sales-card h4 {
@@ -210,12 +211,12 @@ st.markdown("""
         border-radius: 10px;
         text-decoration: none;
         font-size: 0.82rem;
-        box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+        box-shadow: 0 2px 4px rgba(37, 211, 102, 0.35);
         font-family: 'Poppins', sans-serif;
         transition: transform 0.2s ease;
     }
     .wa-button:hover { transform: translateY(-2px); }
-    
+
     .email-button {
         display: inline-block;
         background-color: #0D1F3C;
@@ -226,6 +227,7 @@ st.markdown("""
         text-decoration: none;
         font-size: 0.82rem;
         margin-left: 8px;
+        box-shadow: 0 2px 4px rgba(13, 31, 60, 0.35);
         transition: transform 0.2s ease;
         font-family: 'Poppins', sans-serif;
     }
@@ -248,14 +250,14 @@ st.markdown("""
         padding: 0.4rem 0.85rem !important;
         transition: all 0.2s ease;
         font-family: 'Poppins', sans-serif;
-        box-shadow: 0 2px 8px rgba(230, 81, 0, 0.2), inset 0 1px 0 rgba(255,255,255,0.15);
+        box-shadow: 0 2px 4px rgba(230, 81, 0, 0.35), inset 0 1px 0 rgba(255,255,255,0.15);
         outline: none !important;
     }
     .stButton>button:hover {
         background-color: #0D1F3C !important;
         color: #FFFFFF !important;
         border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
-        box-shadow: 0 4px 12px rgba(13, 31, 60, 0.3);
+        box-shadow: 0 2px 4px rgba(13, 31, 60, 0.35);
     }
 </style>
 """, unsafe_allow_html=True)
@@ -371,7 +373,7 @@ PANDUAN UTAMA BERINTERAKSI & GAYA BAHASA:
 # 5. Sidebar Setup
 with st.sidebar:
     st.markdown("""
-    <div style="background-color: #0D1F3C; padding: 18px 14px; border-radius: 12px; color: white; text-align: center; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(13, 31, 60, 0.2);">
+    <div style="background-color: #0D1F3C; padding: 18px 14px; border-radius: 12px; color: white; text-align: center; margin-bottom: 15px; box-shadow: 0 2px 4px rgba(13, 31, 60, 0.35);">
         <h3 style="margin: 0; color: #FFFFFF; font-size: 1.4rem; font-weight: 800; font-family: 'Poppins', sans-serif;">INTELLITRAC</h3>
         <p style="margin: 0; color: #E65100; font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; font-family: 'Poppins', sans-serif;">GPS & FLEET SOLUTIONS</p>
     </div>
@@ -397,7 +399,7 @@ with st.sidebar:
             st.info("💡 Belum ada API Key di .env. Anda dapat memasukkannya di atas.")
             st.markdown("""
             <a href="https://aistudio.google.com/app/apikey" target="_blank" style="text-decoration:none;">
-                <div style="background-color:#E65100; color:white; text-align:center; padding:8px; border-radius:8px; font-weight:600; font-size:0.85rem; font-family: 'Poppins', sans-serif; box-shadow: 0 2px 6px rgba(230,81,0,0.3); margin-top: 10px; margin-bottom: 5px;">
+                <div style="background-color:#E65100; color:white; text-align:center; padding:8px; border-radius:8px; font-weight:600; font-size:0.85rem; font-family: 'Poppins', sans-serif; box-shadow: 0 2px 4px rgba(230,81,0,0.35); margin-top: 10px; margin-bottom: 5px;">
                     Dapatkan API Key Gratis di Sini
                 </div>
             </a>
@@ -428,16 +430,16 @@ with st.sidebar:
 
     # Contact Sales Handoff Card in Sidebar
     st.markdown("""
-    <div style="background-color: #F8FAFC; padding: 16px; border-radius: 12px; border: 1px solid #E2E8F0; border-left: 5px solid #E65100; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+    <div style="background-color: #F8FAFC; padding: 16px; border-radius: 12px; border: 1px solid #E2E8F0; border-left: 5px solid #E65100; box-shadow: 0 2px 4px rgba(230, 81, 0, 0.15);">
         <h5 style="color: #0D1F3C; margin-top:0; font-family: 'Poppins', sans-serif; font-weight: 700;">📞 Hubungi Tim Sales</h5>
         <p style="font-size:0.85rem; color:#475569; margin-bottom:12px;">Siap mendapatkan penawaran harga resmi & negosiasi armada?</p>
         <a href="https://wa.me/628118456789?text=Halo%20Sales%20IntelliTrac,%20saya%20tertarik%20dengan%20produk%20GPS%20Tracker" target="_blank" style="text-decoration:none;">
-            <div style="background-color:#25D366; color:white; text-align:center; padding:8px; border-radius:8px; font-weight:bold; font-size:0.85rem; font-family: 'Poppins', sans-serif; box-shadow: 0 2px 6px rgba(37,211,102,0.3);">
+            <div style="background-color:#25D366; color:white; text-align:center; padding:8px; border-radius:8px; font-weight:bold; font-size:0.85rem; font-family: 'Poppins', sans-serif; box-shadow: 0 2px 4px rgba(37,211,102,0.35);">
                 💬 Chat via WhatsApp<br>(+62 811-845-6789)
             </div>
         </a>
         <a href="https://wa.me/6281111306717?text=Halo%20Sales%20IntelliTrac,%20saya%20tertarik%20dengan%20produk%20GPS%20Tracker" target="_blank" style="text-decoration:none;">
-            <div style="background-color:#25D366; color:white; text-align:center; padding:8px; border-radius:8px; font-weight:bold; font-size:0.85rem; font-family: 'Poppins', sans-serif; box-shadow: 0 2px 6px rgba(37,211,102,0.3); margin-top:8px;">
+            <div style="background-color:#25D366; color:white; text-align:center; padding:8px; border-radius:8px; font-weight:bold; font-size:0.85rem; font-family: 'Poppins', sans-serif; box-shadow: 0 2px 4px rgba(37,211,102,0.35); margin-top:8px;">
                 💬 Chat via WhatsApp<br>(+62 811-1130-6717)
             </div>
         </a>

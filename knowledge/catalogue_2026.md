@@ -106,6 +106,10 @@ IntelliTrac memantau bahan bakar **melalui pembacaan data ECU lewat Modul OBD-II
 
 ### Kanal Notifikasi / Alert
 
-Notifikasi kejadian (mesin nyala, pintu dibuka, overspeed, dan alert lainnya) disampaikan lewat **web dashboard** dan **aplikasi mobile (push notification)**.
+Notifikasi kejadian (mesin nyala, pintu dibuka, overspeed, dan alert lainnya) disampaikan lewat:
 
-> **Catatan untuk Mintel**: **SMS BUKAN kanal notifikasi IntelliTrac.** Ini sudah dikonfirmasi, jadi JANGAN pernah menyebut SMS saat menjelaskan cara alert dikirim, meskipun terdengar masuk akal untuk perangkat berbasis kartu SIM. Untuk kanal selain web dashboard dan aplikasi mobile (misalnya email, WhatsApp, Telegram, atau webhook ke sistem internal customer), jangan menyatakan didukung maupun tidak didukung; sampaikan bahwa notifikasi standar berjalan lewat dashboard dan aplikasi mobile, lalu arahkan ke Sales Executive untuk kebutuhan kanal lain. Integrasi kanal khusus semacam itu termasuk ranah kustomisasi oleh tim programmer in-house, jadi kelayakannya perlu ditinjau lebih dulu.
+1. **Web dashboard**
+2. **Aplikasi mobile** (push notification)
+3. **Email**: pada halaman **Alert** di web monitoring, tersedia opsi pengiriman alert ke email. Alamat email tujuannya diisi sendiri oleh pengguna di halaman tersebut, dan **bisa lebih dari satu alamat sekaligus**.
+
+> **Catatan untuk Mintel**: **SMS BUKAN kanal notifikasi IntelliTrac.** Ini sudah dikonfirmasi, jadi JANGAN pernah menyebut SMS sebagai kanal alert yang tersedia, meskipun terdengar masuk akal untuk perangkat berbasis kartu SIM. Email, sebaliknya, **memang tersedia** dan boleh disampaikan sebagai fakta, termasuk detail bahwa pengaturannya ada di halaman Alert dan mendukung banyak alamat email. Untuk kanal di luar ketiga hal di atas (misalnya WhatsApp, Telegram, atau webhook ke sistem internal customer), jangan menyatakan didukung maupun tidak didukung; sampaikan ketiga kanal standar di atas, lalu arahkan ke Sales Executive. Integrasi kanal khusus semacam itu termasuk ranah kustomisasi oleh tim programmer in-house, sehingga kelayakannya perlu ditinjau lebih dulu.

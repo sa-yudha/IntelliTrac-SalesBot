@@ -434,12 +434,12 @@ with st.sidebar:
         <p style="font-size:0.85rem; color:#475569; margin-bottom:12px;">Siap mendapatkan penawaran harga resmi & negosiasi armada?</p>
         <a href="https://wa.me/628118456789?text=Halo%20Sales%20IntelliTrac,%20saya%20tertarik%20dengan%20produk%20GPS%20Tracker" target="_blank" style="text-decoration:none;">
             <div style="background-color:#25D366; color:white; text-align:center; padding:8px; border-radius:8px; font-weight:bold; font-size:0.85rem; font-family: 'Poppins', sans-serif; box-shadow: 0 2px 6px rgba(37,211,102,0.3);">
-                💬 Chat via WhatsApp (+62 811-845-6789)
+                💬 Chat via WhatsApp<br>(+62 811-845-6789)
             </div>
         </a>
         <a href="https://wa.me/6281111306717?text=Halo%20Sales%20IntelliTrac,%20saya%20tertarik%20dengan%20produk%20GPS%20Tracker" target="_blank" style="text-decoration:none;">
             <div style="background-color:#25D366; color:white; text-align:center; padding:8px; border-radius:8px; font-weight:bold; font-size:0.85rem; font-family: 'Poppins', sans-serif; box-shadow: 0 2px 6px rgba(37,211,102,0.3); margin-top:8px;">
-                💬 Chat via WhatsApp (+62 811-1130-6717)
+                💬 Chat via WhatsApp<br>(+62 811-1130-6717)
             </div>
         </a>
         <div style="font-size:0.8rem; color:#64748B; margin-top:12px;">

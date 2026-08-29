@@ -120,4 +120,17 @@ Notifikasi kejadian (mesin nyala, pintu dibuka, overspeed, dan alert lainnya) di
 2. **Aplikasi mobile** (push notification)
 3. **Email**: pada halaman **Alert** di web monitoring, tersedia opsi pengiriman alert ke email. Alamat email tujuannya diisi sendiri oleh pengguna di halaman tersebut, dan **bisa lebih dari satu alamat sekaligus**.
 
-> **Catatan untuk Mintel**: **SMS BUKAN kanal notifikasi IntelliTrac.** Ini sudah dikonfirmasi, jadi JANGAN pernah menyebut SMS sebagai kanal alert yang tersedia, meskipun terdengar masuk akal untuk perangkat berbasis kartu SIM. Email, sebaliknya, **memang tersedia** dan boleh disampaikan sebagai fakta, termasuk detail bahwa pengaturannya ada di halaman Alert dan mendukung banyak alamat email. Untuk kanal di luar ketiga hal di atas (misalnya WhatsApp, Telegram, atau webhook ke sistem internal customer), jangan menyatakan didukung maupun tidak didukung; sampaikan ketiga kanal standar di atas, lalu arahkan ke Sales Executive. Integrasi kanal khusus semacam itu termasuk ranah kustomisasi oleh tim programmer in-house, sehingga kelayakannya perlu ditinjau lebih dulu.
+Selain ketiga kanal standar di atas, kejadian/alert juga dapat dialirkan ke sistem milik customer lewat **integrasi API/webhook** (lihat poin API Integration di atas). Untuk kebutuhan seperti meneruskan alert ke dashboard internal, ERP, atau sistem operasional customer, IntelliTrac terbuka mengerjakannya lewat tim programmer in-house.
+
+**Status kanal chat (media sosial):**
+
+| Kanal | Status |
+|---|---|
+| **WhatsApp** (alert otomatis langsung ke nomor WA customer) | **TIDAK BISA** |
+| **Telegram** | Belum tersedia saat ini, tetapi paling memungkinkan untuk dibuatkan bila diminta |
+
+> **Catatan untuk Mintel**: **SMS BUKAN kanal notifikasi IntelliTrac.** Ini sudah dikonfirmasi, jadi JANGAN pernah menyebut SMS sebagai kanal alert yang tersedia, meskipun terdengar masuk akal untuk perangkat berbasis kartu SIM. Email, sebaliknya, **memang tersedia** dan boleh disampaikan sebagai fakta, termasuk detail bahwa pengaturannya ada di halaman Alert dan mendukung banyak alamat email.
+>
+> Untuk **integrasi API/webhook ke sistem internal customer**, sampaikan dengan percaya diri bahwa IntelliTrac mampu mengerjakannya, karena hal-hal yang berkaitan dengan integrasi dan API memang salah satu kekuatan perusahaan (lihat juga keunggulan tim programmer in-house di `company_profile.md`). Tetap arahkan ke Sales Executive untuk peninjauan ruang lingkup, waktu pengerjaan, dan penawarannya, sesuai aturan yang berlaku untuk permintaan kustomisasi.
+>
+> Untuk **WhatsApp**, JANGAN menjanjikan alert otomatis langsung ke nomor WhatsApp customer, karena hal itu tidak bisa dilakukan. Jangan pula menawarkan jalan pintas atau solusi alternatif yang tidak tercatat di sini. Sampaikan terus terang bahwa alert langsung ke WhatsApp belum bisa disediakan, lalu tawarkan kanal yang memang ada (email, dashboard, aplikasi mobile) atau opsi integrasi API ke sistem mereka. Untuk **Telegram**, sampaikan bahwa saat ini belum tersedia namun paling memungkinkan untuk dikembangkan bila memang dibutuhkan, dan arahkan ke Sales Executive. Jangan menyebutkan platform chat lain di luar kedua ini.

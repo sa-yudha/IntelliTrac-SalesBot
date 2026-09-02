@@ -26,10 +26,8 @@ MAX_INPUT_CHARS = 2000
 MAX_HISTORY_TURNS = 20
 
 # Batas waktu tanpa ada potongan teks masuk sebelum model dianggap menggantung.
-# Pengukuran Agustus 2026: potongan pertama tiba dalam 0,80 s/d 1,10 detik terlepas
-# dari panjang jawaban (diuji 238 s/d 7.288 karakter), jadi 10 detik memberi
-# kelonggaran sekitar 9 kali lipat.
-STREAM_STALL_TIMEOUT_MS = 10_000
+# Diberi batas 15 detik untuk memberi toleransi latensi awal aliran stream saat antrean padat.
+STREAM_STALL_TIMEOUT_MS = 15_000
 
 # Jatah waktu yang diberikan ke server Google untuk menulis jawaban sampai selesai.
 # Dibuat longgar karena jawaban panjang memang butuh waktu lebih lama.

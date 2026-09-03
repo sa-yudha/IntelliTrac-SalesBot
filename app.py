@@ -108,8 +108,28 @@ st.markdown("""
     h1, h2, h3, h4, h5, h6, .header-title {
         font-family: 'Poppins', sans-serif !important;
     }
+    /* Latar belakang pola kertas kotak-kotak (graph paper), garis mayor tiap 5 kotak
+       seperti kertas kotak-kotak sungguhan, warna navy brand dengan opasitas sangat
+       rendah supaya tidak mengganggu keterbacaan teks. */
+    .stApp, [data-testid="stAppViewContainer"] {
+        background-color: #F5F7FA;
+        background-image:
+            linear-gradient(rgba(10, 37, 64, 0.09) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(10, 37, 64, 0.09) 1px, transparent 1px),
+            linear-gradient(rgba(10, 37, 64, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(10, 37, 64, 0.05) 1px, transparent 1px);
+        background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+        background-repeat: repeat;
+    }
+    [data-testid="stHeader"] {
+        background: transparent;
+    }
     .main {
-        background-color: #F4F4F4;
+        background-color: transparent;
+    }
+    [data-testid="stSidebar"] {
+        background-color: #FDFDFE;
+        border-right: 1px solid rgba(10, 37, 64, 0.08);
     }
     /* Kurangi padding atas default Streamlit agar header lebih ke atas */
     .block-container {

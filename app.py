@@ -110,16 +110,21 @@ st.markdown("""
     }
     /* Latar belakang pola kertas kotak-kotak (graph paper), garis mayor tiap 5 kotak
        seperti kertas kotak-kotak sungguhan, warna navy brand dengan opasitas sangat
-       rendah supaya tidak mengganggu keterbacaan teks. */
+       rendah supaya tidak mengganggu keterbacaan teks. Dua radial-gradient di baris
+       pertama memberi glow warna brand (oranye di atas, navy di bawah) yang menyebar
+       ke seluruh tinggi halaman, bukan cuma menempel di dekat header. */
     .stApp, [data-testid="stAppViewContainer"] {
         background-color: #F5F7FA;
         background-image:
+            radial-gradient(ellipse 90% 60% at 50% 0%, rgba(230, 101, 0, 0.22), transparent 70%),
+            radial-gradient(ellipse 90% 60% at 50% 100%, rgba(10, 37, 64, 0.16), transparent 70%),
             linear-gradient(rgba(10, 37, 64, 0.09) 1px, transparent 1px),
             linear-gradient(90deg, rgba(10, 37, 64, 0.09) 1px, transparent 1px),
             linear-gradient(rgba(10, 37, 64, 0.05) 1px, transparent 1px),
             linear-gradient(90deg, rgba(10, 37, 64, 0.05) 1px, transparent 1px);
-        background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
-        background-repeat: repeat;
+        background-size: 100% 100vh, 100% 100vh, 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+        background-repeat: no-repeat, no-repeat, repeat, repeat, repeat, repeat;
+        background-attachment: fixed, fixed, scroll, scroll, scroll, scroll;
     }
     [data-testid="stHeader"] {
         background: transparent;
@@ -130,6 +135,12 @@ st.markdown("""
     [data-testid="stSidebar"] {
         background-color: #FDFDFE;
         border-right: 1px solid rgba(10, 37, 64, 0.08);
+    }
+    /* Kotak chat & kartu handoff dibuat agak tembus pandang supaya glow+grid di
+       baliknya tetap kelihatan menembus, bukan cuma nongol di sela-sela kosong. */
+    [data-testid="stChatMessage"], .sales-card {
+        background-color: rgba(255, 255, 255, 0.55) !important;
+        backdrop-filter: blur(6px);
     }
     /* Kurangi padding atas default Streamlit agar header lebih ke atas */
     .block-container {

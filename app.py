@@ -296,7 +296,7 @@ st.markdown("""
 FEEDBACK_TAB = "FeedbackLogs"
 FEEDBACK_HEADER = ["timestamp", "query", "response", "rating"]
 CHAT_LOGS_TAB = "ChatLogs"
-CHAT_LOGS_HEADER = ["timestamp", "query", "response"]
+CHAT_LOGS_HEADER = ["timestamp", "query", "response", "ip"]
 
 @st.cache_resource(show_spinner=False)
 def _get_gsheet_client():
@@ -337,6 +337,16 @@ def save_chat_history_log(entry):
         ws.append_row([_sheet_safe(entry.get(k, "")) for k in CHAT_LOGS_HEADER])
     except Exception:
         logger.warning("Gagal menyimpan log chat.", exc_info=True)
+
+def get_visitor_ip():
+    """st.context.ip_address adalah IP dari koneksi WebSocket langsung ke server.
+    Kalau app di-deploy di belakang reverse proxy, itu bisa jadi IP proxy-nya,
+    bukan IP pengunjung asli, jadi X-Forwarded-For dicoba dulu sebagai sumber utama."""
+    headers = st.context.headers or {}
+    forwarded = headers.get("X-Forwarded-For")
+    if forwarded:
+        return forwarded.split(",")[0].strip()
+    return st.context.ip_address or "unknown"
 
 # TTL wajib diisi. Tanpa argumen, @st.cache_data tidak pernah kedaluwarsa selama
 # proses hidup, sehingga perubahan pada berkas di knowledge/ tidak akan terbaca
@@ -674,7 +684,8 @@ if user_input:
                 chat_log_entry = {
                     "timestamp": datetime.now(timezone(timedelta(hours=7))).strftime("%Y-%m-%d %H:%M:%S"),
                     "query": user_input,
-                    "response": reply_text
+                    "response": reply_text,
+                    "ip": get_visitor_ip()
                 }
                 save_chat_history_log(chat_log_entry)
 

@@ -91,7 +91,7 @@ Ya. Perangkat GPS Tracker IntelliTrac bergaransi 1 (satu) tahun, dan sensor berg
 
 Garansi ini berlaku selama kerusakan bukan disebabkan oleh masuknya air melebihi batas ketahanan rating IP perangkat (misalnya perendaman) atau kelalaian penggunaan, perangkat tidak dimodifikasi atau dibongkar sendiri oleh customer di luar teknisi resmi IntelliTrac, dan kerusakan bukan akibat faktor eksternal di luar pemakaian normal seperti kecelakaan, kebakaran, atau lonjakan tegangan ekstrem.
 
-> **Catatan untuk Mintel**: garansi mengikuti batas rating IP masing-masing perangkat. VT-45 ber-rating IP65 (tahan debu dan cipratan air) dan kamera CE04 pada JC450 ber-rating IP67 (waterproof), jadi paparan air dalam batas rating tersebut termasuk pemakaian normal. Yang berada di luar cakupan garansi adalah kerusakan akibat air melebihi batas rating perangkat, misalnya perendaman. Untuk klaim garansi spesifik, arahkan ke tim Support/Service resmi.
+> **Catatan untuk Mintel**: garansi mengikuti batas rating IP masing-masing perangkat. VT-45 ber-rating IP65 (tahan debu dan cipratan air) dan kamera CE04 pada JC450 ber-rating IP67 (waterproof), jadi paparan air dalam batas rating tersebut termasuk pemakaian normal. Yang berada di luar cakupan garansi adalah kerusakan akibat air melebihi batas rating perangkat, misalnya perendaman. Untuk klaim garansi spesifik, arahkan ke tim Support/Service resmi. Garansi di atas hanya soal garansi perangkat GPS Tracker & sensor IntelliTrac; untuk pertanyaan soal pengaruh pemasangan Engine Cut-Off terhadap garansi **kendaraan**, itu topik berbeda, lihat `faq.md` bagian Pengaruh Pemasangan Engine Cut-Off terhadap Garansi Kendaraan.
 
 ---
 
@@ -174,7 +174,7 @@ Lewat aplikasi mobile, pengguna bisa melakukan live tracking, mengatur geofence,
 
 Ya. Kendaraan dalam kondisi mesin OFF tetap mengirimkan data lokasi GPS ke server. Secara default, pengiriman datanya dilakukan setiap 1 jam sekali untuk menghemat konsumsi daya, tapi interval ini bisa dikonfigurasi sesuai kebutuhan armada.
 
-> **Catatan untuk Mintel**: sampaikan angka 1 jam ini sebagai pengaturan default, bukan batasan mutlak. Kalau customer butuh interval berbeda saat kendaraan parkir (misalnya untuk armada bernilai tinggi atau kendaraan yang lama tidak beroperasi), arahkan ke Sales Executive untuk penyesuaian konfigurasi. Satu hal lagi, saat suplai daya kendaraan terputus, perangkat beralih ke baterai cadangan internal yang kapasitasnya terbatas (160-300 mAh tergantung tipe). Untuk rincian lengkap interval saat mesin menyala (kombinasi 15 detik / perubahan heading 15 derajat / event triggered), lihat `faq.md` bagian Interval Pengiriman Data.
+> **Catatan untuk Mintel**: sampaikan angka 1 jam ini sebagai pengaturan default, bukan batasan mutlak. Kalau customer butuh interval berbeda saat kendaraan parkir (misalnya untuk armada bernilai tinggi atau kendaraan yang lama tidak beroperasi), arahkan ke Sales Executive untuk penyesuaian konfigurasi. Satu hal lagi, saat suplai daya kendaraan terputus, perangkat beralih ke baterai cadangan internal yang kapasitasnya terbatas: VT-45 Lite 160 mAh (tahan hingga 30 menit), VT-45 200 mAh (tahan hingga 1 jam). Rincian JC261/JC450 belum terdokumentasi di KB ini, jangan menyebut angka mAh/durasi spesifik untuk keduanya. Untuk rincian lengkap interval saat mesin menyala (kombinasi 15 detik / perubahan heading 15 derajat / event triggered), lihat `faq.md` bagian Interval Pengiriman Data.
 
 ---
 

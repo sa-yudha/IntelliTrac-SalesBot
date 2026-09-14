@@ -6,21 +6,26 @@
 |---|---|---|---|---|
 | **Jaringan (Network)** | 4G LTE | 4G LTE (Fallback 2G) | 4G LTE | 4G LTE |
 | **GPS Live Tracking** | Ya | Ya | Ya | Ya |
-| **Engine Cut-off (Immobilizer)** | Ya | Ya | Ya | Ya |
-| **SOS / Panic Button** | Opsional | Ya | Ya | Ya |
+| **Engine Cut-off (Immobilizer)** | Ya* | Ya* | Ya | Ya |
+| **Geofence Controller** | Tidak | Ya | - | - |
+| **Wi-Fi Module** | Tidak | Ya | Ya | Ya |
+| **PTO Indicator** | Opsional* (Pilih 1 dari 3) | Ya* | Tidak | Tidak |
+| **SOS / Panic Button** | Opsional* (Pilih 1 dari 3) | Ya* | Ya | Ya |
+| **Door Sensor Support** | Opsional* (Pilih 1 dari 3, 1 Channel) | Ya* (Hingga 3 Channel) | Ya | Ya |
 | **Voice Tap (Listen In)** | Tidak | Tidak | Ya | Ya |
 | **Overspeed Alarm/Buzzer** | Tidak (Notifikasi via Aplikasi) | Ya (Buzzer & App) | Ya (Voice & App) | Ya (Voice & App) |
-| **Door Sensor Support** | Opsional (1 Channel) | Ya (Hingga 3 Channel) | Ya | Ya |
-| **Temperature Sensor** | Tidak | Opsional | Tidak | Tidak |
-| **Rotation Sensor (Mixer)** | Tidak | Opsional | Tidak | Tidak |
-| **RFID / iButton (ID Reader)**| Tidak | Opsional (iButton) | Tidak | Tidak |
+| **Temperature Sensor** | Tidak | Opsional* (Pilih 1 dari 2) | Tidak | Tidak |
+| **OBD-II CAN800 Integration**| Tidak | Opsional* (Pilih 1 dari 2) | Tidak | Tidak |
+| **Rotation Sensor (Mixer)** | Tidak | Opsional* | Tidak | Tidak |
+| **RFID / iButton (ID Reader)**| Tidak | Opsional* (iButton) | Tidak | Tidak |
 | **Harsh Driving Behaviour** | Ya (HA & HB) | Ya (HA & HB) | Ya (HA, HB, HC) | Ya (HA, HB, HC) |
 | **DMS (Driver Monitor AI)** | Tidak | Tidak | Ya (Kamera Kabin) | Ya (Kamera Kabin) |
 | **ADAS (Safety Assist AI)** | Tidak | Tidak | Ya | Ya |
 | **Jumlah Kamera** | - | - | Dual (2 Channel) | Hingga 5 Channel |
-| **OBD-II CAN800 Integration**| Tidak | Opsional | Tidak | Tidak |
-| **Backup Battery Capacity** | 160 mAh | 200/300 mAh | Built-in | Built-in |
+| **Backup Battery** | 160 mAh (tahan hingga 30 menit) | 200 mAh (tahan hingga 1 jam) | Built-in | Built-in |
 | **Garansi Alat** | 1 Tahun | 1 Tahun | 1 Tahun | 1 Tahun |
+
+> **Catatan untuk Mintel**: fitur/sensor/aksesori bertanda bintang (*) di atas, termasuk Engine Cut-Off, dikenakan biaya tambahan di luar unit dasar VT-45 Lite/VT-45, sesuai skema harga resmi (rincian biaya lihat Sales Executive, bukan dari KB ini). Untuk VT-45 Lite, PTO Indicator, SOS/Panic Button, dan Door Sensor berbagi satu slot tambahan yang sama, sehingga customer hanya bisa memilih **satu** dari ketiganya, tidak bisa dipasang bersamaan ("Pilih 1 dari 3"). Untuk VT-45, Temperature Sensor dan modul OBD-II CAN800 berbagi satu slot tambahan yang sama, sehingga customer hanya bisa memilih **satu** dari keduanya, tidak bisa dipasang bersamaan ("Pilih 1 dari 2"). Selalu tanyakan kebutuhan spesifik armada customer sebelum menyarankan salah satu pilihan.
 
 ## Rating Ketahanan (IP Rating) yang Terdokumentasi
 

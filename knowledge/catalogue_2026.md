@@ -38,24 +38,27 @@
   - **GPS Live Tracking 4G LTE**: Akurasi tinggi dengan sensitivitas GPS hingga -160 dBm.
   - **Engine Cut-Off**: Mematikan mesin kendaraan dari jarak jauh via aplikasi.
   - **Power Lost Alert**: Notifikasi instan saat kabel GPS dilepas/dipotong paksa.
-  - **Door Sensor (1 Channel)**: Pengawasan pintu kargo/penumpang.
-  - **SOS / Panic Button**: Tombol darurat untuk pengemudi.
+  - **Backup Battery**: Kapasitas 160 mAh, tahan hingga 30 menit saat suplai daya kendaraan terputus.
   - **Harsh Driving Behaviour**: Deteksi akselerasi mendadak (HA) dan pengereman mendadak (HB).
   - **Desain Ringkas & Kompatibilitas Tegangan Luas**: Operating voltage 9V–90V DC.
+- **Add-On Opsional (PENTING, Hanya Bisa Pilih 1 dari 3)**: VT-45 Lite cuma punya satu slot tambahan untuk sensor/aksesori opsional, jadi customer hanya bisa memilih **satu** dari tiga pilihan berikut, tidak bisa dipasang bersamaan: PTO Indicator (Power Take-Off), SOS/Panic Button, atau Door Sensor (1 Channel). Tanyakan kebutuhan armada customer untuk menentukan pilihan yang paling relevan sebelum pemasangan.
+- **Catatan Biaya**: Engine Cut-Off dan ketiga pilihan add-on di atas dikenakan biaya tambahan di luar unit dasar, sesuai skema harga resmi.
 
 ### D. IntelliTrac GPS Tracker VT-45 (Advanced Fleet Management)
 - **Kategori**: Solusi pelacak armada tingkat lanjut dengan dukungan multi-sensor komprehensif.
 - **Peruntukan**: Truk pendingin (reefer), truk semen/mixer, alat berat, truk kargo mahal, bus antarkota.
 - **Fitur Utama**:
-  - **Multi-Sensor Integration**: Kompatibel dengan Sensor Suhu, Door Sensor (hingga 3 channel), Sensor Rotasi Drum Mixer, iButton (ID Reader).
-  - **Dukungan Modul OBD-II CAN800**: Membaca data ECU mesin secara mendalam.
+  - **Multi-Sensor Integration**: Kompatibel dengan Door Sensor (hingga 3 channel), Sensor Rotasi Drum Mixer, iButton (ID Reader).
   - **Harsh Driving Behaviour**: Deteksi akselerasi mendadak (HA) dan rem mendadak (HB).
-  - **Engine Cut-Off, Geofence Controller, Overspeed Alarm, SOS Button**.
+  - **Engine Cut-Off, Geofence Controller, Overspeed Alarm, SOS Button, Wi-Fi Module**.
+  - **Backup Battery**: Kapasitas 200 mAh, tahan hingga 1 jam saat suplai daya kendaraan terputus.
   - **Proteksi IP65**: Tahan terhadap debu dan cipratan air.
+- **Add-On Opsional (PENTING, Hanya Bisa Pilih 1 dari 2)**: Sensor Suhu dan modul OBD-II CAN800 berbagi satu slot tambahan yang sama di VT-45, sehingga customer hanya bisa memilih **satu** dari keduanya, tidak bisa dipasang bersamaan. Tanyakan kebutuhan armada customer (pemantauan suhu cold chain, atau data ECU mesin) untuk menentukan pilihan yang paling sesuai. Detail modul CAN800 ada di bagian E di bawah.
+- **Catatan Biaya**: Engine Cut-Off, Door Sensor, Sensor Rotasi Drum Mixer, iButton, dan add-on Sensor Suhu/CAN800 di atas dikenakan biaya tambahan di luar unit dasar, sesuai skema harga resmi.
 
 ### E. Modul OBD-II CAN800 (Total Fleet Insight)
 - **Kategori**: Modul pembaca data ECU (Electronic Control Unit) kendaraan via port OBD-II.
-- **Kombinasi**: Dipasangkan dengan VT-45 untuk analisis performa mesin mendalam.
+- **Kombinasi**: Dipasangkan dengan VT-45 untuk analisis performa mesin mendalam. **Catatan**: VT-45 hanya punya satu slot sensor tambahan yang dipakai bersama dengan Sensor Suhu, jadi CAN800 dan Sensor Suhu tidak bisa dipasang bersamaan di unit VT-45 yang sama, customer harus memilih salah satu.
 - **Data yang Dibaca**:
   - Fuel Level Percentage (%)
   - Idle Fuel Consumption & Driving Fuel Consumption

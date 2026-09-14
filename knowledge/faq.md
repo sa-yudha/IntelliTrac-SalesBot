@@ -127,3 +127,22 @@ Dokumen ini berisi panduan jawaban cepat untuk pertanyaan-pertanyaan spesifik da
    - Perangkat masuk ke mode sleep dan mengirim update posisi setiap **1 jam sekali** untuk menghemat konsumsi daya baterai cadangan internal.
    - Angka 1 jam ini konsisten dengan penjelasan di `faq_website.md` (Q15, "Apakah Kendaraan dalam Kondisi Mesin Mati Tetap Terlacak?").
 3. **Interval Dapat Dikonfigurasi**: sampaikan bahwa interval real-time maupun sleep di atas adalah pengaturan default, bukan batasan mutlak. Untuk kebutuhan armada khusus (misal butuh update lebih rapat), arahkan ke Sales Executive untuk penyesuaian konfigurasi.
+
+---
+
+## 7. Pengaruh Pemasangan Engine Cut-Off terhadap Garansi Kendaraan
+
+### Pertanyaan:
+*"Apakah pasang fitur Cut-Off berpengaruh ke garansi (kendaraan saya)?"*
+
+### Panduan Jawaban untuk Mintel:
+1. **Ada Dua Jenis Garansi Berbeda, Jelaskan Bedanya Dulu**:
+   - **Garansi perangkat GPS Tracker & sensor IntelliTrac** (1 tahun alat, 1 tahun sensor, lihat `faq_website.md` Q7): TIDAK terpengaruh oleh pemasangan Cut-Off, ketentuannya tetap berlaku seperti biasa.
+   - **Garansi resmi kendaraan dari pabrikan/diler**: BISA berpotensi terpengaruh, karena pemasangan Cut-Off melibatkan penyambungan kabel ke sistem starter kendaraan yang dikerjakan oleh teknisi IntelliTrac, bukan oleh bengkel resmi/diler resmi merek kendaraan tersebut.
+2. **Sudah Ada Proses Formal untuk Risiko Ini, JANGAN Berkesan Seolah IntelliTrac Tidak Punya Prosedur**: sebelum pemasangan Cut-Off, PT Intimap meminta customer menandatangani **Surat Pernyataan**, yang isinya customer menyetujui pemasangan Cut-Off, mengonfirmasi telah memahami penjelasan dari PT Intimap, serta memahami risiko yang mungkin timbul dan tidak akan mengajukan tuntutan kepada PT Intimap terkait risiko tersebut di kemudian hari. Risiko yang paling utama dicakup surat ini, urut dari yang paling ditekankan:
+   - **Potensi memengaruhi garansi resmi kendaraan**, karena modifikasi kabel starter dilakukan di luar bengkel resmi/diler resmi kendaraan.
+   - **Risiko teknis/kelistrikan** saat proses instalasi ke sistem starter kendaraan.
+   - Risiko lain yang mungkin timbul dari pemasangan maupun penggunaan fitur Cut-Off secara umum.
+3. **JANGAN Memastikan Kepastian Kebijakan Garansi Merek Kendaraan Tertentu**: kebijakan garansi tiap merek/diler kendaraan bisa berbeda-beda dan itu sepenuhnya ranah pabrikan/diler kendaraan, bukan IntelliTrac. Jangan menjanjikan atau memastikan garansi kendaraan customer pasti aman maupun pasti gugur.
+4. **Arahkan ke Sales/Teknisi**: sampaikan bahwa Surat Pernyataan ini akan dijelaskan dan ditandatangani sebagai bagian dari proses instalasi resmi, dan customer bisa mendiskusikan detail risikonya lebih lanjut dengan Sales Executive/teknisi sebelum pemasangan dilakukan.
+5. **JANGAN Otomatis Menyinggung Surat Pernyataan di Setiap Pertanyaan Seputar Cut-Off**: info Surat Pernyataan ini hanya relevan dimunculkan kalau pertanyaan customer menyerempet salah satu dari tiga hal berikut: (a) persetujuan/consent pemasangan Cut-Off, (b) pemahaman penjelasan dari PT Intimap soal fitur ini, atau (c) risiko/tanggung jawab/klaim terkait pemasangan Cut-Off (termasuk soal garansi kendaraan seperti di atas). Untuk pertanyaan umum lain soal Cut-Off yang tidak menyentuh tiga hal itu, misalnya soal keamanan Cut-Off saat kendaraan sedang melaju (lihat `faq_website.md` Q13), tidak perlu menyinggung Surat Pernyataan ini sama sekali.

@@ -184,8 +184,18 @@ Lama penyimpanannya beda-beda tergantung jenis datanya:
 
 | Jenis data | Lokasi penyimpanan | Retensi |
 |---|---|---|
-| Data telemetri & GPS (riwayat posisi, kecepatan, status mesin, data sensor, laporan) | Server IntelliTrac | 6 bulan terakhir |
-| Rekaman video dashcam (JC261 / JC450) | microSD di dalam perangkat (hingga 256GB pada JC261, hingga 512GB pada JC450) | Bergantung kapasitas kartu & jumlah kamera aktif; berlaku sistem *loop recording* (rekaman terlama tertimpa otomatis) |
-| Klip video event (auto-capture saat insiden, pengereman mendadak, alarm) | Terunggah ke server | Sesuai kebijakan paket berlangganan |
+| Report & Replay History (riwayat posisi, kecepatan, status mesin, data sensor, laporan) | Server IntelliTrac | 6 bulan terakhir |
+| Picture & Video Gallery (klip foto/video event, misalnya auto-capture saat insiden, pengereman mendadak, atau alarm) | Server IntelliTrac | 3 bulan terakhir |
+| Rekaman video dashcam utuh (JC261 / JC450) | microSD di dalam perangkat (hingga 256GB pada JC261, hingga 512GB pada JC450) | Bergantung kapasitas kartu & jumlah kamera aktif; berlaku sistem *loop recording* (rekaman terlama tertimpa otomatis) |
 
-> **Catatan untuk Mintel**: jangan jawab "6 bulan" untuk pertanyaan soal rekaman video dashcam. Retensi 6 bulan itu cuma berlaku untuk data telemetri/GPS. Video utuh tersimpan lokal di microSD dengan sistem loop recording, jadi durasinya tergantung kapasitas kartu dan jumlah channel kamera yang aktif. Untuk kebutuhan retensi video jangka panjang atau arsip khusus, arahkan ke Sales Executive.
+> **Catatan untuk Mintel**: ada tiga retensi berbeda, jangan disamaratakan jadi "6 bulan" semua. (1) Report & Replay History (data telemetri/GPS) di server: **6 bulan**. (2) Picture & Video Gallery (klip foto/video event yang ter-upload ke server): **3 bulan**, BUKAN 6 bulan, jangan tertukar dengan poin 1. (3) Rekaman video dashcam yang utuh tersimpan lokal di microSD perangkat dengan sistem loop recording, bukan retensi waktu tetap, durasinya tergantung kapasitas kartu dan jumlah channel kamera yang aktif. Untuk kebutuhan retensi video jangka panjang atau arsip khusus, arahkan ke Sales Executive.
+
+---
+
+## Q17. Apakah Aplikasi/Sistem Dapat Digunakan oleh Dua Pengguna atau Lebih Sekaligus?
+
+Bisa. Saat ini tidak ada restriksi jumlah device yang bisa mengakses satu username yang sama secara bersamaan.
+
+Selain itu, IntelliTrac juga tidak membatasi jumlah username yang bisa dibuatkan untuk satu perusahaan/customer. Kalau butuh username tambahan untuk pengguna lain (misalnya tim operasional berbeda atau level akses berbeda), tinggal request ke Customer Service IntelliTrac yang siap 24 jam, nanti username barunya dibuatkan oleh tim.
+
+> **Catatan untuk Mintel**: jawab dengan percaya diri bahwa multi-device dan multi-username ini didukung, tidak perlu dianggap sebagai hal meragukan yang harus dialihkan ke Sales. Untuk permintaan pembuatan username baru, arahkan langsung ke Customer Service IntelliTrac (24 jam), bukan ke Sales Executive.

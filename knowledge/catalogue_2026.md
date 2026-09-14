@@ -12,12 +12,14 @@
     - **CI01**: Infrared Cabin-view Camera (Basic Camera) — memantau keseluruhan kabin (sopir & penumpang), tanpa analisis AI. Posisi pemasangan lebih fleksibel, umumnya di tengah dashboard atau pojok sisi penumpang depan dengan sudut diagonal, menyesuaikan kebutuhan pemasangan.
 - **Fitur Unggulan**:
   - **Live Streaming 4G LTE**: Memantau video jalan & kabin real-time.
-  - **Dual-Channel Recording**: Perekaman disimpan langsung di microSD (hingga 256GB).
-  - **Driver Monitoring System (DMS)**: Mendeteksi kelelahan sopir (menguap, mata tertutup), gangguan saat mengemudi (merokok, main HP, pandangan tidak ke depan).
+  - **Dual-Channel Recording & Image Capturing**: Perekaman video dan foto disimpan langsung di microSD (hingga 256GB; microSD adalah aksesori berbayar terpisah dari unit dasar).
+  - **Driver Monitoring System (DMS, butuh sub camera JC171)**: Mendeteksi kelelahan sopir (menguap, mata tertutup), gangguan saat mengemudi (merokok, main HP, pandangan tidak ke depan), serta wajah tidak terdeteksi (no face detected).
   - **Advanced Driver Assistance Systems (ADAS)**: Peringatan jarak aman kendaraan, potensi tabrakan depan, departure lane warning.
   - **Engine Cut-Off**: Mematikan mesin dari jarak jauh saat keadaan darurat.
-  - **Auto-Capture Event**: Otomatis merekam dan mengunggah klip video saat terjadi insiden / pengereman mendadak.
-  - **Fitur Lainnya**: SOS/Panic Button, Door Sensor Support, Overspeed Alert, In-Cabin Voice Alert, Wi-Fi Connectivity, Replay History, Rebound Alert (Fatigue/Harsh Driving termasuk HA, HB, dan Manuver Tajam/HC).
+  - **Auto-Capture Event**: Otomatis merekam dan mengunggah klip video saat terjadi insiden / pengereman mendadak / overspeeding.
+  - **Auto-Capture Bukan Eksklusif Kamera DMS (PENTING)**: berlaku untuk semua kamera yang terpasang di unit, baik kamera utama jalan (main camera JC261/JC450), sub camera CI01 (non-DMS), maupun JC171 (DMS), selama fiturnya sudah disetting/request aktif. JANGAN jawab seolah cuma kamera ber-DMS (JC171) yang bisa auto-capture event seperti overspeeding, CI01 pun bisa. "Video Outside" pada laporan Driving Behaviour Overspeed = rekaman dari kamera utama jalan (main camera JC261/JC450), bukan penanda DMS/non-DMS.
+  - **Fitur Lainnya**: SOS/Panic Button, Door Sensor Support, Overspeed Alert, In-Cabin Voice Alert (Event Voice Alert untuk Fatigue, No SD Card, dan Overspeed), Wi-Fi Connectivity, Replay History, Rebound Alert (Fatigue/Harsh Driving termasuk HA, HB, dan Manuver Tajam/HC).
+  - **Fungsi Wi-Fi Connectivity (PENTING)**: bukan hotspot transfer video maupun WiFi setup semata, melainkan **jalur alternatif pengiriman data tracking** saat sinyal seluler (4G) lemah/tidak ada di lokasi, tapi tersedia infrastruktur WiFi (misal gudang, kantor, area tambang yang sudah terpasang WiFi). SSID WiFi lokasi tersebut perlu didaftarkan lebih dulu ke sistem sebelum bisa dipakai sebagai jalur alternatif ini.
 
 ### B. IntelliTrac GPS Tracker JC450 (Multi-Channel AI Dashcam)
 - **Kategori**: Multi-channel Commercial Dashcam (hingga 5 kamera sekaligus).
@@ -25,9 +27,12 @@
 - **Fitur Unggulan**:
   - **Up to 5 Channels**: Memantau jalan depan, kabin, sisi kanan, sisi kiri, kargo/belakang.
   - **Kamera Tahan Cuaca (CE04)**: IP67 waterproof untuk dipasang di luar/kargo.
-  - **DMS & ADAS AI**: Peringatan kelelahan sopir dan asisten keselamatan berkendara.
-  - **Storage Besar**: Dual microSD Slot (hingga 512GB / 2x256GB).
+  - **DMS & ADAS AI (DMS butuh sub camera JC171 sebagai salah satu channel)**: DMS mendeteksi kelelahan sopir (menguap, mata tertutup), gangguan saat mengemudi (merokok, main HP, pandangan tidak ke depan), serta wajah tidak terdeteksi (no face detected); ADAS jadi asisten keselamatan berkendara.
+  - **Event Voice Alert**: Peringatan suara otomatis untuk kondisi Fatigue, No SD Card, dan Overspeed, keluar dari unit dashcam-nya sendiri (bukan dari Buzzer Alarm terpisah, lihat bagian Sensor & Aksesori).
+  - **Storage Besar & Image Capturing**: Dual microSD Slot (hingga 512GB / 2x256GB; microSD adalah aksesori berbayar terpisah dari unit dasar), mendukung perekaman video maupun foto.
+  - **Wi-Fi Connectivity**: jalur alternatif pengiriman data tracking saat sinyal seluler lemah/tidak ada tapi tersedia infrastruktur WiFi di lokasi (SSID perlu didaftarkan dulu ke sistem); lihat penjelasan lengkap di bagian A (JC261).
   - **Engine Cut-Off & SOS Button**: Fitur keamanan standar keselamatan industri.
+  - **Auto-Capture Event**: Otomatis merekam dan mengunggah klip video saat terjadi insiden / pengereman mendadak / overspeeding, berlaku di semua channel kamera yang terpasang (termasuk CE04), selama fiturnya sudah disetting/request aktif.
   - **Harsh Driving Behaviour**: Deteksi pengereman mendadak (HB), akselerasi mendadak (HA), dan manuver tajam / Harsh Cornering (HC).
   - **Analog & Serial Ports**: Mendukung koneksi berbagai sensor tambahan dan integrasi relay.
 
@@ -51,6 +56,7 @@
   - **Multi-Sensor Integration**: Kompatibel dengan Door Sensor (hingga 3 channel), Sensor Rotasi Drum Mixer, iButton (ID Reader).
   - **Harsh Driving Behaviour**: Deteksi akselerasi mendadak (HA) dan rem mendadak (HB).
   - **Engine Cut-Off, Geofence Controller, Overspeed Alarm, SOS Button, Wi-Fi Module**.
+  - **Fungsi Wi-Fi Module (PENTING)**: sama seperti Wi-Fi Connectivity pada JC261 (lihat bagian A), ini **jalur alternatif pengiriman data tracking** saat sinyal seluler lemah/tidak ada tapi tersedia infrastruktur WiFi di lokasi, bukan hotspot transfer video. SSID lokasi perlu didaftarkan dulu ke sistem sebelum dipakai.
   - **Backup Battery**: Kapasitas 200 mAh, tahan hingga 1 jam saat suplai daya kendaraan terputus.
   - **Proteksi IP65**: Tahan terhadap debu dan cipratan air.
 - **Add-On Opsional (PENTING, Hanya Bisa Pilih 1 dari 2)**: Sensor Suhu dan modul OBD-II CAN800 berbagi satu slot tambahan yang sama di VT-45, sehingga customer hanya bisa memilih **satu** dari keduanya, tidak bisa dipasang bersamaan. Tanyakan kebutuhan armada customer (pemantauan suhu cold chain, atau data ECU mesin) untuk menentukan pilihan yang paling sesuai. Detail modul CAN800 ada di bagian E di bawah.
@@ -89,6 +95,7 @@
 6. **Cut-Off Relay**: Relay jarak jauh untuk mematikan fungsi starter mesin saat terjadi indikasi bahaya/pencurian.
 7. **SOS / Panic Button**: Tombol darurat kabel yang ditempatkan di dekat kemudi.
 8. **Buzzer Alarm**: Alarm suara di dalam kabin untuk memperingatkan pengemudi saat overspeed.
+   - **JANGAN Tertukar dengan In-Cabin Voice Alert (PENTING)**: Buzzer Alarm ini adalah aksesori fisik terpisah pada lini VT-45, alatnya sendiri, khusus untuk peringatan overspeed, bunyinya nada melengking ("nging"), bukan suara verbal. Ini BEDA dengan peringatan suara DMS (kelelahan, distraksi, merokok, main HP) di JC261/JC450, yang keluar langsung dari kamera JC171/unit dashcam-nya sendiri (fitur In-Cabin Voice Alert, berupa suara peringatan verbal), BUKAN dari alat Buzzer Alarm terpisah. JANGAN menyebut peringatan DMS berasal dari Buzzer Alarm, dan JANGAN menyebut peringatan Buzzer Alarm berupa suara verbal. Peringatan DMS via voice ini juga hanya berlaku kalau sub camera yang dipakai JC171 (yang punya AI), bukan CI01 (kamera basic tanpa AI).
 
 ### Catatan Khusus: Pemantauan Bahan Bakar (Fuel Monitoring)
 

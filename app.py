@@ -523,17 +523,19 @@ with st.sidebar:
             }
             st.session_state["pending_prompt"] = prompt_map.get(jenis_armada, "")
             
-            # Inject Javascript untuk menutup sidebar secara otomatis (UX khusus mobile)
+            # Inject Javascript untuk menutup sidebar secara otomatis HANYA di mobile (<=768px)
             st.components.v1.html(
                 """
                 <script>
-                    const parentDoc = window.parent.document;
-                    const closeBtn = parentDoc.querySelector('[data-testid="stSidebarCollapseButton"]');
-                    if (closeBtn) {
-                        closeBtn.click();
-                    } else {
-                        const escEvent = new KeyboardEvent('keydown', { key: 'Escape', code: 'Escape', keyCode: 27, which: 27, bubbles: true });
-                        parentDoc.dispatchEvent(escEvent);
+                    if (window.parent.innerWidth <= 768) {
+                        const parentDoc = window.parent.document;
+                        const closeBtn = parentDoc.querySelector('[data-testid="stSidebarCollapseButton"]');
+                        if (closeBtn) {
+                            closeBtn.click();
+                        } else {
+                            const escEvent = new KeyboardEvent('keydown', { key: 'Escape', code: 'Escape', keyCode: 27, which: 27, bubbles: true });
+                            parentDoc.dispatchEvent(escEvent);
+                        }
                     }
                 </script>
                 """,

@@ -288,6 +288,62 @@ st.markdown("""
         border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
         box-shadow: 0 6px 16px rgba(13, 31, 60, 0.4);
     }
+
+    /* ============================================================
+       MOBILE: Sidebar Toggle Button — Color Breathe Animation
+       Hanya aktif di layar ≤768px (mobile/tablet kecil).
+       Target: tombol ">>" bawaan Streamlit saat sidebar tertutup.
+    ============================================================ */
+    @media (max-width: 768px) {
+        @keyframes colorBreathe {
+            0%, 100% {
+                background-color: #E65100;
+                box-shadow: 0 2px 8px rgba(230, 81, 0, 0.4);
+            }
+            50% {
+                background-color: #FF7A3D;
+                box-shadow: 0 2px 16px rgba(255, 122, 61, 0.7);
+                filter: brightness(1.15);
+            }
+        }
+
+        /* Wrapper tombol collapsed sidebar */
+        [data-testid="collapsedControl"] {
+            animation: colorBreathe 2s ease-in-out infinite;
+            border-radius: 0 10px 10px 0 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 10px 6px !important;
+            gap: 6px !important;
+            width: auto !important;
+        }
+
+        /* Fix centering vertikal ikon ">>" di dalam tombol */
+        [data-testid="collapsedControl"] svg,
+        [data-testid="collapsedControl"] span {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            margin: 0 !important;
+            line-height: 1 !important;
+        }
+
+        /* Label "Filter Armada" di bawah ikon ">>" */
+        [data-testid="collapsedControl"]::after {
+            content: "Filter Armada";
+            display: block;
+            font-size: 0.55rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            letter-spacing: 0.3px;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            white-space: nowrap;
+            opacity: 0.95;
+        }
+    }
 </style>
 """, unsafe_allow_html=True)
 

@@ -293,12 +293,6 @@
       box-shadow: var(--shadow-sm);
     }
 
-    @media (max-width: 860px) {
-      .kpi-strip { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 500px) {
-      .kpi-strip { grid-template-columns: 1fr; }
-    }
 
     .kpi-item {
       padding: 14px 20px;
@@ -378,6 +372,11 @@
       display: flex;
       align-items: center;
       gap: 10px;
+    }
+
+    .view-toggle-group {
+      display: inline-flex;
+      gap: 6px;
     }
 
     .view-toggle-btn {
@@ -562,10 +561,12 @@
     .table-scroll {
       overflow-x: auto;
       max-width: 100%;
+      -webkit-overflow-scrolling: touch;
     }
 
     table {
       width: 100%;
+      min-width: 680px;
       border-collapse: collapse;
       text-align: left;
       font-size: 0.86rem;
@@ -656,8 +657,227 @@
       font-weight: 600;
     }
 
-    footer a:hover {
-      text-decoration: underline;
+    /* ==========================================================================
+       RESPONSIVE DESIGN (Tablets & Mobile Viewports)
+       ========================================================================== */
+    @media (max-width: 860px) {
+      .masthead {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+        padding-bottom: 16px;
+        margin-bottom: 24px;
+      }
+
+      .brand-mark {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .masthead-actions {
+        display: flex;
+        gap: 8px;
+        width: 100%;
+      }
+
+      .action-link {
+        flex: 1;
+        justify-content: center;
+        padding: 8px 12px;
+      }
+
+      .kpi-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .kpi-item {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .kpi-item:nth-child(odd) {
+        border-right: 1px solid var(--border);
+      }
+
+      .kpi-item:nth-child(3),
+      .kpi-item:nth-child(4) {
+        border-bottom: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 18px 14px 60px;
+      }
+
+      .brand-caption {
+        font-size: 0.73rem;
+        line-height: 1.35;
+      }
+
+      .doc-header {
+        margin-bottom: 20px;
+      }
+
+      .meta-strip {
+        font-size: 0.63rem;
+        letter-spacing: 0.4px;
+        margin-bottom: 8px;
+        line-height: 1.4;
+      }
+
+      h1 {
+        font-size: 1.38rem;
+        line-height: 1.28;
+        margin-bottom: 8px;
+      }
+
+      .doc-subtitle {
+        font-size: 0.83rem;
+        line-height: 1.5;
+      }
+
+      .section-title {
+        font-size: 0.68rem;
+        margin-bottom: 10px;
+      }
+
+      /* Resource Cards */
+      .resource-grid {
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .resource-card {
+        padding: 12px 14px;
+      }
+
+      .resource-icon-box {
+        width: 38px;
+        height: 38px;
+      }
+
+      .resource-card-info h3 {
+        font-size: 0.88rem;
+      }
+
+      .resource-card-info p {
+        font-size: 0.72rem;
+      }
+
+      /* KPI Items */
+      .kpi-item {
+        padding: 10px 14px;
+      }
+
+      .kpi-value {
+        font-size: 1.35rem;
+      }
+
+      .kpi-label {
+        font-size: 0.63rem;
+        letter-spacing: 0.4px;
+      }
+
+      /* Controls & Filter Bar */
+      .view-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        margin-bottom: 16px;
+      }
+
+      .segmented-control {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding: 4px;
+        gap: 4px;
+        width: 100%;
+      }
+
+      .segmented-control::-webkit-scrollbar {
+        display: none;
+      }
+
+      .segment-tab {
+        white-space: nowrap;
+        flex-shrink: 0;
+        padding: 6px 12px;
+        font-size: 0.72rem;
+      }
+
+      .controls-right {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 8px;
+      }
+
+      .view-toggle-group {
+        display: flex;
+        width: 100%;
+        gap: 6px;
+      }
+
+      .view-toggle-btn {
+        flex: 1;
+        justify-content: center;
+        padding: 8px 10px;
+        font-size: 0.74rem;
+      }
+
+      .search-input-wrap {
+        width: 100%;
+      }
+
+      .search-input-wrap input {
+        width: 100%;
+        font-size: 16px; /* Prevents auto-zoom on iOS Safari/Chrome */
+        padding: 8px 28px 8px 32px;
+      }
+
+      /* Syllabus Cards */
+      .cards-view-grid {
+        gap: 12px;
+      }
+
+      .syllabus-card {
+        padding: 15px;
+      }
+
+      .card-title {
+        font-size: 0.9rem;
+        margin-bottom: 8px;
+      }
+
+      .card-justification {
+        font-size: 0.78rem;
+        line-height: 1.45;
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        margin-top: 30px;
+        font-size: 0.72rem;
+      }
+    }
+
+    /* Disable hover transforms on touch screens */
+    @media (hover: none) {
+      .resource-card:hover {
+        transform: none !important;
+        box-shadow: var(--shadow-sm) !important;
+      }
+
+      .syllabus-card:hover {
+        transform: none !important;
+        box-shadow: var(--shadow-sm) !important;
+      }
     }
 
     @media print {
@@ -770,14 +990,16 @@
 
       <div class="controls-right">
         <!-- View Mode Switcher -->
-        <button id="btnGridView" class="view-toggle-btn active" title="Tampilkan format Kartu Grid">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"></rect><rect width="7" height="7" x="14" y="3" rx="1"></rect><rect width="7" height="7" x="14" y="14" rx="1"></rect><rect width="7" height="7" x="3" y="14" rx="1"></rect></svg>
-          Kartu Grid
-        </button>
-        <button id="btnTableView" class="view-toggle-btn" title="Tampilkan format Tabel Lengkap">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="6" y2="6"></line><line x1="3" x2="21" y1="12" y2="12"></line><line x1="3" x2="21" y1="18" y2="18"></line></svg>
-          Tabel
-        </button>
+        <div class="view-toggle-group">
+          <button id="btnGridView" class="view-toggle-btn active" title="Tampilkan format Kartu Grid">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"></rect><rect width="7" height="7" x="14" y="3" rx="1"></rect><rect width="7" height="7" x="14" y="14" rx="1"></rect><rect width="7" height="7" x="3" y="14" rx="1"></rect></svg>
+            Kartu Grid
+          </button>
+          <button id="btnTableView" class="view-toggle-btn" title="Tampilkan format Tabel Lengkap">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="6" y2="6"></line><line x1="3" x2="21" y1="12" y2="12"></line><line x1="3" x2="21" y1="18" y2="18"></line></svg>
+            Tabel
+          </button>
+        </div>
 
         <!-- Search Bar -->
         <div class="search-input-wrap">

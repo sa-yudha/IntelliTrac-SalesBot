@@ -522,6 +522,23 @@ with st.sidebar:
                 "Bus & Mobil Operasional": "Halo Mintel, rekomendasi Dashcam AI / GPS untuk Bus dan Mobil Operasional Perusahaan apa?"
             }
             st.session_state["pending_prompt"] = prompt_map.get(jenis_armada, "")
+            
+            # Inject Javascript untuk menutup sidebar secara otomatis (UX khusus mobile)
+            st.components.v1.html(
+                """
+                <script>
+                    const parentDoc = window.parent.document;
+                    const closeBtn = parentDoc.querySelector('[data-testid="stSidebarCollapseButton"]');
+                    if (closeBtn) {
+                        closeBtn.click();
+                    } else {
+                        const escEvent = new KeyboardEvent('keydown', { key: 'Escape', code: 'Escape', keyCode: 27, which: 27, bubbles: true });
+                        parentDoc.dispatchEvent(escEvent);
+                    }
+                </script>
+                """,
+                height=0, width=0
+            )
 
     st.divider()
 

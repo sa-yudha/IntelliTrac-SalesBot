@@ -293,6 +293,7 @@ st.markdown("""
        MOBILE: Sidebar Toggle Button — Color Breathe Animation
        Hanya aktif di layar ≤768px (mobile/tablet kecil).
        Target: tombol ">>" bawaan Streamlit saat sidebar tertutup.
+       Selector: data-testid="stExpandSidebarButton" (Streamlit versi terbaru)
     ============================================================ */
     @media (max-width: 768px) {
         @keyframes colorBreathe {
@@ -307,9 +308,9 @@ st.markdown("""
             }
         }
 
-        /* Wrapper tombol collapsed sidebar */
-        [data-testid="collapsedControl"] {
-            animation: colorBreathe 2s ease-in-out infinite;
+        /* Wrapper tombol expand sidebar */
+        [data-testid="stExpandSidebarButton"] {
+            animation: colorBreathe 2s ease-in-out infinite !important;
             border-radius: 0 10px 10px 0 !important;
             display: flex !important;
             flex-direction: column !important;
@@ -318,11 +319,12 @@ st.markdown("""
             padding: 10px 6px !important;
             gap: 6px !important;
             width: auto !important;
+            background-color: #E65100 !important;
         }
 
         /* Fix centering vertikal ikon ">>" di dalam tombol */
-        [data-testid="collapsedControl"] svg,
-        [data-testid="collapsedControl"] span {
+        [data-testid="stExpandSidebarButton"] svg,
+        [data-testid="stExpandSidebarButton"] span {
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
@@ -331,12 +333,12 @@ st.markdown("""
         }
 
         /* Label "Filter Armada" di bawah ikon ">>" */
-        [data-testid="collapsedControl"]::after {
+        [data-testid="stExpandSidebarButton"]::after {
             content: "Filter Armada";
-            display: block;
-            font-size: 0.55rem;
-            font-weight: 700;
-            color: #FFFFFF;
+            display: block !important;
+            font-size: 0.55rem !important;
+            font-weight: 700 !important;
+            color: #FFFFFF !important;
             letter-spacing: 0.3px;
             text-align: center;
             font-family: 'Poppins', sans-serif;

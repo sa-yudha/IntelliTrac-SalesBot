@@ -9,44 +9,56 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   
   <style>
-    /* // UI Theme: Ruixen Moon Theme (v2) - Inspired by 21st.dev/@ruixen.ui/components/ruixen-moon-chat */
+    /* ==========================================================================
+       RESOURCE CARDS GRID & EXECUTIVE DOCUMENTATION SYSTEM (Light Mode)
+       Adapted from resource-cards-grid.tsx + Stripe / Notion Docs
+       ========================================================================== */
     :root {
-      --bg-moon: #040810;
-      --glass-panel: rgba(10, 14, 24, 0.65);
-      --glass-card: rgba(15, 22, 38, 0.68);
-      --glass-card-hover: rgba(22, 32, 54, 0.85);
-      --glass-border: rgba(255, 255, 255, 0.12);
-      --glass-border-strong: rgba(255, 255, 255, 0.22);
+      --bg-body: #E5EAF0;
+      --bg-card: #FFFFFF;
+      --bg-card-subtle: #F8FAFC;
+      --bg-card-hover: #FFFFFF;
       
-      --text-white: #FFFFFF;
-      --text-muted: #D1D5DB;
-      --text-faint: #9CA3AF;
-      
-      --signal-orange: #F97316;
-      --signal-orange-glow: rgba(249, 115, 22, 0.35);
-      
-      --status-green: #34D399;
-      --status-green-bg: rgba(52, 211, 153, 0.16);
-      --status-green-border: rgba(52, 211, 153, 0.38);
+      --border: #D1D9E4;
+      --border-medium: #CBD5E1;
+      --border-dark: #94A3B8;
 
-      --status-blue: #38BDF8;
-      --status-blue-bg: rgba(56, 189, 248, 0.16);
-      --status-blue-border: rgba(56, 189, 248, 0.38);
+      --text-foreground: #0F172A;
+      --text-body: #334155;
+      --text-muted: #64748B;
+      --text-faint: #94A3B8;
 
-      --session-1-color: #E9D5FF;
-      --session-1-bg: rgba(168, 85, 247, 0.2);
-      --session-1-border: rgba(168, 85, 247, 0.4);
+      --brand-navy: #0D1F3C;
+      --brand-orange: #C2410C;
+      --brand-orange-soft: #FFF7ED;
 
-      --session-2-color: #BAE6FD;
-      --session-2-bg: rgba(14, 165, 233, 0.2);
-      --session-2-border: rgba(14, 165, 233, 0.4);
+      --status-green-text: #065F46;
+      --status-green-bg: #ECFDF5;
+      --status-green-border: #A7F3D0;
 
-      --session-3-color: #FEF08A;
-      --session-3-bg: rgba(245, 158, 11, 0.2);
-      --session-3-border: rgba(245, 158, 11, 0.4);
+      --status-blue-text: #1E40AF;
+      --status-blue-bg: #EFF6FF;
+      --status-blue-border: #BFDBFE;
+
+      --session-s1-text: #6B21A8;
+      --session-s1-bg: #FAF5FF;
+      --session-s1-border: #E9D5FF;
+
+      --session-s2-text: #0369A1;
+      --session-s2-bg: #F0F9FF;
+      --session-s2-border: #BAE6FD;
+
+      --session-s3-text: #854D0E;
+      --session-s3-bg: #FEFCE8;
+      --session-s3-border: #FEF08A;
 
       --font-main: "Verdana", Geneva, Tahoma, sans-serif;
       --font-mono: "IBM Plex Mono", Consolas, monospace;
+      
+      --radius-card: 10px;
+      --shadow-sm: 0 1px 3px 0 rgba(15, 23, 42, 0.08), 0 1px 2px -1px rgba(15, 23, 42, 0.04);
+      --shadow-md: 0 4px 10px -2px rgba(15, 23, 42, 0.1), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+      --shadow-lg: 0 12px 20px -4px rgba(15, 23, 42, 0.12), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
     }
 
     * {
@@ -56,337 +68,495 @@
     }
 
     body {
-      background-color: var(--bg-moon);
-      background-image: 
-        radial-gradient(ellipse at top, rgba(14, 28, 54, 0.5) 0%, rgba(4, 8, 16, 0.88) 75%),
-        url('https://cdn.21st.dev/assets/mirror/c3/c333918af688a4a8a3d004652e6c0ee219457a9d84d380eeb31f513d4b59a09f.png');
-      background-attachment: fixed;
-      background-size: cover;
-      background-position: center top;
-      background-repeat: no-repeat;
-      color: var(--text-white);
+      background-color: var(--bg-body);
+      color: var(--text-body);
       font-family: var(--font-main);
       min-height: 100vh;
-      padding: 48px 24px 80px;
+      padding: 40px 24px 80px;
       line-height: 1.6;
-      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
     .container {
-      max-width: 1420px;
+      max-width: 1380px;
       margin: 0 auto;
-      position: relative;
-      z-index: 1;
     }
 
-    /* Top Action Bar */
-    .top-nav {
+    /* Top Masthead */
+    .masthead {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 28px;
+      padding-bottom: 20px;
+      margin-bottom: 32px;
+      border-bottom: 1px solid var(--border);
     }
 
-    .nav-badge {
-      display: inline-flex;
+    .brand-mark {
+      display: flex;
       align-items: center;
       gap: 10px;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--glass-border);
-      padding: 6px 14px;
-      border-radius: 999px;
-      font-size: 0.76rem;
-      font-weight: 700;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      color: var(--signal-orange);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     }
 
-    .nav-badge .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--signal-orange);
-      box-shadow: 0 0 10px var(--signal-orange);
-      animation: pulse 2s infinite ease-in-out;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.6; transform: scale(0.85); }
-    }
-
-    .nav-actions {
-      display: flex;
-      gap: 12px;
-    }
-
-    .glass-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 16px;
-      border-radius: 12px;
-      background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--glass-border);
-      color: var(--text-muted);
-      font-family: var(--font-main);
-      font-size: 0.82rem;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.25s ease;
-    }
-
-    .glass-btn:hover {
-      background: rgba(255, 255, 255, 0.12);
-      border-color: var(--glass-border-strong);
-      color: var(--text-white);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-    }
-
-    /* Hero Header - Ruixen Moon Inspired */
-    .hero-header {
-      text-align: center;
-      margin-bottom: 36px;
-      padding: 10px 16px 0;
-    }
-
-    .kicker-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 5px 15px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.07);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      color: #93C5FD;
-      font-family: var(--font-mono);
+    .brand-badge {
       font-size: 0.72rem;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: 1px;
       text-transform: uppercase;
-      margin-bottom: 14px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+      color: var(--brand-navy);
+      background: #D8E1EC;
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 4px;
     }
 
-    .hero-header h1 {
-      font-size: clamp(2rem, 3.8vw, 2.75rem);
-      font-weight: 700;
-      color: var(--text-white);
-      letter-spacing: -0.02em;
-      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 255, 255, 0.15);
-      margin-bottom: 12px;
-    }
-
-    .hero-header p {
+    .brand-caption {
+      font-size: 0.78rem;
       color: var(--text-muted);
-      font-size: 0.94rem;
-      max-width: 860px;
-      margin: 0 auto;
-      line-height: 1.6;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+      font-weight: 500;
     }
 
-    .hero-header p strong {
-      color: var(--text-white);
-    }
-
-    /* Ruixen Floating Search Capsule */
-    .search-section {
-      max-width: 820px;
-      margin: 0 auto 32px;
-    }
-
-    .ruixen-search-box {
-      background: rgba(4, 8, 18, 0.72);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      border-radius: 18px;
-      padding: 10px 16px;
+    .masthead-actions {
       display: flex;
-      align-items: center;
-      gap: 12px;
-      box-shadow: 0 16px 48px -10px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05);
-      transition: all 0.3s ease;
-    }
-
-    .ruixen-search-box:focus-within {
-      border-color: var(--signal-orange);
-      box-shadow: 0 16px 50px -8px rgba(249, 115, 22, 0.25), 0 0 0 2px rgba(249, 115, 22, 0.35);
-      transform: translateY(-2px);
-    }
-
-    .search-icon-wrap {
-      color: var(--text-faint);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .search-icon-wrap svg {
-      width: 20px;
-      height: 20px;
-      stroke: currentColor;
-    }
-
-    .ruixen-input {
-      flex: 1;
-      background: transparent;
-      border: none;
-      outline: none;
-      color: var(--text-white);
-      font-family: var(--font-main);
-      font-size: 0.92rem;
-    }
-
-    .ruixen-input::placeholder {
-      color: #6B7280;
-    }
-
-    .clear-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-faint);
-      cursor: pointer;
-      display: none;
-      padding: 4px;
-      border-radius: 50%;
-      align-items: center;
-      justify-content: center;
-      transition: color 0.2s;
-    }
-
-    .clear-btn:hover {
-      color: var(--text-white);
-    }
-
-    /* Ruixen Quick Action Filter Pills */
-    .quick-filters {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
       gap: 10px;
-      margin-top: 16px;
     }
 
-    .filter-pill {
+    .action-link {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 7px 16px;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.55);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      color: var(--text-muted);
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 6px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      color: var(--text-body);
       font-family: var(--font-main);
       font-size: 0.78rem;
       font-weight: 600;
+      text-decoration: none;
       cursor: pointer;
-      transition: all 0.22s ease;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.15s ease;
+    }
+
+    .action-link:hover {
+      background: var(--bg-card-subtle);
+      color: var(--text-foreground);
+      border-color: var(--border-dark);
+    }
+
+    /* Header */
+    .doc-header {
+      margin-bottom: 28px;
+    }
+
+    .consortium-kicker {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--brand-orange);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 8px;
+    }
+
+    .doc-header h1 {
+      font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+      font-weight: 700;
+      color: var(--text-foreground);
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+
+    .doc-header p {
+      font-size: 0.94rem;
+      color: var(--text-muted);
+      max-width: 980px;
+      line-height: 1.6;
+    }
+
+    /* Section Heading */
+    .section-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* Key Project Resource Cards (Exact ResourceCardsGrid Style) */
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    @media (min-width: 640px) {
+      .resource-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .resource-card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      padding: 18px 20px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .resource-card:hover {
+      transform: scale(1.02);
+      box-shadow: var(--shadow-md);
+      border-color: var(--border-medium);
+      background: var(--bg-card-hover);
+    }
+
+    .resource-card-inner {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .resource-card-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .resource-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      background: var(--bg-card-subtle);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--brand-navy);
+    }
+
+    .resource-card-info h3 {
+      font-size: 0.96rem;
+      font-weight: 700;
+      color: var(--text-foreground);
+      margin-bottom: 2px;
+      line-height: 1.3;
+    }
+
+    .resource-card-info p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .arrow-icon {
+      width: 18px;
+      height: 18px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+      transition: transform 0.25s ease, color 0.2s ease;
+    }
+
+    .resource-card:hover .arrow-icon {
+      transform: translate(2px, -2px);
+      color: var(--brand-orange);
+    }
+
+    /* KPI Summary Strip */
+    .kpi-strip {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    @media (max-width: 860px) {
+      .kpi-strip { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 500px) {
+      .kpi-strip { grid-template-columns: 1fr; }
+    }
+
+    .kpi-item {
+      padding: 14px 20px;
+      border-right: 1px solid var(--border);
+    }
+
+    .kpi-item:last-child {
+      border-right: none;
+    }
+
+    .kpi-value {
+      font-family: var(--font-mono);
+      font-size: 1.7rem;
+      font-weight: 600;
+      line-height: 1.1;
+      margin-bottom: 2px;
+    }
+
+    .kpi-item.total .kpi-value { color: var(--text-foreground); }
+    .kpi-item.implemented .kpi-value { color: var(--status-green-text); }
+    .kpi-item.replaced .kpi-value { color: var(--status-blue-text); }
+    .kpi-item.coverage .kpi-value { color: var(--brand-orange); }
+
+    .kpi-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    /* Controls & View Switcher */
+    .view-controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .segmented-control {
+      background: #D8E1EC;
+      border: 1px solid var(--border);
+      padding: 3px;
+      border-radius: 8px;
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 3px;
+    }
+
+    .segment-tab {
+      background: transparent;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-family: var(--font-main);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s ease;
       user-select: none;
     }
 
-    .filter-pill:hover {
-      background: rgba(255, 255, 255, 0.12);
-      border-color: rgba(255, 255, 255, 0.28);
-      color: var(--text-white);
-      transform: translateY(-2px);
+    .segment-tab:hover {
+      color: var(--text-foreground);
     }
 
-    .filter-pill.active {
-      background: rgba(249, 115, 22, 0.92);
-      border-color: var(--signal-orange);
-      color: #FFFFFF;
-      box-shadow: 0 4px 18px rgba(249, 115, 22, 0.45);
+    .segment-tab.active {
+      background: var(--bg-card);
+      color: var(--text-foreground);
+      box-shadow: var(--shadow-sm);
     }
 
-    .filter-pill svg {
-      width: 14px;
-      height: 14px;
-      stroke: currentColor;
+    .controls-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    /* Stats Overview Cards - Glassmorphism */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      margin-bottom: 28px;
-    }
-
-    .stat-card {
-      background: var(--glass-card);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-      border-radius: 18px;
-      padding: 18px 22px;
-      transition: all 0.25s ease;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .stat-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    }
-
-    .stat-card:hover {
-      background: var(--glass-card-hover);
-      border-color: var(--glass-border-strong);
-      transform: translateY(-3px);
-      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5);
-    }
-
-    .stat-num {
-      font-family: var(--font-mono);
-      font-size: 2.1rem;
-      font-weight: 700;
-      line-height: 1;
-      margin-bottom: 6px;
-      letter-spacing: -0.03em;
-    }
-
-    .stat-card.total .stat-num { color: #FFFFFF; text-shadow: 0 0 16px rgba(255, 255, 255, 0.3); }
-    .stat-card.green .stat-num { color: var(--status-green); text-shadow: 0 0 16px rgba(52, 211, 153, 0.4); }
-    .stat-card.blue .stat-num  { color: var(--status-blue); text-shadow: 0 0 16px rgba(56, 189, 248, 0.4); }
-    .stat-card.ratio .stat-num { color: var(--signal-orange); text-shadow: 0 0 16px rgba(249, 115, 22, 0.4); }
-
-    .stat-label {
-      font-size: 0.78rem;
-      color: var(--text-faint);
+    .view-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      font-family: var(--font-main);
+      font-size: 0.75rem;
       font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
+      color: var(--text-body);
+      cursor: pointer;
+      transition: all 0.15s ease;
     }
 
-    /* Master Table Container */
-    .table-container {
-      background: var(--glass-panel);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid var(--glass-border);
-      border-radius: 20px;
-      box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.7);
+    .view-toggle-btn.active {
+      background: var(--brand-navy);
+      color: #FFFFFF;
+      border-color: var(--brand-navy);
+    }
+
+    .search-input-wrap {
+      position: relative;
+      width: 280px;
+    }
+
+    .search-input-wrap input {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      border-radius: 6px;
+      padding: 6px 28px 6px 30px;
+      font-family: var(--font-main);
+      font-size: 0.78rem;
+      color: var(--text-foreground);
+      outline: none;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.15s ease;
+    }
+
+    .search-input-wrap input:focus {
+      border-color: var(--brand-navy);
+    }
+
+    .search-input-wrap svg.icon-search {
+      position: absolute;
+      left: 9px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .search-input-wrap button.clear-search {
+      position: absolute;
+      right: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: none;
+      font-size: 0.9rem;
+      padding: 2px;
+    }
+
+    /* Grid of 18 Syllabus Cards (ResourceCard Pattern) */
+    .cards-view-grid {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 16px;
+    }
+
+    @media (min-width: 640px) {
+      .cards-view-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .cards-view-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .syllabus-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .syllabus-card:hover {
+      transform: scale(1.02);
+      box-shadow: var(--shadow-md);
+      border-color: var(--border-medium);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .tag-session {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .tag-s1 { background: var(--session-s1-bg); color: var(--session-s1-text); border: 1px solid var(--session-s1-border); }
+    .tag-s2 { background: var(--session-s2-bg); color: var(--session-s2-text); border: 1px solid var(--session-s2-border); }
+    .tag-s3 { background: var(--session-s3-bg); color: var(--session-s3-text); border: 1px solid var(--session-s3-border); }
+
+    .card-title {
+      font-size: 0.94rem;
+      font-weight: 700;
+      color: var(--text-foreground);
+      margin-bottom: 10px;
+      line-height: 1.35;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      width: fit-content;
+    }
+
+    .status-badge.implemented {
+      background: var(--status-green-bg);
+      color: var(--status-green-text);
+      border: 1px solid var(--status-green-border);
+    }
+
+    .status-badge.replaced {
+      background: var(--status-blue-bg);
+      color: var(--status-blue-text);
+      border: 1px solid var(--status-blue-border);
+    }
+
+    .card-justification {
+      font-size: 0.81rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .card-justification code {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      background: var(--bg-card-subtle);
+      color: #B45309;
+      padding: 1px 5px;
+      border-radius: 4px;
+      border: 1px solid var(--border-medium);
+    }
+
+    /* Table View Container */
+    .table-view-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-sm);
       overflow: hidden;
+      display: none; /* toggled via js */
     }
 
     .table-scroll {
@@ -398,21 +568,21 @@
       width: 100%;
       border-collapse: collapse;
       text-align: left;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
     }
 
     thead {
-      background: rgba(6, 10, 20, 0.82);
-      border-bottom: 2px solid rgba(255, 255, 255, 0.14);
+      background: #F8FAFC;
+      border-bottom: 1px solid var(--border-medium);
     }
 
     th {
-      padding: 18px 22px;
-      font-size: 0.78rem;
+      padding: 12px 18px;
+      font-size: 0.72rem;
       font-weight: 700;
       color: var(--text-muted);
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 0.7px;
       white-space: nowrap;
     }
 
@@ -421,8 +591,8 @@
     }
 
     tbody tr {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      transition: background-color 0.18s ease;
+      border-bottom: 1px solid var(--border);
+      transition: background-color 0.1s ease;
     }
 
     tbody tr:last-child {
@@ -430,183 +600,71 @@
     }
 
     tbody tr:hover {
-      background-color: rgba(255, 255, 255, 0.06);
+      background-color: var(--bg-card-subtle);
     }
 
     td {
-      padding: 18px 22px;
+      padding: 14px 18px;
       vertical-align: top;
-      color: var(--text-white);
+      color: var(--text-body);
     }
 
-    /* Badges & Text Styling */
-    .badge-sesi {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 4px 12px;
-      border-radius: 8px;
-      white-space: nowrap;
-      letter-spacing: 0.5px;
-    }
-
-    .badge-s1 {
-      background: var(--session-1-bg);
-      color: var(--session-1-color);
-      border: 1px solid var(--session-1-border);
-      box-shadow: 0 0 12px rgba(168, 85, 247, 0.2);
-    }
-
-    .badge-s2 {
-      background: var(--session-2-bg);
-      color: var(--session-2-color);
-      border: 1px solid var(--session-2-border);
-      box-shadow: 0 0 12px rgba(14, 165, 233, 0.2);
-    }
-
-    .badge-s3 {
-      background: var(--session-3-bg);
-      color: var(--session-3-color);
-      border: 1px solid var(--session-3-border);
-      box-shadow: 0 0 12px rgba(245, 158, 11, 0.2);
-    }
-
-    .syllabus-text {
-      font-weight: 600;
-      color: #FFFFFF;
+    .replaced-target {
       display: block;
-      font-size: 0.92rem;
-      margin-bottom: 2px;
-    }
-
-    .status-capsule {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.76rem;
-      font-weight: 700;
-      padding: 6px 14px;
-      border-radius: 999px;
-      white-space: nowrap;
-    }
-
-    .status-capsule.implemented {
-      background: var(--status-green-bg);
-      color: var(--status-green);
-      border: 1px solid var(--status-green-border);
-      box-shadow: 0 0 16px rgba(52, 211, 153, 0.25);
-    }
-
-    .status-capsule.replaced {
-      background: var(--status-blue-bg);
-      color: var(--status-blue);
-      border: 1px solid var(--status-blue-border);
-      box-shadow: 0 0 16px rgba(56, 189, 248, 0.25);
-    }
-
-    .replaced-detail {
-      display: block;
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       font-family: var(--font-mono);
-      font-weight: 500;
-      color: #93C5FD;
-      margin-top: 5px;
-    }
-
-    .justification-text {
-      color: var(--text-muted);
-      font-size: 0.86rem;
-      line-height: 1.55;
-    }
-
-    .justification-text code {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      background: rgba(255, 255, 255, 0.08);
-      padding: 2px 7px;
-      border-radius: 5px;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      color: #FDBA74;
-    }
-
-    .justification-text em {
-      font-style: italic;
-      color: #FFFFFF;
+      font-weight: 600;
+      color: #1E3A8A;
+      margin-top: 3px;
     }
 
     /* Empty state */
-    .empty-row {
+    .empty-state {
       text-align: center;
       padding: 40px;
-      color: var(--text-faint);
+      color: var(--text-muted);
       display: none;
+      grid-column: 1 / -1;
     }
 
     /* Footer */
     footer {
-      margin-top: 36px;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       gap: 16px;
-      color: var(--text-faint);
-      font-size: 0.82rem;
-      padding-top: 24px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.78rem;
+      color: var(--text-muted);
     }
 
-    .footer-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .pulse-dot {
+    .footer-dot {
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: var(--status-green);
-      box-shadow: 0 0 8px var(--status-green);
+      background: #10B981;
+      display: inline-block;
+      margin-right: 6px;
     }
 
-    .footer-link {
-      color: var(--signal-orange);
+    footer a {
+      color: var(--brand-navy);
       text-decoration: none;
       font-weight: 600;
-      transition: color 0.2s;
     }
 
-    .footer-link:hover {
-      color: #FFB074;
+    footer a:hover {
       text-decoration: underline;
     }
 
-    /* Media Print */
     @media print {
-      body {
-        background: #FFFFFF !important;
-        color: #000000 !important;
-        padding: 10px;
-      }
-      .top-nav, .search-section, .stats-grid, footer {
-        display: none !important;
-      }
-      .table-container {
-        background: #FFFFFF;
-        box-shadow: none;
-        border: 1px solid #CCCCCC;
-      }
-      th, td {
-        color: #000000 !important;
-        border-bottom: 1px solid #EEEEEE;
-      }
-      .status-capsule {
-        border: 1px solid #777777 !important;
-      }
+      body { background: #fff !important; color: #000 !important; padding: 0; }
+      .masthead, .resource-grid, .kpi-strip, .view-controls, footer { display: none !important; }
+      .table-view-card { display: block !important; border: 1px solid #ccc; }
+      .cards-view-grid { display: none !important; }
     }
   </style>
 </head>
@@ -614,285 +672,492 @@
 
   <div class="container">
 
-    <!-- Top Action Bar -->
-    <div class="top-nav">
-      <div class="nav-badge">
-        <span class="dot"></span>
-        <span>PT INTIMAP • INTELLITRAC SALESBOT</span>
+    <!-- Top Masthead -->
+    <header class="masthead">
+      <div class="brand-mark">
+        <span class="brand-badge">IntelliTrac</span>
+        <span class="brand-caption">PT Intimap (IntelliTrac Indonesia) &bull; AI Pre-Sales Solutions</span>
       </div>
-      <div class="nav-actions">
-        <button class="glass-btn" onclick="window.print()" title="Cetak Tabel atau Simpan PDF">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-          Cetak / PDF
+      <div class="masthead-actions">
+        <button class="action-link" onclick="window.print()" title="Cetak Dokumen">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+          Cetak
         </button>
-        <a href="https://intellitrac-salesbot.streamlit.app/" target="_blank" class="glass-btn" title="Buka Aplikasi Live">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        <a href="https://intellitrac-salesbot.streamlit.app/" target="_blank" class="action-link">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
           Live Demo
         </a>
       </div>
-    </div>
-
-    <!-- Hero Header (Ruixen Moon Style) -->
-    <header class="hero-header">
-      <div class="kicker-badge">
-        AI Opportunity Fund: Asia Pacific &bull; AVPN &times; Google.org &times; ADB &times; Hacktiv8
-      </div>
-      <h1>Matriks Penerapan Materi Pelatihan</h1>
-      <p>
-        Komparasi praktis antara silabus pelatihan <strong>Maju Bareng AI</strong> dengan keputusan arsitektur perangkat lunak pada <strong>IntelliTrac SalesBot ("Mintel")</strong>.
-      </p>
     </header>
 
-    <!-- Ruixen Moon Search Bar & Quick Filters -->
-    <section class="search-section">
-      <div class="ruixen-search-box">
-        <div class="search-icon-wrap">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-        </div>
-        <input 
-          type="text" 
-          id="ruixenInput" 
-          class="ruixen-input" 
-          placeholder="Cari materi, keyword arsitektur, modul (e.g. Gemini, LangChain, Vector, In-Context)..." 
-          autocomplete="off"
-        />
-        <button id="clearBtn" class="clear-btn" title="Hapus pencarian">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-        </button>
-      </div>
+    <!-- Header & Abstract -->
+    <section class="doc-header">
+      <span class="consortium-kicker">
+        AI Opportunity Fund: Asia Pacific &bull; AVPN &times; Google.org &times; ADB &times; Hacktiv8
+      </span>
+      <h1>Matriks Penerapan Materi Pelatihan</h1>
+      <p>
+        Komparasi praktis antara silabus kurikulum <strong>Maju Bareng AI</strong> dengan keputusan arsitektur perangkat lunak pada sistem produksi <strong>IntelliTrac SalesBot ("Mintel")</strong>.
+      </p>
+    </section>
 
-      <!-- Quick Action Pills (Ruixen UI Pattern) -->
-      <div class="quick-filters">
-        <button class="filter-pill active" data-filter="all">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-          Semua (18)
-        </button>
-        <button class="filter-pill" data-filter="s1">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-          Sesi 1: Generative AI (8)
-        </button>
-        <button class="filter-pill" data-filter="s2">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-          Sesi 2: RAG &amp; Grounding (4)
-        </button>
-        <button class="filter-pill" data-filter="s3">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path></svg>
-          Sesi 3: UI &amp; Agents (6)
-        </button>
-        <button class="filter-pill" data-filter="implemented">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-          ✅ Diimplementasikan (11)
-        </button>
-        <button class="filter-pill" data-filter="replaced">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
-          🔄 Replaced by Design (7)
-        </button>
+    <!-- Project Resource Cards Grid (ResourceCardsGrid Style Component) -->
+    <div class="section-title">Dokumentasi &amp; Tautan Utama Proyek</div>
+    <div class="resource-grid">
+      <!-- Card 1 -->
+      <a href="https://intellitrac-salesbot.streamlit.app/" target="_blank" class="resource-card">
+        <div class="resource-card-inner">
+          <div class="resource-card-left">
+            <div class="resource-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="m9 8 6 4-6 4Z"></path></svg>
+            </div>
+            <div class="resource-card-info">
+              <h3>IntelliTrac SalesBot</h3>
+              <p>Live Demo &bull; Streamlit Community Cloud</p>
+            </div>
+          </div>
+          <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+        </div>
+      </a>
+
+      <!-- Card 2 -->
+      <a href="https://github.com/sa-yudha/IntelliTrac-SalesBot" target="_blank" class="resource-card">
+        <div class="resource-card-inner">
+          <div class="resource-card-left">
+            <div class="resource-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+            </div>
+            <div class="resource-card-info">
+              <h3>Repositori GitHub</h3>
+              <p>Kode Sumber, Audit Log &bull; Branch main</p>
+            </div>
+          </div>
+          <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+        </div>
+      </a>
+    </div>
+
+    <!-- KPI Metric Strip -->
+    <section class="kpi-strip">
+      <div class="kpi-item total">
+        <div class="kpi-value" id="kpiCounter">18</div>
+        <div class="kpi-label">Total Topik Silabus</div>
+      </div>
+      <div class="kpi-item implemented">
+        <div class="kpi-value">11</div>
+        <div class="kpi-label">✅ Diimplementasikan</div>
+      </div>
+      <div class="kpi-item replaced">
+        <div class="kpi-value">7</div>
+        <div class="kpi-label">🔄 Replaced by Design</div>
+      </div>
+      <div class="kpi-item coverage">
+        <div class="kpi-value">100%</div>
+        <div class="kpi-label">Cakupan Silabus (18/18)</div>
       </div>
     </section>
 
-    <!-- Stat Highlights Overview -->
-    <div class="stats-grid">
-      <div class="stat-card total">
-        <div class="stat-num" id="statCounter">18</div>
-        <div class="stat-label">Total Topik Silabus</div>
+    <!-- Controls Bar: Filter Tabs + View Switcher + Search -->
+    <div class="view-controls">
+      <div class="segmented-control">
+        <button class="segment-tab active" data-filter="all">Semua (18)</button>
+        <button class="segment-tab" data-filter="s1">Sesi 1 (8)</button>
+        <button class="segment-tab" data-filter="s2">Sesi 2 (4)</button>
+        <button class="segment-tab" data-filter="s3">Sesi 3 (6)</button>
+        <button class="segment-tab" data-filter="implemented">✅ Diimplementasikan (11)</button>
+        <button class="segment-tab" data-filter="replaced">🔄 Replaced by Design (7)</button>
       </div>
-      <div class="stat-card green">
-        <div class="stat-num">11</div>
-        <div class="stat-label">✅ Diimplementasikan</div>
-      </div>
-      <div class="stat-card blue">
-        <div class="stat-num">7</div>
-        <div class="stat-label">🔄 Replaced by Design</div>
-      </div>
-      <div class="stat-card ratio">
-        <div class="stat-num">100%</div>
-        <div class="stat-label">Cakupan Silabus (18/18)</div>
+
+      <div class="controls-right">
+        <!-- View Mode Switcher -->
+        <button id="btnGridView" class="view-toggle-btn active" title="Tampilkan format Kartu Grid">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"></rect><rect width="7" height="7" x="14" y="3" rx="1"></rect><rect width="7" height="7" x="14" y="14" rx="1"></rect><rect width="7" height="7" x="3" y="14" rx="1"></rect></svg>
+          Kartu Grid
+        </button>
+        <button id="btnTableView" class="view-toggle-btn" title="Tampilkan format Tabel Lengkap">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="6" y2="6"></line><line x1="3" x2="21" y1="12" y2="12"></line><line x1="3" x2="21" y1="18" y2="18"></line></svg>
+          Tabel
+        </button>
+
+        <!-- Search Bar -->
+        <div class="search-input-wrap">
+          <svg class="icon-search" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="searchInput" placeholder="Cari materi..." autocomplete="off" />
+          <button id="clearSearch" class="clear-search">&times;</button>
+        </div>
       </div>
     </div>
 
-    <!-- Master Table Glassmorphism Container -->
-    <div class="table-container">
+    <!-- VIEW 1: Resource Cards Grid (18 Items) -->
+    <div id="gridContainer" class="cards-view-grid">
+      <!-- 1 -->
+      <div class="syllabus-card" data-session="s1" data-status="implemented">
+        <div>
+          <div class="card-top">
+            <span class="tag-session tag-s1">Sesi 1</span>
+            <span class="status-badge implemented">✅ Diimplementasikan</span>
+          </div>
+          <h4 class="card-title">Integrasi Google Gemini API</h4>
+          <p class="card-justification">Menggunakan SDK resmi <code>google-genai</code> v2.x via <code>genai.Client</code> dengan percakapan bersambung (<em>multi-turn</em>).</p>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="syllabus-card" data-session="s1" data-status="implemented">
+        <div>
+          <div class="card-top">
+            <span class="tag-session tag-s1">Sesi 1</span>
+            <span class="status-badge implemented">✅ Diimplementasikan</span>
+          </div>
+          <h4 class="card-title">Pengelolaan API Key &amp; Environment</h4>
+          <p class="card-justification">Dikelola aman via <code>.env</code> dan Streamlit Secrets, dengan fallback input manual di sidebar.</p>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="syllabus-card" data-session="s1" data-status="implemented">
+        <div>
+          <div class="card-top">
+            <span class="tag-session tag-s1">Sesi 1</span>
+            <span class="status-badge implemented">✅ Diimplementasikan</span>
+          </div>
+          <h4 class="card-title">Prompting Dasar (Role &amp; Instructional)</h4>
+          <p class="card-justification">Persona <em>"Mintel"</em>, aturan gaya bahasa, dan batasan konteks ketat di <code>SYSTEM_INSTRUCTION</code>.</p>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="syllabus-card" data-session="s1" data-status="implemented">
+        <div>
+          <div class="card-top">
+            <span class="tag-session tag-s1">Sesi 1</span>
+            <span class="status-badge implemented">✅ Diimplementasikan</span>
+          </div>
+          <h4 class="card-title">Streaming Text Output</h4>
+          <p class="card-justification">Menggunakan generator <code>chat.send_message_stream()</code> untuk respons teks <em>real-time</em> sub-detik.</p>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="syllabus-card" data-session="s1" data-status="implemented">
+        <div>
+          <div class="card-top">
+            <span class="tag-session tag-s1">Sesi 1</span>
+            <span class="status-badge implemented">✅ Diimplementasikan</span>
+          </div>
+          <h4 class="card-title">Etika AI, Privasi &amp; Keamanan Data</h4>
+          <p class="card-justification">Notifikasi perekaman data, sanitasi CSV Formula Injection (<code>_sheet_safe</code>), dan batas karakter input.</p>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="syllabus-card" data-session="s1" data-status="replaced">
+        <div>
+          <div class="card-top">
+            <span class="tag-session tag-s1">Sesi 1</span>
+            <span class="status-badge replaced">🔄 Replaced by Design</span>
+          </div>
+          <h4 class="card-title">Hyperparameter Tuning (<code>temperature</code>, dll.)</h4>
+          <p class="card-justification">Digantikan <strong>Model Default Preset</strong> demi menghindari konflik parameter dan menjamin 100% kompatibilitas universal lintas 6 model pada antrean <em>fallback</em>.</p>
+        </div>
+      </div>
+
+      <!-- 7 -->
+      <div class="syllabus-card" data-session="s1" data-status="replaced">
+        <div>
+          <div class="card-top">
+            <span class="tag-session tag-s1">Sesi 1</span>
+            <span class="status-badge replaced">🔄 Replaced by Design</span>
+          </div>
+          <h4 class="card-title">Native Function Calling Gemini</h4>
+          <p class="card-justification">Digantikan <strong>Regex Handoff Engine</strong> di level aplikasi Python, sehingga 100% konsisten tanpa membuang kuota <em>round-trip function calling</em>.</p>
+        </div>
+      </div>
+
+      <!-- 8 -->
+      <div class="syllabus-card" data-session="s1" data-status="replaced">
+        <div>
+          <div class="card-top">
+            <span class="tag-session tag-s1">Sesi 1</span>
+            <span class="status-badge replaced">🔄 Replaced by Design</span>
+          </div>
+          <h4 class="card-title">Prompting Lanjutan (CoT, ToT, ReAct)</h4>
+          <p class="card-justification">Digantikan <strong>Direct Instructional Prompting</strong> yang ramah dan cepat (<em>Direct Advisory</em>) sesuai kebutuhan pre-sales, tanpa coretan penalaran bertele-tele.</p>
+        </div>
+      </div>
+
+      <!-- 9 -->
+      <div class="syllabus-card" data-session="s2" data-status="implemented">
+        <div>
+          <div class="card-top">
+            <span class="tag-session tag-s2">Sesi 2</span>
+            <span class="status-badge implemented">✅ Diimplementasikan</span>
+          </div>
+          <h4 class="card-title">Konsep Retrieval &amp; Anti-Halusinasi</h4>
+          <p class="card-justification">Memuat 6 dokumen panduan Markdown dari folder <code>knowledge/</code> langsung ke System Prompt secara dinamis.</p>
+        </div>
+      </div>
+
+      <!-- 10 -->
+      <div class="syllabus-card" data-session="s2" data-status="replaced">
+        <div>
+          <div class="card-top">
+            <span class="tag-session tag-s2">Sesi 2</span>
+            <span class="status-badge replaced">🔄 Replaced by Design</span>
+          </div>
+          <h4 class="card-title">LangChain Framework</h4>
+          <p class="card-justification">Digantikan <strong>Native SDK google-genai</strong> resmi untuk mengeliminasi dependensi pihak ketiga (<em>no bloatware</em>), mempercepat <em>booting</em>, dan meringankan aplikasi.</p>
+        </div>
+      </div>
+
+      <!-- 11 -->
+      <div class="syllabus-card" data-session="s2" data-status="replaced">
+        <div>
+          <div class="card-top">
+            <span class="tag-session tag-s2">Sesi 2</span>
+            <span class="status-badge replaced">🔄 Replaced by Design</span>
+          </div>
+          <h4 class="card-title">Vector Database &amp; Embeddings (FAISS/Chroma)</h4>
+          <p class="card-justification">Digantikan <strong>In-Context Grounding</strong> memanfaatkan 1M+ context window Gemini untuk memuat 6 dokumen katalog (~10.000 token) utuh 100% tanpa <em>chunking loss</em>.</p>
+        </div>
+      </div>
+
+      <!-- 12 -->
+      <div class="syllabus-card" data-session="s2" data-status="replaced">
+        <div>
+          <div class="card-top">
+            <span class="tag-session tag-s2">Sesi 2</span>
+            <span class="status-badge replaced">🔄 Replaced by Design</span>
+          </div>
+          <h4 class="card-title">Meta LLaMA &amp; Groq Cloud API</h4>
+          <p class="card-justification">Digantikan <strong>Gemini Multi-Model Stack</strong> karena batas kuota gratis Groq sangat sempit (~6K–30K TPM) yang rawan rate limit dibanding 250K TPM Gemini.</p>
+        </div>
+      </div>
+
+      <!-- 13 -->
+      <div class="syllabus-card" data-session="s3" data-status="implemented">
+        <div>
+          <div class="card-top">
+            <span class="tag-session tag-s3">Sesi 3</span>
+            <span class="status-badge implemented">✅ Diimplementasikan</span>
+          </div>
+          <h4 class="card-title">Streamlit UI &amp; Chat Components</h4>
+          <p class="card-justification">UI interaktif dengan <code>st.chat_message</code>, <code>st.chat_input</code>, <code>st.sidebar</code>, <code>st.columns</code>, dan custom CSS branding.</p>
+        </div>
+      </div>
+
+      <!-- 14 -->
+      <div class="syllabus-card" data-session="s3" data-status="implemented">
+        <div>
+          <div class="card-top">
+            <span class="tag-session tag-s3">Sesi 3</span>
+            <span class="status-badge implemented">✅ Diimplementasikan</span>
+          </div>
+          <h4 class="card-title">Session State &amp; History Management</h4>
+          <p class="card-justification">Manajemen histori percakapan via <code>st.session_state</code> dengan limit <em>sliding window</em> <code>MAX_HISTORY_TURNS = 20</code>.</p>
+        </div>
+      </div>
+
+      <!-- 15 -->
+      <div class="syllabus-card" data-session="s3" data-status="implemented">
+        <div>
+          <div class="card-top">
+            <span class="tag-session tag-s3">Sesi 3</span>
+            <span class="status-badge implemented">✅ Diimplementasikan</span>
+          </div>
+          <h4 class="card-title">Caching Data &amp; Resource</h4>
+          <p class="card-justification"><code>@st.cache_data(ttl=300)</code> untuk membaca file knowledge base dan <code>@st.cache_resource</code> untuk Google Sheets.</p>
+        </div>
+      </div>
+
+      <!-- 16 -->
+      <div class="syllabus-card" data-session="s3" data-status="implemented">
+        <div>
+          <div class="card-top">
+            <span class="tag-session tag-s3">Sesi 3</span>
+            <span class="status-badge implemented">✅ Diimplementasikan</span>
+          </div>
+          <h4 class="card-title">Cloud Deployment</h4>
+          <p class="card-justification">Dideploy live dan dapat diakses publik di Streamlit Community Cloud.</p>
+        </div>
+      </div>
+
+      <!-- 17 -->
+      <div class="syllabus-card" data-session="s3" data-status="implemented">
+        <div>
+          <div class="card-top">
+            <span class="tag-session tag-s3">Sesi 3</span>
+            <span class="status-badge implemented">✅ Diimplementasikan</span>
+          </div>
+          <h4 class="card-title">Deliverables Final Project</h4>
+          <p class="card-justification">Repositori GitHub, screenshot UI (<code>UI_Screenshot.png</code>), dan dokumentasi lengkap di <code>README.md</code>.</p>
+        </div>
+      </div>
+
+      <!-- 18 -->
+      <div class="syllabus-card" data-session="s3" data-status="replaced">
+        <div>
+          <div class="card-top">
+            <span class="tag-session tag-s3">Sesi 3</span>
+            <span class="status-badge replaced">🔄 Replaced by Design</span>
+          </div>
+          <h4 class="card-title">Autonomous Multi-Step AI Agent</h4>
+          <p class="card-justification">Digantikan <strong>Guided Pre-Sales Consultant</strong> dengan prinsip <em>Human-in-the-Loop</em> saat bertransaksi demi keamanan komersial.</p>
+        </div>
+      </div>
+
+      <div id="gridEmpty" class="empty-state">Tidak ada materi yang sesuai dengan filter atau pencarian.</div>
+    </div>
+
+    <!-- VIEW 2: Detail Table View (Toggleable) -->
+    <div id="tableContainer" class="table-view-card">
       <div class="table-scroll">
-        <table id="ruixenMasterTable">
+        <table id="fullTable">
           <thead>
             <tr>
-              <th class="col-center" style="width: 110px;">Sesi</th>
+              <th class="col-center" style="width: 100px;">Sesi</th>
               <th style="width: 290px;">Materi Silabus Kurikulum</th>
-              <th class="col-center" style="width: 260px;">Status di Proyek</th>
+              <th class="col-center" style="width: 250px;">Status di Proyek</th>
               <th>Detail &amp; Justifikasi Arsitektur</th>
             </tr>
           </thead>
           <tbody>
-            <!-- Sesi 1: 1 -->
+            <!-- S1 -->
             <tr data-session="s1" data-status="implemented">
-              <td class="col-center"><span class="badge-sesi badge-s1">Sesi 1</span></td>
-              <td><span class="syllabus-text">Integrasi Google Gemini API</span></td>
-              <td class="col-center"><span class="status-capsule implemented">✅ Diimplementasikan</span></td>
-              <td><div class="justification-text">Menggunakan SDK resmi <code>google-genai</code> v2.x via <code>genai.Client</code> dengan percakapan bersambung (<em>multi-turn</em>).</div></td>
+              <td class="col-center"><span class="tag-session tag-s1">Sesi 1</span></td>
+              <td><strong>Integrasi Google Gemini API</strong></td>
+              <td class="col-center"><span class="status-badge implemented">✅ Diimplementasikan</span></td>
+              <td>Menggunakan SDK resmi <code>google-genai</code> v2.x via <code>genai.Client</code> dengan percakapan bersambung (<em>multi-turn</em>).</td>
             </tr>
-
-            <!-- Sesi 1: 2 -->
             <tr data-session="s1" data-status="implemented">
-              <td class="col-center"><span class="badge-sesi badge-s1">Sesi 1</span></td>
-              <td><span class="syllabus-text">Pengelolaan API Key &amp; Environment</span></td>
-              <td class="col-center"><span class="status-capsule implemented">✅ Diimplementasikan</span></td>
-              <td><div class="justification-text">Dikelola aman via <code>.env</code> dan Streamlit Secrets, dengan fallback input manual di sidebar.</div></td>
+              <td class="col-center"><span class="tag-session tag-s1">Sesi 1</span></td>
+              <td><strong>Pengelolaan API Key &amp; Environment</strong></td>
+              <td class="col-center"><span class="status-badge implemented">✅ Diimplementasikan</span></td>
+              <td>Dikelola aman via <code>.env</code> dan Streamlit Secrets, dengan fallback input manual di sidebar.</td>
             </tr>
-
-            <!-- Sesi 1: 3 -->
             <tr data-session="s1" data-status="implemented">
-              <td class="col-center"><span class="badge-sesi badge-s1">Sesi 1</span></td>
-              <td><span class="syllabus-text">Prompting Dasar (Role &amp; Instructional)</span></td>
-              <td class="col-center"><span class="status-capsule implemented">✅ Diimplementasikan</span></td>
-              <td><div class="justification-text">Persona <em>"Mintel"</em>, aturan gaya bahasa, dan batasan konteks ketat di <code>SYSTEM_INSTRUCTION</code>.</div></td>
+              <td class="col-center"><span class="tag-session tag-s1">Sesi 1</span></td>
+              <td><strong>Prompting Dasar (Role &amp; Instructional)</strong></td>
+              <td class="col-center"><span class="status-badge implemented">✅ Diimplementasikan</span></td>
+              <td>Persona <em>"Mintel"</em>, aturan gaya bahasa, dan batasan konteks ketat di <code>SYSTEM_INSTRUCTION</code>.</td>
             </tr>
-
-            <!-- Sesi 1: 4 -->
             <tr data-session="s1" data-status="implemented">
-              <td class="col-center"><span class="badge-sesi badge-s1">Sesi 1</span></td>
-              <td><span class="syllabus-text">Streaming Text Output</span></td>
-              <td class="col-center"><span class="status-capsule implemented">✅ Diimplementasikan</span></td>
-              <td><div class="justification-text">Menggunakan generator <code>chat.send_message_stream()</code> untuk respons teks <em>real-time</em> sub-detik.</div></td>
+              <td class="col-center"><span class="tag-session tag-s1">Sesi 1</span></td>
+              <td><strong>Streaming Text Output</strong></td>
+              <td class="col-center"><span class="status-badge implemented">✅ Diimplementasikan</span></td>
+              <td>Menggunakan generator <code>chat.send_message_stream()</code> untuk respons teks <em>real-time</em> sub-detik.</td>
             </tr>
-
-            <!-- Sesi 1: 5 -->
             <tr data-session="s1" data-status="implemented">
-              <td class="col-center"><span class="badge-sesi badge-s1">Sesi 1</span></td>
-              <td><span class="syllabus-text">Etika AI, Privasi &amp; Keamanan Data</span></td>
-              <td class="col-center"><span class="status-capsule implemented">✅ Diimplementasikan</span></td>
-              <td><div class="justification-text">Notifikasi perekaman data, sanitasi CSV Formula Injection (<code>_sheet_safe</code>), dan batas karakter input.</div></td>
+              <td class="col-center"><span class="tag-session tag-s1">Sesi 1</span></td>
+              <td><strong>Etika AI, Privasi &amp; Keamanan Data</strong></td>
+              <td class="col-center"><span class="status-badge implemented">✅ Diimplementasikan</span></td>
+              <td>Notifikasi perekaman data, sanitasi CSV Formula Injection (<code>_sheet_safe</code>), dan batas karakter input.</td>
             </tr>
-
-            <!-- Sesi 1: 6 -->
             <tr data-session="s1" data-status="replaced">
-              <td class="col-center"><span class="badge-sesi badge-s1">Sesi 1</span></td>
-              <td><span class="syllabus-text">Hyperparameter Tuning (<code>temperature</code>, dll.)</span></td>
+              <td class="col-center"><span class="tag-session tag-s1">Sesi 1</span></td>
+              <td><strong>Hyperparameter Tuning (<code>temperature</code>, dll.)</strong></td>
               <td class="col-center">
-                <span class="status-capsule replaced">🔄 Replaced</span>
-                <span class="replaced-detail">by Model Default Preset</span>
+                <span class="status-badge replaced">🔄 Replaced</span>
+                <span class="replaced-target">by Model Default Preset</span>
               </td>
-              <td><div class="justification-text">Menggunakan konfigurasi <em>default</em> bawaan model demi menghindari konflik parameter dan menjamin 100% kompatibilitas universal lintas 6 model pada antrean <em>fallback</em>.</div></td>
+              <td>Menggunakan konfigurasi <em>default</em> bawaan model demi menghindari konflik parameter dan menjamin 100% kompatibilitas universal lintas 6 model pada antrean <em>fallback</em>.</td>
             </tr>
-
-            <!-- Sesi 1: 7 -->
             <tr data-session="s1" data-status="replaced">
-              <td class="col-center"><span class="badge-sesi badge-s1">Sesi 1</span></td>
-              <td><span class="syllabus-text">Native Function Calling Gemini</span></td>
+              <td class="col-center"><span class="tag-session tag-s1">Sesi 1</span></td>
+              <td><strong>Native Function Calling Gemini</strong></td>
               <td class="col-center">
-                <span class="status-capsule replaced">🔄 Replaced</span>
-                <span class="replaced-detail">by Regex Handoff Engine</span>
+                <span class="status-badge replaced">🔄 Replaced</span>
+                <span class="replaced-target">by Regex Handoff Engine</span>
               </td>
-              <td><div class="justification-text">Logika pemicu kontak sales ditangani secara deterministik menggunakan filter Regex Python di level aplikasi, sehingga 100% konsisten tanpa membuang kuota <em>round-trip function calling</em>.</div></td>
+              <td>Logika pemicu kontak sales ditangani secara deterministik menggunakan filter Regex Python di level aplikasi, sehingga 100% konsisten tanpa membuang kuota <em>round-trip function calling</em>.</td>
             </tr>
-
-            <!-- Sesi 1: 8 -->
             <tr data-session="s1" data-status="replaced">
-              <td class="col-center"><span class="badge-sesi badge-s1">Sesi 1</span></td>
-              <td><span class="syllabus-text">Prompting Lanjutan (CoT, ToT, ReAct)</span></td>
+              <td class="col-center"><span class="tag-session tag-s1">Sesi 1</span></td>
+              <td><strong>Prompting Lanjutan (CoT, ToT, ReAct)</strong></td>
               <td class="col-center">
-                <span class="status-capsule replaced">🔄 Replaced</span>
-                <span class="replaced-detail">by Direct Instructional Prompting</span>
+                <span class="status-badge replaced">🔄 Replaced</span>
+                <span class="replaced-target">by Direct Instructional Prompting</span>
               </td>
-              <td><div class="justification-text">Menggunakan gaya konsultasi langsung yang ramah dan cepat (<em>Direct Advisory</em>) sesuai kebutuhan pre-sales, menghindari coretan penalaran analitis bertele-tele di layar calon pelanggan.</div></td>
+              <td>Menggunakan gaya konsultasi langsung yang ramah dan cepat (<em>Direct Advisory</em>) sesuai kebutuhan pre-sales, menghindari coretan penalaran analitis bertele-tele.</td>
             </tr>
 
-            <!-- Sesi 2: 9 -->
+            <!-- S2 -->
             <tr data-session="s2" data-status="implemented">
-              <td class="col-center"><span class="badge-sesi badge-s2">Sesi 2</span></td>
-              <td><span class="syllabus-text">Konsep Retrieval &amp; Anti-Halusinasi</span></td>
-              <td class="col-center"><span class="status-capsule implemented">✅ Diimplementasikan</span></td>
-              <td><div class="justification-text">Memuat 6 dokumen panduan Markdown dari folder <code>knowledge/</code> langsung ke System Prompt secara dinamis.</div></td>
+              <td class="col-center"><span class="tag-session tag-s2">Sesi 2</span></td>
+              <td><strong>Konsep Retrieval &amp; Anti-Halusinasi</strong></td>
+              <td class="col-center"><span class="status-badge implemented">✅ Diimplementasikan</span></td>
+              <td>Memuat 6 dokumen panduan Markdown dari folder <code>knowledge/</code> langsung ke System Prompt secara dinamis.</td>
             </tr>
-
-            <!-- Sesi 2: 10 -->
             <tr data-session="s2" data-status="replaced">
-              <td class="col-center"><span class="badge-sesi badge-s2">Sesi 2</span></td>
-              <td><span class="syllabus-text">LangChain Framework</span></td>
+              <td class="col-center"><span class="tag-session tag-s2">Sesi 2</span></td>
+              <td><strong>LangChain Framework</strong></td>
               <td class="col-center">
-                <span class="status-capsule replaced">🔄 Replaced</span>
-                <span class="replaced-detail">by Native SDK</span>
+                <span class="status-badge replaced">🔄 Replaced</span>
+                <span class="replaced-target">by Native SDK</span>
               </td>
-              <td><div class="justification-text">Digantikan dengan integrasi langsung SDK resmi <code>google-genai</code> untuk mengeliminasi dependensi pihak ketiga (<em>no bloatware</em>), mempercepat waktu <em>booting</em>, dan meringankan aplikasi.</div></td>
+              <td>Digantikan dengan integrasi langsung SDK resmi <code>google-genai</code> untuk mengeliminasi dependensi pihak ketiga (<em>no bloatware</em>), mempercepat waktu <em>booting</em>, dan meringankan aplikasi.</td>
             </tr>
-
-            <!-- Sesi 2: 11 -->
             <tr data-session="s2" data-status="replaced">
-              <td class="col-center"><span class="badge-sesi badge-s2">Sesi 2</span></td>
-              <td><span class="syllabus-text">Vector Database &amp; Embeddings (FAISS/Chroma)</span></td>
+              <td class="col-center"><span class="tag-session tag-s2">Sesi 2</span></td>
+              <td><strong>Vector Database &amp; Embeddings (FAISS/Chroma)</strong></td>
               <td class="col-center">
-                <span class="status-capsule replaced">🔄 Replaced</span>
-                <span class="replaced-detail">by In-Context Grounding</span>
+                <span class="status-badge replaced">🔄 Replaced</span>
+                <span class="replaced-target">by In-Context Grounding</span>
               </td>
-              <td><div class="justification-text">Memanfaatkan <em>large context window</em> Gemini (1M+ token) untuk memuat seluruh 6 dokumen katalog (~10.000 token) secara utuh 100%, mengeliminasi resiko salah baca tabel spesifikasi akibat pemotongan teks (<em>chunking loss</em>).</div></td>
+              <td>Memanfaatkan <em>large context window</em> Gemini (1M+ token) untuk memuat seluruh 6 dokumen katalog (~10.000 token) secara utuh 100%, mengeliminasi resiko salah baca tabel spesifikasi akibat pemotongan teks (<em>chunking loss</em>).</td>
             </tr>
-
-            <!-- Sesi 2: 12 -->
             <tr data-session="s2" data-status="replaced">
-              <td class="col-center"><span class="badge-sesi badge-s2">Sesi 2</span></td>
-              <td><span class="syllabus-text">Meta LLaMA &amp; Groq Cloud API</span></td>
+              <td class="col-center"><span class="tag-session tag-s2">Sesi 2</span></td>
+              <td><strong>Meta LLaMA &amp; Groq Cloud API</strong></td>
               <td class="col-center">
-                <span class="status-capsule replaced">🔄 Replaced</span>
-                <span class="replaced-detail">by Gemini Multi-Model Stack</span>
+                <span class="status-badge replaced">🔄 Replaced</span>
+                <span class="replaced-target">by Gemini Multi-Model Stack</span>
               </td>
-              <td><div class="justification-text">Fokus penuh pada ekosistem Google Gemini karena batas kuota gratis Groq (<em>Tokens Per Minute</em>) sangat sempit (~6K–30K TPM) yang rawan <em>rate limit</em> saat menginjeksi Knowledge Base, sedangkan Gemini menyediakan 250K TPM dan 500 RPD per model Flash-Lite.</div></td>
+              <td>Fokus penuh pada ekosistem Google Gemini karena batas kuota gratis Groq (<em>Tokens Per Minute</em>) sangat sempit (~6K–30K TPM) yang rawan <em>rate limit</em> saat menginjeksi Knowledge Base, sedangkan Gemini menyediakan 250K TPM dan 500 RPD per model Flash-Lite.</td>
             </tr>
 
-            <!-- Sesi 3: 13 -->
+            <!-- S3 -->
             <tr data-session="s3" data-status="implemented">
-              <td class="col-center"><span class="badge-sesi badge-s3">Sesi 3</span></td>
-              <td><span class="syllabus-text">Streamlit UI &amp; Chat Components</span></td>
-              <td class="col-center"><span class="status-capsule implemented">✅ Diimplementasikan</span></td>
-              <td><div class="justification-text">UI interaktif dengan <code>st.chat_message</code>, <code>st.chat_input</code>, <code>st.sidebar</code>, <code>st.columns</code>, dan custom CSS branding.</div></td>
+              <td class="col-center"><span class="tag-session tag-s3">Sesi 3</span></td>
+              <td><strong>Streamlit UI &amp; Chat Components</strong></td>
+              <td class="col-center"><span class="status-badge implemented">✅ Diimplementasikan</span></td>
+              <td>UI interaktif dengan <code>st.chat_message</code>, <code>st.chat_input</code>, <code>st.sidebar</code>, <code>st.columns</code>, dan custom CSS branding.</td>
             </tr>
-
-            <!-- Sesi 3: 14 -->
             <tr data-session="s3" data-status="implemented">
-              <td class="col-center"><span class="badge-sesi badge-s3">Sesi 3</span></td>
-              <td><span class="syllabus-text">Session State &amp; History Management</span></td>
-              <td class="col-center"><span class="status-capsule implemented">✅ Diimplementasikan</span></td>
-              <td><div class="justification-text">Manajemen histori percakapan via <code>st.session_state</code> dengan limit <em>sliding window</em> <code>MAX_HISTORY_TURNS = 20</code>.</div></td>
+              <td class="col-center"><span class="tag-session tag-s3">Sesi 3</span></td>
+              <td><strong>Session State &amp; History Management</strong></td>
+              <td class="col-center"><span class="status-badge implemented">✅ Diimplementasikan</span></td>
+              <td>Manajemen histori percakapan via <code>st.session_state</code> dengan limit <em>sliding window</em> <code>MAX_HISTORY_TURNS = 20</code>.</td>
             </tr>
-
-            <!-- Sesi 3: 15 -->
             <tr data-session="s3" data-status="implemented">
-              <td class="col-center"><span class="badge-sesi badge-s3">Sesi 3</span></td>
-              <td><span class="syllabus-text">Caching Data &amp; Resource</span></td>
-              <td class="col-center"><span class="status-capsule implemented">✅ Diimplementasikan</span></td>
-              <td><div class="justification-text"><code>@st.cache_data(ttl=300)</code> untuk membaca file knowledge base dan <code>@st.cache_resource</code> untuk Google Sheets.</div></td>
+              <td class="col-center"><span class="tag-session tag-s3">Sesi 3</span></td>
+              <td><strong>Caching Data &amp; Resource</strong></td>
+              <td class="col-center"><span class="status-badge implemented">✅ Diimplementasikan</span></td>
+              <td><code>@st.cache_data(ttl=300)</code> untuk membaca file knowledge base dan <code>@st.cache_resource</code> untuk Google Sheets.</td>
             </tr>
-
-            <!-- Sesi 3: 16 -->
             <tr data-session="s3" data-status="implemented">
-              <td class="col-center"><span class="badge-sesi badge-s3">Sesi 3</span></td>
-              <td><span class="syllabus-text">Cloud Deployment</span></td>
-              <td class="col-center"><span class="status-capsule implemented">✅ Diimplementasikan</span></td>
-              <td><div class="justification-text">Dideploy live dan dapat diakses publik di Streamlit Community Cloud.</div></td>
+              <td class="col-center"><span class="tag-session tag-s3">Sesi 3</span></td>
+              <td><strong>Cloud Deployment</strong></td>
+              <td class="col-center"><span class="status-badge implemented">✅ Diimplementasikan</span></td>
+              <td>Dideploy live dan dapat diakses publik di Streamlit Community Cloud.</td>
             </tr>
-
-            <!-- Sesi 3: 17 -->
             <tr data-session="s3" data-status="implemented">
-              <td class="col-center"><span class="badge-sesi badge-s3">Sesi 3</span></td>
-              <td><span class="syllabus-text">Deliverables Final Project</span></td>
-              <td class="col-center"><span class="status-capsule implemented">✅ Diimplementasikan</span></td>
-              <td><div class="justification-text">Repositori GitHub, screenshot UI (<code>UI_Screenshot.png</code>), dan dokumentasi lengkap di <code>README.md</code>.</div></td>
+              <td class="col-center"><span class="tag-session tag-s3">Sesi 3</span></td>
+              <td><strong>Deliverables Final Project</strong></td>
+              <td class="col-center"><span class="status-badge implemented">✅ Diimplementasikan</span></td>
+              <td>Repositori GitHub, screenshot UI (<code>UI_Screenshot.png</code>), dan dokumentasi lengkap di <code>README.md</code>.</td>
             </tr>
-
-            <!-- Sesi 3: 18 -->
             <tr data-session="s3" data-status="replaced">
-              <td class="col-center"><span class="badge-sesi badge-s3">Sesi 3</span></td>
-              <td><span class="syllabus-text">Autonomous Multi-Step AI Agent (Agentic Loop)</span></td>
+              <td class="col-center"><span class="tag-session tag-s3">Sesi 3</span></td>
+              <td><strong>Autonomous Multi-Step AI Agent</strong></td>
               <td class="col-center">
-                <span class="status-capsule replaced">🔄 Replaced</span>
-                <span class="replaced-detail">by Guided Pre-Sales Consultant</span>
+                <span class="status-badge replaced">🔄 Replaced</span>
+                <span class="replaced-target">by Guided Pre-Sales Consultant</span>
               </td>
-              <td><div class="justification-text">Mengadopsi arsitektur asisten kualifikasi kebutuhan dengan prinsip <em>Human-in-the-Loop</em> (dialihkan ke Sales Rep manusia saat bertransaksi) demi menjaga keamanan komersial dan responsivitas interaksi.</div></td>
+              <td>Mengadopsi arsitektur asisten kualifikasi kebutuhan dengan prinsip <em>Human-in-the-Loop</em> (dialihkan ke Sales Rep manusia saat bertransaksi) demi menjaga keamanan komersial dan responsivitas interaksi.</td>
             </tr>
-
-            <!-- Empty Row Fallback -->
-            <tr id="emptyRow" class="empty-row">
-              <td colspan="4">
-                Tidak ada materi yang sesuai dengan pencarian atau filter yang dipilih.
-              </td>
+            <tr id="tableEmpty" class="empty-state">
+              <td colspan="4">Tidak ada materi yang sesuai dengan filter atau pencarian.</td>
             </tr>
           </tbody>
         </table>
@@ -900,114 +1165,135 @@
     </div>
 
     <!-- Footer -->
-    <!-- // UI Theme: Ruixen Moon Theme (v2) -->
     <footer>
-      <div class="footer-brand">
-        <span class="pulse-dot"></span>
-        <span>PT Intimap (IntelliTrac Indonesia)</span>
+      <div>
+        <span class="footer-dot"></span>
+        <span>PT Intimap (IntelliTrac Indonesia) &bull; Enterprise Architecture Portfolio</span>
       </div>
       <div>
-        Live App: <a href="https://intellitrac-salesbot.streamlit.app/" target="_blank" class="footer-link">intellitrac-salesbot.streamlit.app</a>
+        Live App: <a href="https://intellitrac-salesbot.streamlit.app/" target="_blank">intellitrac-salesbot.streamlit.app</a>
       </div>
     </footer>
 
   </div>
 
   <script>
-    // UI Theme: Ruixen Moon Theme (v2) - Inspired by 21st.dev/@ruixen.ui/components/ruixen-moon-chat
-    const searchInput = document.getElementById('ruixenInput');
-    const clearBtn = document.getElementById('clearBtn');
-    const filterPills = document.querySelectorAll('.filter-pill');
-    const rows = document.querySelectorAll('#ruixenMasterTable tbody tr:not(.empty-row)');
-    const emptyRow = document.getElementById('emptyRow');
-    const statCounter = document.getElementById('statCounter');
-
+    // Tab filtering state
     let currentFilter = 'all';
+    let currentSearch = '';
 
-    // Filter Pills Handler
-    filterPills.forEach(pill => {
-      pill.addEventListener('click', () => {
-        filterPills.forEach(p => p.classList.remove('active'));
-        pill.classList.add('active');
-        currentFilter = pill.getAttribute('data-filter');
+    const filterTabs = document.querySelectorAll('.segment-tab');
+    const searchInput = document.getElementById('searchInput');
+    const clearSearchBtn = document.getElementById('clearSearch');
+    const kpiCounter = document.getElementById('kpiCounter');
+
+    const gridCards = document.querySelectorAll('#gridContainer .syllabus-card');
+    const tableRows = document.querySelectorAll('#fullTable tbody tr:not(.empty-state)');
+    const gridEmpty = document.getElementById('gridEmpty');
+    const tableEmpty = document.getElementById('tableEmpty');
+
+    // View Toggles
+    const btnGridView = document.getElementById('btnGridView');
+    const btnTableView = document.getElementById('btnTableView');
+    const gridContainer = document.getElementById('gridContainer');
+    const tableContainer = document.getElementById('tableContainer');
+
+    btnGridView.addEventListener('click', () => {
+      btnGridView.classList.add('active');
+      btnTableView.classList.remove('active');
+      gridContainer.style.display = 'grid';
+      tableContainer.style.display = 'none';
+    });
+
+    btnTableView.addEventListener('click', () => {
+      btnTableView.classList.add('active');
+      btnGridView.classList.remove('active');
+      gridContainer.style.display = 'none';
+      tableContainer.style.display = 'block';
+    });
+
+    // Filter Tabs Handler
+    filterTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        filterTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentFilter = tab.getAttribute('data-filter');
         applyFilter();
       });
     });
 
-    // Search Input Handler
+    // Search Handler
     searchInput.addEventListener('input', () => {
-      if (searchInput.value.trim() !== '') {
-        clearBtn.style.display = 'flex';
-      } else {
-        clearBtn.style.display = 'none';
-      }
+      currentSearch = searchInput.value.toLowerCase().trim();
+      clearSearchBtn.style.display = currentSearch !== '' ? 'block' : 'none';
       applyFilter();
     });
 
-    // Clear Search Handler
-    clearBtn.addEventListener('click', () => {
+    clearSearchBtn.addEventListener('click', () => {
       searchInput.value = '';
-      clearBtn.style.display = 'none';
+      currentSearch = '';
+      clearSearchBtn.style.display = 'none';
       searchInput.focus();
       applyFilter();
     });
 
-    // Keyboard shortcut (Esc to clear)
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && searchInput.value !== '') {
         searchInput.value = '';
-        clearBtn.style.display = 'none';
+        currentSearch = '';
+        clearSearchBtn.style.display = 'none';
         applyFilter();
       }
     });
 
     function applyFilter() {
-      const query = searchInput.value.toLowerCase().trim();
       let visibleCount = 0;
 
-      rows.forEach(row => {
-        const session = row.getAttribute('data-session');
-        const status = row.getAttribute('data-status');
-        const text = row.innerText.toLowerCase();
+      // Filter Grid Cards
+      gridCards.forEach(card => {
+        const s = card.getAttribute('data-session');
+        const st = card.getAttribute('data-status');
+        const text = card.innerText.toLowerCase();
 
-        // 1. Check Filter Pill
-        let matchFilter = false;
-        if (currentFilter === 'all') {
-          matchFilter = true;
-        } else if (currentFilter === 's1' && session === 's1') {
-          matchFilter = true;
-        } else if (currentFilter === 's2' && session === 's2') {
-          matchFilter = true;
-        } else if (currentFilter === 's3' && session === 's3') {
-          matchFilter = true;
-        } else if (currentFilter === 'implemented' && status === 'implemented') {
-          matchFilter = true;
-        } else if (currentFilter === 'replaced' && status === 'replaced') {
-          matchFilter = true;
-        }
-
-        // 2. Check Search Query
-        const matchSearch = query === '' || text.includes(query);
+        const matchFilter = checkMatch(s, st);
+        const matchSearch = currentSearch === '' || text.includes(currentSearch);
 
         if (matchFilter && matchSearch) {
-          row.style.display = '';
+          card.style.display = 'flex';
           visibleCount++;
         } else {
-          row.style.display = 'none';
+          card.style.display = 'none';
         }
       });
 
-      // Update visible counter
-      if (statCounter) {
-        statCounter.innerText = visibleCount;
-      }
+      // Filter Table Rows
+      tableRows.forEach(row => {
+        const s = row.getAttribute('data-session');
+        const st = row.getAttribute('data-status');
+        const text = row.innerText.toLowerCase();
 
-      // Empty State Display
-      if (visibleCount === 0) {
-        emptyRow.style.display = 'table-row';
-      } else {
-        emptyRow.style.display = 'none';
-      }
+        const matchFilter = checkMatch(s, st);
+        const matchSearch = currentSearch === '' || text.includes(currentSearch);
+
+        row.style.display = (matchFilter && matchSearch) ? '' : 'none';
+      });
+
+      // Update counter
+      if (kpiCounter) kpiCounter.innerText = visibleCount;
+
+      // Empty states
+      gridEmpty.style.display = visibleCount === 0 ? 'block' : 'none';
+      tableEmpty.style.display = visibleCount === 0 ? 'table-row' : 'none';
+    }
+
+    function checkMatch(session, status) {
+      if (currentFilter === 'all') return true;
+      if (currentFilter === 's1' && session === 's1') return true;
+      if (currentFilter === 's2' && session === 's2') return true;
+      if (currentFilter === 's3' && session === 's3') return true;
+      if (currentFilter === 'implemented' && status === 'implemented') return true;
+      if (currentFilter === 'replaced' && status === 'replaced') return true;
+      return false;
     }
   </script>
 

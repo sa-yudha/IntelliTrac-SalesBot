@@ -3,6 +3,7 @@ import re
 import glob
 import uuid
 import logging
+import time
 from datetime import datetime, timezone, timedelta
 import streamlit as st
 from google import genai
@@ -33,15 +34,25 @@ STREAM_STALL_TIMEOUT_MS = 15_000
 # Dibuat longgar karena jawaban panjang memang butuh waktu lebih lama.
 SERVER_BUDGET_SECONDS = 300
 
+# Batas jumlah pertanyaan per sesi dalam satu jendela waktu. Satu pertanyaan bisa
+# memicu sampai 12 request (6 model x 2 percobaan), jadi tanpa batas ini satu sesi
+# skrip otomatis bisa menghabiskan kuota harian free tier untuk semua pengunjung.
+# Batas per sesi tidak menahan penyerang yang membuka banyak sesi sekaligus.
+MAX_QUESTIONS_PER_WINDOW = 15
+RATE_WINDOW_SECONDS = 600
+
 # Pemicu kartu Sales Handoff. Memakai batas kata (\b) supaya "penghargaan" tidak
 # terbaca sebagai "harga" dan "beliau" tidak terbaca sebagai "beli".
 # "pesan" ditangani terpisah karena bermakna ganda: memesan barang vs pesan error.
+# Sufiks -nya/-kah/-lah diizinkan karena \b membuat "harganya" atau "biayanya"
+# tidak cocok, padahal itu bentuk pertanyaan harga yang paling umum.
 HANDOFF_RE = re.compile(
     r"\b(?:"
     r"harga|biaya|tarif|budget|anggaran|penawaran|quotation|quote|rab|"
     r"diskon|nego\w*|beli|membeli|pembelian|pesanan|memesan|pemesanan|order|"
-    r"sewa|rental|sales|hubungi|kontak|bayar|pembayaran|cicilan|duit"
-    r")\b"
+    r"sewa|rental|sales|hubungi|kontak|bayar|pembayaran|cicilan|duit|"
+    r"ongkos|investasi|langganan|berlangganan|rupiah|pricelist|price|prices|pricing|cost"
+    r")(?:nya|kah|lah)?\b"
     r"|\bpesan\b(?!\s+(?:error|eror|gagal|masuk|singkat|otomatis|notifikasi|balasan|terkirim))",
     re.IGNORECASE,
 )
@@ -427,11 +438,18 @@ def load_knowledge_base():
                     knowledge_text += f"\n--- START OF DOCUMENT: {file_name} ---\n"
                     knowledge_text += content
                     knowledge_text += f"\n--- END OF DOCUMENT: {file_name} ---\n"
-            except Exception as e:
-                st.warning(f"Gagal membaca file knowledge: {file_name}")
+            except Exception:
+                # Nama file termasuk konfigurasi internal (lihat Poin 9), jadi cukup ke log server.
+                logger.warning("Gagal membaca file knowledge: %s", file_name, exc_info=True)
     return knowledge_text
 
 KNOWLEDGE_BASE = load_knowledge_base()
+# Tanpa knowledge base, bot tetap menjawab tapi mengarang spesifikasi produk ke calon
+# customer. Lebih aman berhenti total. 500 karakter jauh di bawah ukuran normal (~70 KB).
+if len(KNOWLEDGE_BASE.strip()) < 500:
+    logger.error("Knowledge base kosong atau gagal dimuat (%d karakter).", len(KNOWLEDGE_BASE))
+    st.error("Maaf, layanan Mintel sedang dalam pemeliharaan. Silakan hubungi Tim Sales IntelliTrac di sales@intellitrac.co.id atau (021) 6325 999.")
+    st.stop()
 
 # 4. Construct System Instruction for Gemini
 SYSTEM_INSTRUCTION = f"""
@@ -466,6 +484,12 @@ PANDUAN UTAMA BERINTERAKSI & GAYA BAHASA:
    - JANGAN mengalihkan ke produk lain seolah-olah nama produk yang ditanyakan customer itu memang ada di IntelliTrac, kalau nama itu sebenarnya tidak dikenali.
    - Yang BENAR: akui dengan jujur dan percaya diri bahwa kamu tidak memiliki informasi spesifik mengenai hal tersebut, tawarkan informasi terkait yang memang kamu punya (kalau ada dan relevan), lalu arahkan calon customer ke Sales Executive untuk kepastiannya. Contoh: "Untuk hal tersebut saya belum punya informasi spesifiknya. Agar Anda mendapat jawaban yang pasti, saya bisa hubungkan langsung ke Sales Executive kami."
 """
+
+# Pertanyaan yang sedang dijawab. Dihitung sebelum widget mana pun dirender supaya
+# semua tombol & kotak input bisa dinonaktifkan selama Mintel menjawab. Interaksi
+# widget saat skrip berjalan membuat Streamlit menghentikan skrip di tengah jalan,
+# sehingga jawaban yang sedang dialirkan hilang dan pertanyaannya tertinggal tanpa jawaban.
+is_busy = bool(st.session_state.get("pending_question"))
 
 # 5. Sidebar Setup
 with st.sidebar:
@@ -507,11 +531,12 @@ with st.sidebar:
     st.subheader("🔍 Fast Product Match")
     jenis_armada = st.selectbox(
         "Pilih Jenis Armada Anda:",
-        ["-- Pilih Jenis Armada --", "Sepeda Motor", "Mobil Pribadi", "Truk Logistik / Kargo", "Truk Pendingin (Reefer)", "Truk Semen / Mixer", "Truk Tambang & Alat Berat", "Bus & Mobil Operasional"]
+        ["-- Pilih Jenis Armada --", "Sepeda Motor", "Mobil Pribadi", "Truk Logistik / Kargo", "Truk Pendingin (Reefer)", "Truk Semen / Mixer", "Truk Tambang & Alat Berat", "Bus & Mobil Operasional"],
+        disabled=is_busy
     )
-    
+
     if jenis_armada != "-- Pilih Jenis Armada --":
-        if st.button("💡 Lihat Rekomendasi Produk"):
+        if st.button("💡 Lihat Rekomendasi Produk", disabled=is_busy):
             prompt_map = {
                 "Sepeda Motor": "Halo Mintel, saya butuh GPS Tracker untuk Sepeda Motor. Rekomendasinya tipe apa?",
                 "Mobil Pribadi": "Halo Mintel, produk GPS Tracker apa yang cocok untuk pengamanan Mobil Pribadi?",
@@ -522,14 +547,19 @@ with st.sidebar:
                 "Bus & Mobil Operasional": "Halo Mintel, rekomendasi Dashcam AI / GPS untuk Bus dan Mobil Operasional Perusahaan apa?"
             }
             st.session_state["pending_prompt"] = prompt_map.get(jenis_armada, "")
-            
+            st.session_state["autohide_sidebar"] = True
+
+        # Dirender ulang selama pertanyaan dijawab, karena run yang menerima klik langsung
+        # di-rerun dan iframe-nya bisa hilang sebelum script sempat jalan.
+        if st.session_state.get("autohide_sidebar"):
             # Inject Javascript untuk menutup sidebar secara otomatis HANYA di mobile (<=768px)
             st.components.v1.html(
                 """
                 <script>
                     if (window.parent.innerWidth <= 768) {
                         const parentDoc = window.parent.document;
-                        const closeBtn = parentDoc.querySelector('[data-testid="stSidebarCollapseButton"]');
+                        // stSidebarCollapseButton adalah div pembungkus, klik harus ke <button> di dalamnya.
+                        const closeBtn = parentDoc.querySelector('[data-testid="stSidebarCollapseButton"] button');
                         if (closeBtn) {
                             closeBtn.click();
                         } else {
@@ -567,7 +597,7 @@ with st.sidebar:
     """, unsafe_allow_html=True)
 
     st.divider()
-    if st.button("🗑️ Hapus Riwayat Chat"):
+    if st.button("🗑️ Hapus Riwayat Chat", disabled=is_busy):
         _reset_chat()
         st.rerun()
 
@@ -595,7 +625,11 @@ for _m in st.session_state.messages:
 # Display Previous Messages
 for idx, msg in enumerate(st.session_state.messages):
     with st.chat_message(msg["role"], avatar="🛰️" if msg["role"] == "assistant" else "👤"):
-        st.markdown(msg["content"])
+        # Pesan error tetap tampil sebagai kotak merah setelah rerun, bukan teks biasa.
+        if msg.get("error"):
+            st.error(msg["content"])
+        else:
+            st.markdown(msg["content"])
         if msg.get("handoff"):
             st.markdown(SALES_HANDOFF_HTML, unsafe_allow_html=True)
         if msg["role"] == "assistant" and idx > 0:
@@ -603,7 +637,7 @@ for idx, msg in enumerate(st.session_state.messages):
             already_logged = logged_key in st.session_state
             # Setelah tercatat, tombol dikunci supaya rating tidak bisa diubah
             # dan menghasilkan baris ganda di spreadsheet.
-            feedback = st.feedback("thumbs", key=f"fb_{msg['id']}", disabled=already_logged)
+            feedback = st.feedback("thumbs", key=f"fb_{msg['id']}", disabled=already_logged or is_busy)
             if feedback is not None and not already_logged:
                 st.session_state[logged_key] = feedback
                 prev = st.session_state.messages[idx - 1]
@@ -624,37 +658,39 @@ st.markdown("**💡 Pertanyaan Populer:**")
 # Row 1 - pertanyaan umum (personal & awam)
 col1, col2, col3, col4 = st.columns(4, gap="small")
 with col1:
-    if st.button("📍 GPS bisa pantau real-time?", use_container_width=True):
+    if st.button("📍 GPS bisa pantau real-time?", use_container_width=True, disabled=is_busy):
         st.session_state["pending_prompt"] = "Apakah GPS IntelliTrac bisa memantau posisi kendaraan secara real-time? Seberapa akurat dan cepat update lokasinya?"
 with col2:
-    if st.button("🔒 Bisa matiin mesin dari jarak jauh?", use_container_width=True):
+    if st.button("🔒 Bisa matiin mesin dari jarak jauh?", use_container_width=True, disabled=is_busy):
         st.session_state["pending_prompt"] = "Apakah IntelliTrac bisa mematikan mesin kendaraan dari jarak jauh jika kendaraan dicuri atau disalahgunakan?"
 with col3:
-    if st.button("📱 Dipantau lewat HP bisa?", use_container_width=True):
+    if st.button("📱 Dipantau lewat HP bisa?", use_container_width=True, disabled=is_busy):
         st.session_state["pending_prompt"] = "Apakah saya bisa memantau posisi kendaraan lewat smartphone? Ada aplikasinya tidak?"
 with col4:
-    if st.button("💰 Harga & biaya bulanan?", use_container_width=True):
+    if st.button("💰 Harga & biaya bulanan?", use_container_width=True, disabled=is_busy):
         st.session_state["pending_prompt"] = "Berapa kisaran harga GPS Tracker IntelliTrac? Apakah ada biaya langganan bulanan? Apa saja yang termasuk dalam paketnya?"
 
 # Row 2 - pertanyaan B2B & teknis
 col5, col6, col7, col8 = st.columns(4, gap="small")
 with col5:
-    if st.button("🚚 Rekomendasi Truk & Armada", use_container_width=True):
+    if st.button("🚚 Rekomendasi Truk & Armada", use_container_width=True, disabled=is_busy):
         st.session_state["pending_prompt"] = "Misalkan kami punya armada truk logistik sekitar 20 unit. Produk GPS Tracker IntelliTrac apa yang paling cocok dan apa saja fitur unggulannya?"
 with col6:
-    if st.button("📷 AI Dashcam, apa manfaatnya?", use_container_width=True):
+    if st.button("📷 AI Dashcam, apa manfaatnya?", use_container_width=True, disabled=is_busy):
         st.session_state["pending_prompt"] = "Apa manfaat nyata AI Dashcam seperti JC261 bagi perusahaan? Apakah bisa mendeteksi sopir mengantuk atau tidak fokus?"
 with col7:
-    if st.button("🔌 Apa bedanya dengan GPS tracker murah?", use_container_width=True):
+    if st.button("🔌 Apa bedanya dengan GPS tracker murah?", use_container_width=True, disabled=is_busy):
         st.session_state["pending_prompt"] = "Apa bedanya GPS IntelliTrac dibanding GPS tracker murah yang banyak dijual di marketplace? Mengapa harus pilih IntelliTrac?"
 with col8:
-    if st.button("📑 Minta Penawaran Resmi", use_container_width=True):
+    if st.button("📑 Minta Penawaran Resmi", use_container_width=True, disabled=is_busy):
         st.session_state["pending_prompt"] = "Saya tertarik dan ingin mendapatkan penawaran harga resmi untuk armada perusahaan kami. Bagaimana caranya?"
 
 # Check if there is a pending prompt from sidebar or chips
-user_input = st.chat_input("Ketik pertanyaan Anda di sini... (contoh: Rekomendasi GPS untuk truk kargo)")
-if "pending_prompt" in st.session_state and st.session_state["pending_prompt"]:
-    user_input = st.session_state.pop("pending_prompt")
+typed_input = st.chat_input("Ketik pertanyaan Anda di sini... (contoh: Rekomendasi GPS untuk truk kargo)", disabled=is_busy)
+pending_prompt = st.session_state.pop("pending_prompt", None)
+# Ketikan manual didahulukan. Keduanya hanya bisa hadir bersamaan saat Streamlit
+# menggabungkan dua interaksi dalam satu rerun, dan ketikan pengguna tidak boleh hilang.
+user_input = typed_input or pending_prompt
 
 if user_input and len(user_input) > MAX_INPUT_CHARS:
     st.warning(
@@ -663,19 +699,37 @@ if user_input and len(user_input) > MAX_INPUT_CHARS:
     )
     user_input = None
 
-# 8. Handle User Input
 if user_input:
-    # Append user message
+    now = time.time()
+    question_times = [t for t in st.session_state.get("question_times", []) if now - t < RATE_WINDOW_SECONDS]
+    if len(question_times) >= MAX_QUESTIONS_PER_WINDOW:
+        st.warning(
+            "Anda sudah mengirim banyak pertanyaan dalam waktu singkat. Mohon tunggu beberapa menit, "
+            "atau hubungi Tim Sales kami langsung lewat tombol di sidebar."
+        )
+        user_input = None
+    else:
+        question_times.append(now)
+    st.session_state["question_times"] = question_times
+
+# Pertanyaan belum dijawab di run ini. Disimpan dulu lalu rerun, supaya di run berikutnya
+# semua widget sudah dirender nonaktif (is_busy) sebelum Gemini dipanggil.
+if user_input:
     st.session_state.messages.append(_new_message("user", user_input))
-    with st.chat_message("user", avatar="👤"):
-        st.markdown(user_input)
+    st.session_state["pending_question"] = user_input
+    st.rerun()
+st.session_state.pop("autohide_sidebar", None)
+
+# 8. Handle User Input
+if is_busy:
+    user_input = st.session_state["pending_question"]
 
     # Generate Assistant Response
     with st.chat_message("assistant", avatar="🛰️"):
         if not api_key:
             error_msg = "⚠️ API Key Google Gemini belum dikonfigurasi. Silakan masukkan GOOGLE_API_KEY di file `.env` atau melalui sidebar."
             st.error(error_msg)
-            st.session_state.messages.append(_new_message("assistant", error_msg))
+            st.session_state.messages.append(_new_message("assistant", error_msg, error=True))
         else:
             try:
                 client = genai.Client(api_key=api_key)
@@ -780,7 +834,12 @@ if user_input:
                     f"Silakan coba lagi sebentar lagi. (Kode: {ref})"
                 )
                 st.error(err_text)
-                st.session_state.messages.append(_new_message("assistant", err_text))
+                st.session_state.messages.append(_new_message("assistant", err_text, error=True))
+
+    # Rerun agar widget aktif kembali. Jawaban sudah tersimpan di riwayat sehingga
+    # dirender ulang oleh loop riwayat di atas.
+    st.session_state.pop("pending_question", None)
+    st.rerun()
 
 # 9. Pemberitahuan Perekaman Percakapan
 # Hanya ditampilkan sebelum jawaban pertama muncul, setelah itu dianggap sudah terbaca

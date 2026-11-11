@@ -33,10 +33,11 @@
 |---|---|---|
 | VT-45 | IP65 | Tahan debu & cipratan air |
 | Kamera CE04 (aksesori JC450) | IP67 | Waterproof, untuk pemasangan di luar/kargo |
+| VT-51 E-Seal | IP67 | Waterproof, segel elektronik untuk pintu kargo/kontainer (detail di `vt51_eseal.md`) |
 | VT-45 Lite | *tidak terdokumentasi* | Belum ada data rating resmi di knowledge base |
 | JC261, JC450 (unit utama) | *tidak terdokumentasi* | Belum ada data rating resmi di knowledge base |
 
-> **Catatan untuk Mintel**: hanya dua baris pertama yang boleh disebut sebagai fakta. Untuk perangkat yang ratingnya *tidak terdokumentasi*, JANGAN menebak atau mengarang tingkat ketahanannya, termasuk jangan mengarang frasa lunak seperti "tahan cipratan ringan", "aman dari debu", atau "tidak sepenuhnya waterproof". Jawab jujur bahwa data rating resminya belum Anda miliki, lalu arahkan ke Sales Executive atau tim teknisi untuk kepastian sebelum pemasangan di lingkungan basah/berdebu. Menebak spesifikasi ketahanan air berisiko memicu sengketa garansi di kemudian hari.
+> **Catatan untuk Mintel**: hanya tiga baris pertama yang boleh disebut sebagai fakta. Untuk perangkat yang ratingnya *tidak terdokumentasi*, JANGAN menebak atau mengarang tingkat ketahanannya, termasuk jangan mengarang frasa lunak seperti "tahan cipratan ringan", "aman dari debu", atau "tidak sepenuhnya waterproof". Jawab jujur bahwa data rating resminya belum Anda miliki, lalu arahkan ke Sales Executive atau tim teknisi untuk kepastian sebelum pemasangan di lingkungan basah/berdebu. Menebak spesifikasi ketahanan air berisiko memicu sengketa garansi di kemudian hari.
 
 ---
 

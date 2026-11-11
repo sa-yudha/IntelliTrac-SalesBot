@@ -1,12 +1,12 @@
-# Knowledge Base: FAQ Publik Website IntelliTrac
+# Knowledge Base: FAQ Internal IntelliTrac (Terkoreksi)
 
-> **Sumber**: https://intellitrac.co.id/faqs - diambil 15 Agustus 2026 (16 FAQ, 2 kategori).
+> **Asal**: FAQ website https://intellitrac.co.id/faqs versi 15 Agustus 2026 (16 FAQ). Per November 2026 halaman website sudah dirombak dan tidak lagi memuat pertanyaan-pertanyaan ini, jadi dokumen ini berdiri sendiri sebagai FAQ internal.
 > **Status dokumen**: versi terkoreksi. Sebagian jawaban telah direvisi dari teks asli
 > website karena mengandung kekeliruan teknis, klaim berlebihan, atau kontradiksi dengan
 > katalog produk. Rincian setiap perubahan beserta teks aslinya ada di
 > `docs/FAQ_Website_Revision_Report.md`.
-> **Catatan sinkronisasi**: bila halaman website sudah diperbarui mengikuti laporan revisi,
-> lakukan scrape ulang dan samakan kembali dokumen ini.
+> **Catatan sinkronisasi**: dokumen ini tidak lagi disamakan dengan halaman website.
+> Perbandingan dengan FAQ website versi November 2026 ada di catatan internal proyek.
 
 ---
 
@@ -184,11 +184,11 @@ Lama penyimpanannya beda-beda tergantung jenis datanya:
 
 | Jenis data | Lokasi penyimpanan | Retensi |
 |---|---|---|
-| Report & Replay History (riwayat posisi, kecepatan, status mesin, data sensor, laporan) | Server IntelliTrac | 6 bulan terakhir |
-| Picture & Video Gallery (klip foto/video event, misalnya auto-capture saat insiden, pengereman mendadak, atau alarm) | Server IntelliTrac | 3 bulan terakhir |
+| Report & Replay History (riwayat posisi, kecepatan, status mesin, data sensor, laporan) | Server IntelliTrac | 2 tahun terakhir |
+| Picture & Video Gallery (klip foto/video event, misalnya auto-capture saat insiden, pengereman mendadak, atau alarm) | Server IntelliTrac | 6 bulan terakhir |
 | Rekaman video dashcam utuh (JC261 / JC450) | microSD di dalam perangkat (hingga 256GB pada JC261, hingga 512GB pada JC450) | Bergantung kapasitas kartu & jumlah kamera aktif; berlaku sistem *loop recording* (rekaman terlama tertimpa otomatis) |
 
-> **Catatan untuk Mintel**: ada tiga retensi berbeda, jangan disamaratakan jadi "6 bulan" semua. (1) Report & Replay History (data telemetri/GPS) di server: **6 bulan**. (2) Picture & Video Gallery (klip foto/video event yang ter-upload ke server): **3 bulan**, BUKAN 6 bulan, jangan tertukar dengan poin 1. (3) Rekaman video dashcam yang utuh tersimpan lokal di microSD perangkat dengan sistem loop recording, bukan retensi waktu tetap, durasinya tergantung kapasitas kartu dan jumlah channel kamera yang aktif. Untuk kebutuhan retensi video jangka panjang atau arsip khusus, arahkan ke Sales Executive.
+> **Catatan untuk Mintel**: ada tiga retensi berbeda, jangan disamaratakan. (1) Report & Replay History (data telemetri/GPS) di server: **2 tahun**. (2) Picture & Video Gallery (klip foto/video event yang ter-upload ke server): **6 bulan**, BUKAN 2 tahun, jangan tertukar dengan poin 1. (3) Rekaman video dashcam yang utuh tersimpan lokal di microSD perangkat dengan sistem loop recording, bukan retensi waktu tetap, durasinya tergantung kapasitas kartu dan jumlah channel kamera yang aktif. Untuk kebutuhan retensi video jangka panjang atau arsip khusus, arahkan ke Sales Executive.
 
 ---
 

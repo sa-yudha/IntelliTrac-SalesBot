@@ -469,6 +469,7 @@ PANDUAN UTAMA BERINTERAKSI & GAYA BAHASA:
      * Truk Kargo / Logistik Umum: Rekomendasikan **VT-45 Lite** (dasar) atau **VT-45** (lengkap dengan door sensor).
      * Armada Komersial/Bus dengan Pengawasan Sopir (K3 & Safety): Rekomendasikan **Dual AI Dashcam JC261** (ADAS + DMS) atau **JC450** (hingga 5 kamera).
      * Mobil Operasional / Kendaraan Dinas: Rekomendasikan **VT-45 Lite**.
+     * Kontainer / Kargo Bernilai Tinggi (butuh bukti segel tidak dibuka di perjalanan): Rekomendasikan **VT-51 E-Seal**, bisa dipadukan dengan **VT-45** untuk pelacakan kendaraannya.
 3. **Penjelasan Fitur**: Jelaskan fitur-fitur seperti Live Tracking 4G, Engine Cut-Off (immobilizer), ADAS (Advanced Driver Assistance), DMS (Driver Monitoring System), OBD-II CAN800 dengan bahasa yang jelas.
 4. **Kebijakan Handoff Sales (PENTING)**:
    - Jika calon customer bertanya mengenai **harga spesifik, skema penawaran resmi, paket pembelian dalam jumlah armada banyak (fleet diskon), atau berniat melakukan negosiasi/pembelian**, berikan penjelasan umum mengenai fleksibilitas paket layanan IntelliTrac.
@@ -531,7 +532,7 @@ with st.sidebar:
     st.subheader("🔍 Fast Product Match")
     jenis_armada = st.selectbox(
         "Pilih Jenis Armada Anda:",
-        ["-- Pilih Jenis Armada --", "Sepeda Motor", "Mobil Pribadi", "Truk Logistik / Kargo", "Truk Pendingin (Reefer)", "Truk Semen / Mixer", "Truk Tambang & Alat Berat", "Bus & Mobil Operasional"],
+        ["-- Pilih Jenis Armada --", "Sepeda Motor", "Mobil Pribadi", "Truk Logistik / Kargo", "Truk Pendingin (Reefer)", "Truk Semen / Mixer", "Truk Tambang & Alat Berat", "Bus & Mobil Operasional", "Kontainer / Segel Kargo"],
         disabled=is_busy
     )
 
@@ -544,7 +545,8 @@ with st.sidebar:
                 "Truk Pendingin (Reefer)": "Halo Mintel, saya butuh sistem pemantau suhu dan lokasi untuk Truk Pendingin (Reefer). Apa solusi dari IntelliTrac?",
                 "Truk Semen / Mixer": "Halo Mintel, produk mana yang cocok untuk Truk Semen / Readymix Mixer?",
                 "Truk Tambang & Alat Berat": "Halo Mintel, rekomendasi GPS dan sensor untuk Truk Tambang & Alat Berat apa ya?",
-                "Bus & Mobil Operasional": "Halo Mintel, rekomendasi Dashcam AI / GPS untuk Bus dan Mobil Operasional Perusahaan apa?"
+                "Bus & Mobil Operasional": "Halo Mintel, rekomendasi Dashcam AI / GPS untuk Bus dan Mobil Operasional Perusahaan apa?",
+                "Kontainer / Segel Kargo": "Halo Mintel, saya butuh pengaman pintu kontainer/boks kargo supaya ketahuan kalau dibuka di tengah jalan. Apa solusi dari IntelliTrac?"
             }
             st.session_state["pending_prompt"] = prompt_map.get(jenis_armada, "")
             st.session_state["autohide_sidebar"] = True

@@ -103,7 +103,7 @@ st.set_page_config(
     page_title="IntelliTrac SalesBot - Pre-Sales Assistant",
     page_icon="🛰️",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="auto"
 )
 
 # 2. Custom CSS Styling (IntelliTrac Brand: Deep Navy #0A2540, Vibrant Orange #F26522, Soft Gray #F4F6F9)

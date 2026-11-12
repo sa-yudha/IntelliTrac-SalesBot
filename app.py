@@ -123,16 +123,22 @@ st.markdown("""
        seperti kertas kotak-kotak sungguhan, warna navy brand dengan opasitas sangat
        rendah supaya tidak mengganggu keterbacaan teks. Dua radial-gradient di baris
        pertama memberi glow warna brand (oranye di atas, navy di bawah) yang menyebar
-       ke seluruh tinggi halaman, bukan cuma menempel di dekat header. */
+       ke seluruh tinggi halaman, bukan cuma menempel di dekat header.
+
+       Mode gelap: light-dark(terang, gelap) memilih nilai dari color-scheme yang
+       dipasang Streamlit di .stApp, jadi warna kustom langsung ikut pilihan tema
+       pengunjung tanpa rerun. Nilai gelapnya palet Solarized Dark, sepasang dengan
+       [theme.dark] di .streamlit/config.toml yang mengatur widget bawaan Streamlit.
+       Glow oranye diganti biru kehijauan karena oranye di atas latar teal jadi keruh. */
     .stApp, [data-testid="stAppViewContainer"] {
-        background-color: #F5F7FA;
+        background-color: light-dark(#F5F7FA, #002b36);
         background-image:
-            radial-gradient(ellipse 90% 60% at 50% 0%, rgba(230, 101, 0, 0.22), transparent 70%),
-            radial-gradient(ellipse 90% 60% at 50% 100%, rgba(10, 37, 64, 0.16), transparent 70%),
-            linear-gradient(rgba(10, 37, 64, 0.09) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(10, 37, 64, 0.09) 1px, transparent 1px),
-            linear-gradient(rgba(10, 37, 64, 0.05) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(10, 37, 64, 0.05) 1px, transparent 1px);
+            radial-gradient(ellipse 90% 60% at 50% 0%, light-dark(rgba(230, 101, 0, 0.22), rgba(42, 161, 152, 0.10)), transparent 70%),
+            radial-gradient(ellipse 90% 60% at 50% 100%, light-dark(rgba(10, 37, 64, 0.16), rgba(0, 20, 26, 0.28)), transparent 70%),
+            linear-gradient(light-dark(rgba(10, 37, 64, 0.09), rgba(147, 161, 161, 0.06)) 1px, transparent 1px),
+            linear-gradient(90deg, light-dark(rgba(10, 37, 64, 0.09), rgba(147, 161, 161, 0.06)) 1px, transparent 1px),
+            linear-gradient(light-dark(rgba(10, 37, 64, 0.05), rgba(147, 161, 161, 0.035)) 1px, transparent 1px),
+            linear-gradient(90deg, light-dark(rgba(10, 37, 64, 0.05), rgba(147, 161, 161, 0.035)) 1px, transparent 1px);
         background-size: 100% 100vh, 100% 100vh, 120px 120px, 120px 120px, 24px 24px, 24px 24px;
         background-repeat: no-repeat, no-repeat, repeat, repeat, repeat, repeat;
         background-attachment: fixed, fixed, scroll, scroll, scroll, scroll;
@@ -144,13 +150,13 @@ st.markdown("""
         background-color: transparent;
     }
     [data-testid="stSidebar"] {
-        background-color: #FDFDFE;
-        border-right: 1px solid rgba(10, 37, 64, 0.08);
+        background-color: light-dark(#FDFDFE, #00212b);
+        border-right: 1px solid light-dark(rgba(10, 37, 64, 0.08), rgba(147, 161, 161, 0.14));
     }
     /* Kotak chat & kartu handoff dibuat agak tembus pandang supaya glow+grid di
        baliknya tetap kelihatan menembus, bukan cuma nongol di sela-sela kosong. */
     [data-testid="stChatMessage"], .sales-card {
-        background-color: rgba(255, 255, 255, 0.55) !important;
+        background-color: light-dark(rgba(255, 255, 255, 0.55), rgba(7, 54, 66, 0.72)) !important;
         backdrop-filter: blur(6px);
     }
     /* Kurangi padding atas default Streamlit agar header lebih ke atas */
@@ -166,7 +172,7 @@ st.markdown("""
         border-radius: 18px;
         color: white;
         margin-bottom: 20px;
-        box-shadow: 0 4px 12px rgba(230, 81, 0, 0.35);
+        box-shadow: 0 4px 12px light-dark(rgba(230, 81, 0, 0.35), rgba(0, 0, 0, 0.35));
     }
     .header-title {
         font-size: 1.8rem;
@@ -204,7 +210,7 @@ st.markdown("""
         align-items: center;
         gap: 6px;
         font-family: 'Poppins', sans-serif;
-        box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
+        box-shadow: 0 4px 12px light-dark(rgba(37, 211, 102, 0.35), rgba(0, 0, 0, 0.3));
     }
     .status-dot {
         width: 8px;
@@ -227,18 +233,18 @@ st.markdown("""
         border-left: 6px solid #E65100;
         padding: 16px 20px;
         border-radius: 18px;
-        box-shadow: 0 4px 12px rgba(230, 81, 0, 0.2);
+        box-shadow: 0 4px 12px light-dark(rgba(230, 81, 0, 0.2), rgba(0, 0, 0, 0.3));
         margin: 12px 0;
     }
     .sales-card h4 {
-        color: #0D1F3C;
+        color: light-dark(#0D1F3C, #fdf6e3);
         margin: 0 0 8px 0;
         font-weight: 700;
         font-size: 0.95rem;
         font-family: 'Poppins', sans-serif;
     }
     .sales-card p {
-        color: #475569;
+        color: light-dark(#475569, #b4c0c0);
         font-size: 0.82rem;
         margin-bottom: 12px;
     }
@@ -251,7 +257,7 @@ st.markdown("""
         border-radius: 10px;
         text-decoration: none;
         font-size: 0.82rem;
-        box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
+        box-shadow: 0 4px 12px light-dark(rgba(37, 211, 102, 0.35), rgba(0, 0, 0, 0.3));
         font-family: 'Poppins', sans-serif;
         transition: transform 0.2s ease;
     }
@@ -259,7 +265,7 @@ st.markdown("""
 
     .email-button {
         display: inline-block;
-        background-color: #0D1F3C;
+        background-color: light-dark(#0D1F3C, #1f6fa8);
         color: white !important;
         font-weight: 700;
         padding: 8px 16px;
@@ -290,11 +296,11 @@ st.markdown("""
         padding: 0.4rem 0.85rem !important;
         transition: all 0.2s ease;
         font-family: 'Poppins', sans-serif;
-        box-shadow: 0 4px 12px rgba(230, 81, 0, 0.35), inset 0 1px 0 rgba(255,255,255,0.15);
+        box-shadow: 0 4px 12px light-dark(rgba(230, 81, 0, 0.35), rgba(0, 0, 0, 0.35)), inset 0 1px 0 rgba(255,255,255,0.15);
         outline: none !important;
     }
     .stButton>button:hover {
-        background-color: #0D1F3C !important;
+        background-color: light-dark(#0D1F3C, #0e5566) !important;
         color: #FFFFFF !important;
         border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
         box-shadow: 0 6px 16px rgba(13, 31, 60, 0.4);
@@ -578,22 +584,22 @@ with st.sidebar:
 
     # Contact Sales Handoff Card in Sidebar
     st.markdown("""
-    <div style="background-color: #F8FAFC; padding: 16px; border-radius: 12px; border: 1px solid #E2E8F0; border-left: 5px solid #E65100; box-shadow: 0 4px 12px rgba(230, 81, 0, 0.2);">
-        <h5 style="color: #0D1F3C; margin-top:0; font-family: 'Poppins', sans-serif; font-weight: 700;">📞 Hubungi Tim Sales</h5>
-        <p style="font-size:0.85rem; color:#475569; margin-bottom:12px;">Siap mendapatkan penawaran harga resmi & negosiasi armada?</p>
+    <div style="background-color: light-dark(#F8FAFC, #073642); padding: 16px; border-radius: 12px; border: 1px solid light-dark(#E2E8F0, #1c5261); border-left: 5px solid #E65100; box-shadow: 0 4px 12px light-dark(rgba(230, 81, 0, 0.2), rgba(0, 0, 0, 0.3));">
+        <h5 style="color: light-dark(#0D1F3C, #fdf6e3); margin-top:0; font-family: 'Poppins', sans-serif; font-weight: 700;">📞 Hubungi Tim Sales</h5>
+        <p style="font-size:0.85rem; color:light-dark(#475569, #b4c0c0); margin-bottom:12px;">Siap mendapatkan penawaran harga resmi & negosiasi armada?</p>
         <a href="https://wa.me/628118456789?text=Halo%20Sales%20IntelliTrac,%20saya%20tertarik%20dengan%20produk%20GPS%20Tracker" target="_blank" style="text-decoration:none;">
-            <div style="background-color:#25D366; color:white; text-align:center; padding:8px; border-radius:8px; font-weight:bold; font-size:0.85rem; font-family: 'Poppins', sans-serif; box-shadow: 0 4px 12px rgba(37,211,102,0.35);">
+            <div style="background-color:#25D366; color:white; text-align:center; padding:8px; border-radius:8px; font-weight:bold; font-size:0.85rem; font-family: 'Poppins', sans-serif; box-shadow: 0 4px 12px light-dark(rgba(37,211,102,0.35), rgba(0,0,0,0.3));">
                 💬 Chat via WhatsApp<br>(+62 811-845-6789)
             </div>
         </a>
         <a href="https://wa.me/6281111306717?text=Halo%20Sales%20IntelliTrac,%20saya%20tertarik%20dengan%20produk%20GPS%20Tracker" target="_blank" style="text-decoration:none;">
-            <div style="background-color:#25D366; color:white; text-align:center; padding:8px; border-radius:8px; font-weight:bold; font-size:0.85rem; font-family: 'Poppins', sans-serif; box-shadow: 0 4px 12px rgba(37,211,102,0.35); margin-top:8px;">
+            <div style="background-color:#25D366; color:white; text-align:center; padding:8px; border-radius:8px; font-weight:bold; font-size:0.85rem; font-family: 'Poppins', sans-serif; box-shadow: 0 4px 12px light-dark(rgba(37,211,102,0.35), rgba(0,0,0,0.3)); margin-top:8px;">
                 💬 Chat via WhatsApp<br>(+62 811-1130-6717)
             </div>
         </a>
-        <div style="font-size:0.8rem; color:#64748B; margin-top:12px;">
+        <div style="font-size:0.8rem; color:light-dark(#64748B, #93a1a1); margin-top:12px;">
             <b>Telp:</b> (021) 6325 999<br>
-            <b>Email:</b> <a href="mailto:sales@intellitrac.co.id" style="color: #E65100; text-decoration: none;">sales@intellitrac.co.id</a>
+            <b>Email:</b> <a href="mailto:sales@intellitrac.co.id" style="color: light-dark(#E65100, #FF7A3D); text-decoration: none;">sales@intellitrac.co.id</a>
         </div>
     </div>
     """, unsafe_allow_html=True)

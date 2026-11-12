@@ -1,2 +1,15 @@
 [client]
 toolbarMode = "viewer"
+
+# Mode gelap memakai palet Solarized Dark supaya widget bawaan Streamlit (kotak chat,
+# dropdown, bilah bawah) senada dengan latar kustom di app.py. Mode terang tidak diubah.
+[theme.dark]
+primaryColor = "#E65100"
+backgroundColor = "#002b36"
+secondaryBackgroundColor = "#073642"
+textColor = "#eee8d5"
+borderColor = "#1c5261"
+
+[theme.dark.sidebar]
+backgroundColor = "#00212b"
+secondaryBackgroundColor = "#073642"
